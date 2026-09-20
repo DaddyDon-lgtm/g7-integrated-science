@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>States of Matter Study Guide</title>
+<style>
+  :root {
+    --teal: #12595a;
+    --teal-dark: #0c4142;
+    --teal-soft: #e8f2f2;
+    --orange: #c2621c;
+    --orange-soft: #fdefe3;
+    --orange-text: #96490f;
+    --text: #1c1c1c;
+    --muted: #5a6070;
+    --border: #d9dde4;
+    --grey: #f2f4f6;
+    --solid: #2c5f8a;
+    --liquid: #1d7a6c;
+    --gas: #b06a1f;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17.5px; line-height: 1.65; color: var(--text); background: #f7f8fa;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px 70px; }
+
+  .crumbs { background: #fff; border-bottom: 1px solid var(--border); font-size: 14.5px; }
+  .crumbs .inner { max-width: 940px; margin: 0 auto; padding: 10px 20px; }
+  .crumbs a { color: var(--teal); text-decoration: none; font-weight: 600; }
+  .crumbs a:hover { text-decoration: underline; }
+  .crumbs .sep { color: var(--border); margin: 0 8px; }
+  .crumbs .here { color: var(--muted); }
+
+  header.top { background: var(--teal); color: #fff; padding: 30px 20px 26px; }
+  header.top .inner { max-width: 940px; margin: 0 auto; }
+  header.top .kicker {
+    font-size: 12.5px; letter-spacing: .11em; text-transform: uppercase; opacity: .82; margin: 0 0 6px;
+  }
+  header.top h1 { margin: 0; font-size: 29px; line-height: 1.2; }
+  header.top p.tag { margin: 8px 0 0; font-size: 17px; opacity: .93; }
+
+  nav.jump { background: #fff; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  nav.jump ul {
+    max-width: 940px; margin: 0 auto; padding: 0 20px; list-style: none;
+    display: flex; flex-wrap: wrap; gap: 2px;
+  }
+  nav.jump a {
+    display: block; padding: 11px 12px; font-size: 14.5px; font-weight: 600;
+    color: var(--teal); text-decoration: none; border-bottom: 3px solid transparent;
+  }
+  nav.jump a:hover { border-bottom-color: var(--orange); background: #f6f9f9; }
+
+  h2 {
+    font-size: 23px; color: var(--teal); margin: 46px 0 6px;
+    padding-bottom: 8px; border-bottom: 3px solid var(--teal); scroll-margin-top: 120px;
+  }
+  h3 { font-size: 19px; color: var(--teal-dark); margin: 30px 0 8px; }
+  h4 { font-size: 16.5px; margin: 20px 0 6px; }
+  p { margin: 12px 0; }
+  ul, ol { margin: 12px 0; padding-left: 26px; }
+  li { margin: 6px 0; }
+
+  .box { border-radius: 6px; padding: 16px 20px; margin: 22px 0; border-left: 6px solid; }
+  .box p:first-child { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+  .box .label {
+    display: block; font-size: 12.5px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .box.tip { background: var(--orange-soft); border-color: var(--orange); }
+  .box.tip .label { color: var(--orange-text); }
+  .box.key { background: var(--teal-soft); border-color: var(--teal); }
+  .box.key .label { color: var(--teal); }
+
+  table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16.5px; }
+  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+  thead th { background: var(--teal); color: #fff; font-weight: 600; }
+  tbody tr:nth-child(even) { background: var(--grey); }
+  td .term { font-weight: 700; color: var(--teal-dark); }
+  td .frame { color: var(--muted); font-style: italic; }
+  .compare th:first-child { background: var(--teal-soft); color: var(--teal-dark); }
+  .compare thead th.s { background: var(--solid); }
+  .compare thead th.l { background: var(--liquid); }
+  .compare thead th.g { background: var(--gas); }
+
+  figure { margin: 24px 0; }
+  figcaption { font-size: 15px; color: var(--muted); margin-top: 8px; }
+  svg { max-width: 100%; height: auto; display: block; }
+
+  .frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+  .lvl { background: #fff; border: 2px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+  .lvl h4 { margin-top: 0; color: var(--teal); }
+  .lvl p { font-size: 16px; }
+  .lvl .blank { display: inline-block; min-width: 70px; border-bottom: 2px solid var(--muted); }
+
+  .q { background: #fff; border: 2px solid var(--border); border-radius: 6px; padding: 15px 18px; margin: 14px 0; }
+  .q .ask { font-weight: 600; margin: 0 0 10px; }
+  .q .ans { display: none; border-top: 2px dashed var(--border); margin-top: 10px; padding-top: 10px; }
+  .q .ans.open { display: block; }
+  .q .ans p { margin: 0; }
+  button {
+    font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+    border-radius: 5px; padding: 8px 15px; border: 2px solid var(--teal);
+    background: #fff; color: var(--teal);
+  }
+  button:hover { background: var(--teal); color: #fff; }
+  button.primary { background: var(--teal); color: #fff; }
+
+  /* self-check tracker */
+  .tracker { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 16.5px; }
+  .tracker th, .tracker td { border: 1px solid var(--border); padding: 8px 10px; }
+  .tracker thead th { background: var(--teal); color: #fff; font-size: 15px; }
+  .tracker td.w { font-weight: 600; }
+  .tracker td.c { text-align: center; width: 15%; }
+  .tracker input { width: 20px; height: 20px; cursor: pointer; accent-color: var(--teal); }
+  .tracker tbody tr:nth-child(even) { background: var(--grey); }
+  #trackerNote { font-size: 15px; color: var(--muted); margin-top: 10px; }
+
+  footer {
+    margin-top: 56px; padding: 22px 0 0; border-top: 2px solid var(--border);
+    font-size: 15px; color: var(--muted);
+  }
+
+  @media (max-width: 680px) {
+    body { font-size: 16.5px; }
+    header.top h1 { font-size: 23px; }
+    nav.jump a { padding: 9px 8px; font-size: 13.5px; }
+    table { font-size: 15.5px; }
+    th, td { padding: 8px; }
+  }
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    nav.jump, .crumbs, button { display: none !important; }
+    header.top { background: #fff !important; color: var(--teal) !important; padding: 0 0 10px; }
+    .q .ans { display: block !important; }
+    table, figure, .lvl, .q { break-inside: avoid; page-break-inside: avoid; }
+    h2 { break-after: avoid; }
+    @page { size: A4; margin: 15mm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 1</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">States of Matter Study Guide</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 1 &bull; States of Matter</p>
+    <h1>What Is Everything Made Of?</h1>
+    <p class="tag">Your study guide for vocabulary, particles, and changes of state</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#use">How to Use This</a></li>
+    <li><a href="#partA">Structure of Matter</a></li>
+    <li><a href="#partB">Solids, Liquids, Gases</a></li>
+    <li><a href="#partC">Changes of State</a></li>
+    <li><a href="#curve">Heating Curves</a></li>
+    <li><a href="#explain">Explaining Your Thinking</a></li>
+    <li><a href="#check">Check Yourself</a></li>
+    <li><a href="#tracker">Word Tracker</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<h2 id="use">How to Use This Page</h2>
+
+<p>This page has every word you need for Unit 1, plus the diagrams and the sentence frames from class. You can use it for homework, before a quiz, and while you write your CER explanations.</p>
+
+<ol>
+  <li>Read the definition.</li>
+  <li>Look at the picture if there is one.</li>
+  <li>Try the sentence in the "Try it" column. Say it out loud or write it down.</li>
+  <li>Use the <a href="#tracker">Word Tracker</a> at the bottom to mark which words you already know.</li>
+</ol>
+
+<div class="box tip">
+  <span class="label">Study tip</span>
+  <p>Do not just read the words. Cover the middle column and try to explain each word in your own words first. If you can say it without looking, you know it. If you cannot, that is the word to study tonight.</p>
+</div>
+
+<!-- =============== PART A =============== -->
+<h2 id="partA">Part A: The Structure of Matter</h2>
+
+<p>These words are about what everything is made of: atoms, elements, and molecules.</p>
+
+<table>
+  <thead>
+    <tr><th style="width:20%">Word</th><th style="width:46%">What it means</th><th>Try it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="term">matter</span></td><td>Matter is anything that has mass and takes up space.</td><td class="frame">Air, water, and rocks are all examples of ______.</td></tr>
+    <tr><td><span class="term">mass</span></td><td>Mass is the amount of matter in an object. We measure mass in grams (g) or kilograms (kg).</td><td class="frame">This book has more mass than this pencil because ______.</td></tr>
+    <tr><td><span class="term">weight</span></td><td>Weight is how strongly gravity pulls on an object's mass. Weight can change, but mass stays the same.</td><td class="frame">On the Moon, your weight would be ______ (more / less) because ______.</td></tr>
+    <tr><td><span class="term">volume</span></td><td>Volume is how much space something takes up. We measure it in millilitres (mL) or cubic centimetres (cm<sup>3</sup>).</td><td class="frame">A basketball has more volume than a tennis ball because ______.</td></tr>
+    <tr><td><span class="term">density</span></td><td>Density compares an object's mass to its volume. Density = mass &divide; volume.</td><td class="frame">A rock feels heavy for its size because it has high ______.</td></tr>
+    <tr><td><span class="term">atom</span></td><td>An atom is the smallest building block of matter. Everything around you is made of atoms.</td><td class="frame">Everything in this room is made of ______.</td></tr>
+    <tr><td><span class="term">element</span></td><td>An element is a pure substance made of only one type of atom.</td><td class="frame">Oxygen (O) and gold (Au) are both examples of an ______.</td></tr>
+    <tr><td><span class="term">periodic table</span></td><td>The periodic table is a chart that organises all the known elements.</td><td class="frame">If I want to find information about an element, I can look at the ______.</td></tr>
+    <tr><td><span class="term">pure substance</span></td><td>A pure substance is matter made of only one type of atom or molecule, with the same properties all the way through.</td><td class="frame">Pure water is a ______ because every part of it is the same.</td></tr>
+    <tr><td><span class="term">molecule</span></td><td>A molecule forms when two or more atoms join together.</td><td class="frame">Water (H<sub>2</sub>O) is a ______ made of 2 hydrogen atoms and 1 oxygen atom.</td></tr>
+    <tr><td><span class="term">compound</span></td><td>A compound is a pure substance made of two or more <em>different</em> elements joined together.</td><td class="frame">Water (H<sub>2</sub>O) is a ______ because it combines two different elements.</td></tr>
+    <tr><td><span class="term">chemical bond</span></td><td>A chemical bond is the connection that holds atoms together in a molecule. You only need to know that atoms join together. You do not need to name the type of bond.</td><td class="frame">In a water molecule, a ______ holds the hydrogen and oxygen atoms together.</td></tr>
+  </tbody>
+</table>
+
+<div class="box key">
+  <span class="label">Word parts</span>
+  <p><strong>peri-</strong> plus <strong>-odic</strong> gives you "periodic," which means happening in a repeating pattern. The periodic table repeats patterns of element properties as you move across it.</p>
+</div>
+
+<h3>Stretch words (optional challenge)</h3>
+
+<table>
+  <thead><tr><th style="width:24%">Word</th><th>What it means</th></tr></thead>
+  <tbody>
+    <tr><td><span class="term">proton</span></td><td>A tiny particle found in the nucleus (the centre) of an atom.</td></tr>
+    <tr><td><span class="term">neutron</span></td><td>A tiny particle found in the nucleus alongside protons.</td></tr>
+    <tr><td><span class="term">electron</span></td><td>A tiny particle found moving around outside the nucleus of an atom.</td></tr>
+  </tbody>
+</table>
+
+<!-- =============== PART B =============== -->
+<h2 id="partB">Part B: Solids, Liquids, and Gases</h2>
+
+<p>The same substance can be a solid, a liquid, or a gas. What changes is how the particles are arranged and how they move.</p>
+
+<figure>
+<svg viewBox="0 0 720 230" role="img" aria-label="Diagram comparing particle arrangement in a solid, a liquid, and a gas">
+  <rect x="10" y="34" width="210" height="150" fill="#ffffff" stroke="#2c5f8a" stroke-width="2.5" rx="4"/>
+  <rect x="255" y="34" width="210" height="150" fill="#ffffff" stroke="#1d7a6c" stroke-width="2.5" rx="4"/>
+  <rect x="500" y="34" width="210" height="150" fill="#ffffff" stroke="#b06a1f" stroke-width="2.5" rx="4"/>
+
+  <text x="115" y="24" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#2c5f8a">SOLID</text>
+  <text x="360" y="24" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#1d7a6c">LIQUID</text>
+  <text x="605" y="24" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#b06a1f">GAS</text>
+
+  <!-- solid: tight regular grid -->
+  <g fill="#2c5f8a">
+    <circle cx="48" cy="70" r="13"/><circle cx="82" cy="70" r="13"/><circle cx="116" cy="70" r="13"/><circle cx="150" cy="70" r="13"/><circle cx="184" cy="70" r="13"/>
+    <circle cx="48" cy="108" r="13"/><circle cx="82" cy="108" r="13"/><circle cx="116" cy="108" r="13"/><circle cx="150" cy="108" r="13"/><circle cx="184" cy="108" r="13"/>
+    <circle cx="48" cy="146" r="13"/><circle cx="82" cy="146" r="13"/><circle cx="116" cy="146" r="13"/><circle cx="150" cy="146" r="13"/><circle cx="184" cy="146" r="13"/>
+  </g>
+
+  <!-- liquid: close but irregular -->
+  <g fill="#1d7a6c">
+    <circle cx="292" cy="76" r="13"/><circle cx="330" cy="66" r="13"/><circle cx="368" cy="80" r="13"/><circle cx="406" cy="68" r="13"/><circle cx="440" cy="82" r="13"/>
+    <circle cx="286" cy="116" r="13"/><circle cx="324" cy="108" r="13"/><circle cx="362" cy="120" r="13"/><circle cx="400" cy="106" r="13"/><circle cx="436" cy="118" r="13"/>
+    <circle cx="298" cy="156" r="13"/><circle cx="338" cy="150" r="13"/><circle cx="376" cy="160" r="13"/><circle cx="414" cy="148" r="13"/><circle cx="446" cy="156" r="13"/>
+  </g>
+
+  <!-- gas: far apart with motion arrows -->
+  <g fill="#b06a1f">
+    <circle cx="536" cy="64" r="13"/><circle cx="640" cy="78" r="13"/>
+    <circle cx="586" cy="118" r="13"/><circle cx="684" cy="140" r="13"/>
+    <circle cx="530" cy="160" r="13"/><circle cx="626" cy="166" r="13"/>
+  </g>
+  <g stroke="#b06a1f" stroke-width="2.5" stroke-linecap="round" opacity=".75">
+    <line x1="553" y1="55" x2="574" y2="44"/><line x1="657" y1="70" x2="678" y2="60"/>
+    <line x1="603" y1="110" x2="624" y2="100"/><line x1="668" y1="150" x2="648" y2="161"/>
+    <line x1="513" y1="151" x2="533" y2="141" transform="translate(0,0)"/><line x1="643" y1="172" x2="664" y2="181"/>
+  </g>
+
+  <text x="115" y="205" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14.5" fill="#5a6070">Packed tightly, vibrate in place</text>
+  <text x="360" y="205" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14.5" fill="#5a6070">Close, slide past each other</text>
+  <text x="605" y="205" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14.5" fill="#5a6070">Far apart, move fast and freely</text>
+</svg>
+<figcaption>Particle arrangement in the three states. The particles themselves do not change. Only their spacing and motion change.</figcaption>
+</figure>
+
+<table>
+  <thead>
+    <tr><th style="width:20%">Word</th><th style="width:46%">What it means</th><th>Try it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="term">particle</span></td><td>A particle is a tiny piece of matter, like an atom or a molecule. It is a general word for the tiny pieces that make up a substance.</td><td class="frame">The ice cube is made of tiny ______ that we cannot see.</td></tr>
+    <tr><td><span class="term">solid</span></td><td>In a solid, particles are packed closely together in a fixed pattern. They vibrate but do not move from place to place.</td><td class="frame">Ice, a rock, and a desk are all ______.</td></tr>
+    <tr><td><span class="term">liquid</span></td><td>In a liquid, particles are close together but can slide past each other and move around.</td><td class="frame">Water, juice, and oil are all ______.</td></tr>
+    <tr><td><span class="term">gas</span></td><td>In a gas, particles are spread far apart and move quickly in every direction.</td><td class="frame">Steam, air, and helium in a balloon are all ______.</td></tr>
+    <tr><td><span class="term">particle spacing</span></td><td>Particle spacing describes how close or far apart particles are from each other.</td><td class="frame">In a solid, the particle spacing is ______ (close / far apart).</td></tr>
+    <tr><td><span class="term">particle motion</span></td><td>Particle motion describes how the particles move: vibrating in place, sliding past each other, or moving freely.</td><td class="frame">In a gas, the particle motion is ______ (fast and free / slow and fixed).</td></tr>
+    <tr><td><span class="term">kinetic energy</span></td><td>Kinetic energy is the energy of motion. Particles with more kinetic energy move faster.</td><td class="frame">Gas particles have ______ (more / less) kinetic energy than solid particles.</td></tr>
+  </tbody>
+</table>
+
+<h3>Comparing the three states</h3>
+
+<table class="compare">
+  <thead>
+    <tr><th style="width:22%"></th><th class="s">Solid</th><th class="l">Liquid</th><th class="g">Gas</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Particle spacing</strong></td><td>very close together</td><td>close together</td><td>far apart</td></tr>
+    <tr><td><strong>Particle motion</strong></td><td>vibrate in place</td><td>slide past each other</td><td>move fast, in every direction</td></tr>
+    <tr><td><strong>Particle arrangement</strong></td><td>fixed, repeating pattern</td><td>random, no fixed pattern</td><td>random, spread out</td></tr>
+    <tr><td><strong>Volume</strong></td><td>fixed</td><td>fixed</td><td>not fixed, fills its container</td></tr>
+    <tr><td><strong>Shape</strong></td><td>fixed</td><td>takes the shape of its container</td><td>takes the shape of its container</td></tr>
+    <tr><td><strong>Attraction between particles</strong></td><td>strongest</td><td>medium</td><td>weakest</td></tr>
+  </tbody>
+</table>
+
+<!-- =============== PART C =============== -->
+<h2 id="partC">Part C: Changes of State</h2>
+
+<p>A change of state happens when thermal energy is added or removed. Adding energy makes particles move faster and spread apart. Removing energy makes them slow down and move closer together.</p>
+
+<table>
+  <thead>
+    <tr><th style="width:22%">Word</th><th style="width:46%">What it means</th><th>Try it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="term">heat</span></td><td>Heat is thermal energy moving from a warmer object to a cooler object.</td><td class="frame">When you hold a warm cup, ______ moves from the cup to your hand.</td></tr>
+    <tr><td><span class="term">energy</span></td><td>Energy is the ability to cause change or do work. This unit focuses on thermal energy and kinetic energy.</td><td class="frame">It takes ______ to melt an ice cube.</td></tr>
+    <tr><td><span class="term">temperature</span></td><td>Temperature measures how much kinetic energy the particles in a substance have, on average. We measure it in &deg;C.</td><td class="frame">A higher ______ means the particles are moving faster, on average.</td></tr>
+    <tr><td><span class="term">thermal energy</span></td><td>Thermal energy is the total energy of all the moving particles in a substance.</td><td class="frame">Adding ______ makes particles move faster and spread farther apart.</td></tr>
+    <tr><td><span class="term">intermolecular forces</span></td><td>Intermolecular forces are the attractions that pull particles toward each other. Strong forces hold particles close, as in a solid. Weak forces let particles spread apart, as in a gas.</td><td class="frame">In a solid, the ______ between particles are strong.</td></tr>
+    <tr><td><span class="term">melting</span></td><td>Melting is when a solid changes to a liquid because thermal energy is added.</td><td class="frame">Ice ______ into water when it warms up.</td></tr>
+    <tr><td><span class="term">freezing</span></td><td>Freezing is when a liquid changes to a solid because thermal energy is removed.</td><td class="frame">Water ______ into ice in the freezer.</td></tr>
+    <tr><td><span class="term">boiling</span></td><td>Boiling is when a liquid changes to a gas because thermal energy is added.</td><td class="frame">Water starts ______ at 100&deg;C.</td></tr>
+    <tr><td><span class="term">condensation</span></td><td>Condensation is when a gas changes to a liquid because thermal energy is removed.</td><td class="frame">Water droplets on a cold glass form because of ______.</td></tr>
+    <tr><td><span class="term">evaporation</span></td><td>Evaporation is when a liquid slowly changes to a gas at its surface.</td><td class="frame">A puddle disappears over a hot day because of ______.</td></tr>
+    <tr><td><span class="term">sublimation</span></td><td>Sublimation is when a solid changes directly into a gas, without becoming a liquid first.</td><td class="frame">Dry ice seems to disappear into fog because of ______.</td></tr>
+    <tr><td><span class="term">heating curve</span></td><td>A heating curve is a graph that shows how temperature changes over time as thermal energy is added.</td><td class="frame">A flat part on a ______ shows a phase change happening.</td></tr>
+    <tr><td><span class="term">cooling curve</span></td><td>A cooling curve is a graph that shows how temperature changes over time as thermal energy is removed.</td><td class="frame">A ______ looks like a heating curve, but temperature goes down instead of up.</td></tr>
+  </tbody>
+</table>
+
+<div class="box key">
+  <span class="label">Word parts</span>
+  <p><strong>inter-</strong> means "between." <strong>Intermolecular</strong> forces are the forces <em>between</em> molecules, not the forces holding one molecule together.</p>
+</div>
+
+<!-- =============== HEATING CURVE =============== -->
+<h2 id="curve">Reading a Heating Curve</h2>
+
+<p>This is the graph that confuses people, so take your time with it. The line goes up, then goes flat, then up again, then flat again.</p>
+
+<figure>
+<svg viewBox="0 0 720 340" role="img" aria-label="A heating curve for water showing temperature rising, then flat during melting, rising again, then flat during boiling">
+  <line x1="70" y1="290" x2="690" y2="290" stroke="#1c1c1c" stroke-width="2"/>
+  <line x1="70" y1="30" x2="70" y2="290" stroke="#1c1c1c" stroke-width="2"/>
+  <text x="380" y="325" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#1c1c1c">Time (thermal energy added)</text>
+  <text x="24" y="160" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#1c1c1c" transform="rotate(-90 24 160)">Temperature (&deg;C)</text>
+
+  <line x1="70" y1="230" x2="690" y2="230" stroke="#d9dde4" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="70" y1="95" x2="690" y2="95" stroke="#d9dde4" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <text x="62" y="235" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#5a6070">0&deg;</text>
+  <text x="62" y="100" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#5a6070">100&deg;</text>
+
+  <polyline points="80,275 160,230 300,230 380,95 540,95 660,50"
+            fill="none" stroke="#12595a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="700">
+    <text x="106" y="272" fill="#2c5f8a">solid</text>
+    <text x="215" y="218" fill="#2c5f8a">MELTING</text>
+    <text x="348" y="207" fill="#1d7a6c">liquid</text>
+    <text x="440" y="83" fill="#1d7a6c">BOILING</text>
+    <text x="600" y="38" fill="#b06a1f">gas</text>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#96490f">
+    <text x="215" y="252">temperature</text>
+    <text x="215" y="268">stays the same</text>
+    <text x="440" y="118">temperature</text>
+    <text x="440" y="134">stays the same</text>
+  </g>
+</svg>
+<figcaption>A heating curve for water. The flat parts are phase changes.</figcaption>
+</figure>
+
+<h3>Why do the flat parts happen?</h3>
+
+<p>This is the big idea of the whole unit, and it is worth saying carefully.</p>
+
+<div class="box tip">
+  <span class="label">The key idea</span>
+  <p>During a flat part, you are still adding thermal energy. The temperature does not go up because that energy is being used to <strong>break the attractions between particles</strong> instead of making the particles move faster.</p>
+  <p>Temperature only rises when particles speed up. While a substance is melting or boiling, the energy is doing a different job, so the thermometer does not change.</p>
+</div>
+
+<ul>
+  <li><strong>Going up:</strong> particles are speeding up, so temperature rises.</li>
+  <li><strong>Flat:</strong> particles are pulling apart from each other, so temperature stays the same.</li>
+  <li><strong>A cooling curve is the same graph in reverse.</strong> The line goes down, then flat while the substance freezes or condenses, then down again.</li>
+</ul>
+
+<!-- =============== SENTENCE FRAMES =============== -->
+<h2 id="explain">Explaining Your Thinking</h2>
+
+<p>Pick the level that feels right for you today. You can move up a level whenever you are ready.</p>
+
+<div class="frames">
+  <div class="lvl">
+    <h4>Level 1: More support</h4>
+    <p>In a solid, the particles are <span class="blank"></span> (close together / far apart). They <span class="blank"></span> (vibrate in place / move freely).</p>
+    <p>In a liquid, the particles are <span class="blank"></span>. They <span class="blank"></span>.</p>
+    <p>In a gas, the particles are <span class="blank"></span>. They <span class="blank"></span>.</p>
+  </div>
+  <div class="lvl">
+    <h4>Level 2: Some support</h4>
+    <p>In a solid, the particles are packed <span class="blank"></span>, and they <span class="blank"></span>.</p>
+    <p>In a liquid, the particles are <span class="blank"></span>, which lets them <span class="blank"></span>.</p>
+    <p>In a gas, the particles have <span class="blank"></span> energy, which causes them to <span class="blank"></span>.</p>
+  </div>
+  <div class="lvl">
+    <h4>Level 3: Least support</h4>
+    <p>Describe the particle spacing, motion, and arrangement in a solid, using your own words.</p>
+    <p>Do the same for a liquid.</p>
+    <p>Do the same for a gas.</p>
+  </div>
+</div>
+
+<div class="box key">
+  <span class="label">When you write a CER</span>
+  <p>Your <strong>claim</strong> answers the question in one sentence. Your <strong>evidence</strong> is the data or observation you actually saw. Your <strong>reasoning</strong> explains the evidence using particles and energy. Most marks are lost in the reasoning, so always name what the particles are doing.</p>
+</div>
+
+<!-- =============== CHECK =============== -->
+<h2 id="check">Check Yourself</h2>
+
+<p>Answer each one before you click. Say your answer out loud first.</p>
+
+<div class="controls" style="margin:18px 0;">
+  <button class="primary" type="button" onclick="setAllAns(true)">Show all answers</button>
+  <button type="button" onclick="setAllAns(false)">Hide all answers</button>
+</div>
+
+<div class="q">
+  <p class="ask">1. A puddle on the playground disappears by the end of the day. What change of state happened, and where did the energy come from?</p>
+  <button type="button" onclick="tog(this)">Show answer</button>
+  <div class="ans"><p>Evaporation. The liquid water slowly changed into a gas at its surface. The thermal energy came from the Sun and the warm air, which gave the water particles enough kinetic energy to escape into the air.</p></div>
+</div>
+
+<div class="q">
+  <p class="ask">2. You heat a beaker of ice. For two minutes the thermometer stays at 0&deg;C even though the flame is still on. Is the energy disappearing? Explain.</p>
+  <button type="button" onclick="tog(this)">Show answer</button>
+  <div class="ans"><p>No. The energy is still going in. It is being used to break the attractions holding the ice particles in their fixed pattern, which is melting. Because the particles are not speeding up yet, the temperature does not change. Once all the ice has melted, the temperature starts to rise again.</p></div>
+</div>
+
+<div class="q">
+  <p class="ask">3. Water droplets appear on the outside of a cold glass. Where did the water come from, and what is this change called?</p>
+  <button type="button" onclick="tog(this)">Show answer</button>
+  <div class="ans"><p>The water came from water vapour already in the air, not from inside the glass. The cold glass removed thermal energy from the gas particles near it, they slowed down, and the attractions pulled them together into a liquid. This is condensation.</p></div>
+</div>
+
+<div class="q">
+  <p class="ask">4. A gas fills the whole room, but a solid keeps its shape. Explain the difference using particle spacing and particle motion.</p>
+  <button type="button" onclick="tog(this)">Show answer</button>
+  <div class="ans"><p>In a gas, the particles are far apart with weak attractions and they move fast in every direction, so they spread out until they fill the container. In a solid, the particles are packed closely in a fixed pattern with strong attractions, so they only vibrate in place and the shape stays the same.</p></div>
+</div>
+
+<div class="q">
+  <p class="ask">5. Dry ice turns straight into fog without making a puddle. What is this change called, and what did it skip?</p>
+  <button type="button" onclick="tog(this)">Show answer</button>
+  <div class="ans"><p>Sublimation. It skipped the liquid state, changing directly from a solid to a gas.</p></div>
+</div>
+
+<div class="q">
+  <p class="ask">6. Two objects are the same size, but one feels much heavier. Which property is different, and how would you calculate it?</p>
+  <button type="button" onclick="tog(this)">Show answer</button>
+  <div class="ans"><p>Density. They have the same volume but different mass. Density = mass &divide; volume, so the heavier object has the higher density.</p></div>
+</div>
+
+<!-- =============== TRACKER =============== -->
+<h2 id="tracker">Word Tracker</h2>
+
+<p>Tick a box for each word as you learn it. Come back and update it during the unit. Your ticks are saved in this browser only, so use the same device each time.</p>
+
+<table class="tracker" id="tracker">
+  <thead>
+    <tr><th style="width:40%">Word</th><th class="c">Do not know yet</th><th class="c">Have seen it</th><th class="c">Can use it in a sentence</th></tr>
+  </thead>
+  <tbody id="trackerBody"></tbody>
+</table>
+
+<div style="margin:14px 0;">
+  <button type="button" onclick="resetTracker()">Clear all ticks</button>
+</div>
+<p id="trackerNote"></p>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 1: States of Matter. Aligned to MS-PS1-1 and MS-PS1-4.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+  function tog(btn) {
+    var box = btn.nextElementSibling;
+    var open = box.classList.toggle('open');
+    btn.textContent = open ? 'Hide answer' : 'Show answer';
+  }
+  function setAllAns(open) {
+    document.querySelectorAll('.q').forEach(function (q) {
+      var box = q.querySelector('.ans');
+      var btn = q.querySelector('button');
+      if (!box || !btn) return;
+      box.classList.toggle('open', open);
+      btn.textContent = open ? 'Hide answer' : 'Show answer';
+    });
+  }
+
+  var WORDS = ["matter","mass","weight","volume","density","atom","element","periodic table",
+    "pure substance","molecule","compound","chemical bond","particle","solid","liquid","gas",
+    "particle spacing","particle motion","kinetic energy","heat","energy","temperature",
+    "thermal energy","intermolecular forces","melting","freezing","boiling","condensation",
+    "evaporation","sublimation","heating curve","cooling curve"];
+  var KEY = "g7u1-tracker";
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }
+    catch (e) { return {}; }
+  }
+  function saveState(state) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(state));
+      note("Saved in this browser.");
+    } catch (e) {
+      note("Your browser is not saving ticks right now, so they will disappear when you close this page.");
+    }
+  }
+  function note(msg) { document.getElementById("trackerNote").textContent = msg; }
+
+  function buildTracker() {
+    var state = loadState();
+    var body = document.getElementById("trackerBody");
+    WORDS.forEach(function (w, i) {
+      var tr = document.createElement("tr");
+      var td = document.createElement("td");
+      td.className = "w"; td.textContent = w;
+      tr.appendChild(td);
+      for (var c = 0; c < 3; c++) {
+        var cell = document.createElement("td");
+        cell.className = "c";
+        var cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.setAttribute("aria-label", w + ", level " + (c + 1));
+        cb.checked = state[i] === c;
+        cb.dataset.word = i; cb.dataset.col = c;
+        cb.addEventListener("change", onTick);
+        cell.appendChild(cb);
+        tr.appendChild(cell);
+      }
+      body.appendChild(tr);
+    });
+    if (Object.keys(state).length) note("Loaded your saved ticks.");
+  }
+
+  function onTick(e) {
+    var cb = e.target;
+    var row = cb.closest("tr");
+    row.querySelectorAll("input").forEach(function (other) {
+      if (other !== cb) other.checked = false;
+    });
+    var state = loadState();
+    if (cb.checked) state[cb.dataset.word] = Number(cb.dataset.col);
+    else delete state[cb.dataset.word];
+    saveState(state);
+  }
+
+  function resetTracker() {
+    document.querySelectorAll("#trackerBody input").forEach(function (cb) { cb.checked = false; });
+    try { localStorage.removeItem(KEY); note("Cleared."); }
+    catch (e) { note("Cleared on this page."); }
+  }
+
+  buildTracker();
+</script>
+
+</body>
+</html>
