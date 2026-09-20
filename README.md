@@ -44,11 +44,33 @@ Every page carries `<meta name="robots" content="noindex, nofollow">`, which is 
 pages out of Google. The `robots.txt` file is included but is ignored on a project site like this
 one, since search engines only read `robots.txt` at a domain root. The meta tag is what matters.
 
+## Look and feel
+
+The site uses one visual direction throughout: rounded cards, a teal gradient masthead,
+pill-shaped navigation, and Fredoka for headings with Inter for body text. It is meant to
+feel like something a Grade 7 student would expect to be able to tap.
+
+Fonts are served from `assets/fonts/` rather than from Google Fonts. That is deliberate: a
+school network that blocks external hosts would otherwise strip the typography off every
+page. Nothing on this site loads from a CDN.
+
 ## Structure
 
 ```
 index.html            course home, unit cards
-assets/site.css       all styling for the site
+assets/site.css       styling for the home and unit landing pages
+assets/fonts/         self-hosted woff2 files (Fredoka, Inter, Font Awesome solid)
+assets/img/           images and figures
 unit-1/ ... unit-6/   unit landing pages
+unit-1/*.html         resource pages, each self-contained with its styles inlined
 .nojekyll             tells GitHub Pages to serve files as-is
 ```
+
+Resource pages carry their own copy of the stylesheet so they still work when handed out
+as a single file or uploaded to Canvas. The one thing that does not survive that trip is
+the fonts, since they live in `assets/fonts/`; the pages fall back to system fonts and stay
+perfectly readable.
+
+`unit-1/atomworks-lab.html` keeps the dark look it was generated with. Its Tailwind CSS,
+icons, and fonts are all compiled or vendored into the page, so it does not depend on any
+CDN either.
