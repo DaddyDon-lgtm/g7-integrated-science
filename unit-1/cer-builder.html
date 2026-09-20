@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>CER Builder | G7 Integrated Science</title>
+<style>
+  :root{
+    --teal:#12595a; --teal-dark:#0c4142; --teal-soft:#e8f2f2;
+    --orange:#c2621c; --orange-soft:#fdefe3; --orange-text:#96490f;
+    --green:#1e6b45; --green-soft:#e6f4ec; --red:#9c2a2a; --red-soft:#fce8e8;
+    --grey:#f2f4f6; --border:#d9dde4; --text:#1c1c1c; --muted:#5a6070;
+    --solid:#2c5f8a; --liquid:#1d7a6c; --gas:#b06a1f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+       font-size:17.5px;line-height:1.65;color:var(--text);background:#f7f8fa}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px 70px}
+  .crumbs{background:#fff;border-bottom:1px solid var(--border);font-size:14.5px}
+  .crumbs .inner{max-width:940px;margin:0 auto;padding:10px 20px}
+  .crumbs a{color:var(--teal);text-decoration:none;font-weight:600}
+  .crumbs a:hover{text-decoration:underline}
+  .crumbs .sep{color:var(--border);margin:0 8px}
+  .crumbs .here{color:var(--muted)}
+  header.top{background:var(--teal);color:#fff;padding:30px 20px 26px}
+  header.top .inner{max-width:940px;margin:0 auto}
+  header.top .kicker{font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;opacity:.82;margin:0 0 6px}
+  header.top h1{margin:0;font-size:29px;line-height:1.2}
+  header.top p.tag{margin:8px 0 0;font-size:17px;opacity:.93}
+  nav.jump{background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:30}
+  nav.jump ul{max-width:940px;margin:0 auto;padding:0 20px;list-style:none;display:flex;flex-wrap:wrap;gap:2px}
+  nav.jump a{display:block;padding:11px 12px;font-size:14.5px;font-weight:600;color:var(--teal);
+             text-decoration:none;border-bottom:3px solid transparent}
+  nav.jump a:hover{border-bottom-color:var(--orange);background:#f6f9f9}
+  h2{font-size:23px;color:var(--teal);margin:44px 0 6px;padding-bottom:8px;
+     border-bottom:3px solid var(--teal);scroll-margin-top:124px}
+  h3{font-size:19px;color:var(--teal-dark);margin:28px 0 8px}
+  h4{font-size:16.5px;margin:18px 0 6px}
+  p{margin:11px 0}
+  ul,ol{margin:11px 0;padding-left:26px}
+  li{margin:5px 0}
+  code{background:var(--grey);padding:1px 6px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em}
+  .box{border-radius:6px;padding:16px 20px;margin:22px 0;border-left:6px solid}
+  .box p:first-child{margin-top:0}
+  .box p:last-child{margin-bottom:0}
+  .box .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+  .box.tip{background:var(--orange-soft);border-color:var(--orange)}
+  .box.tip .label{color:var(--orange-text)}
+  .box.key{background:var(--teal-soft);border-color:var(--teal)}
+  .box.key .label{color:var(--teal)}
+  .box.good{background:var(--green-soft);border-color:var(--green)}
+  .box.good .label{color:var(--green)}
+  table{border-collapse:collapse;width:100%;margin:20px 0;font-size:16.5px}
+  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top}
+  thead th{background:var(--teal);color:#fff;font-weight:600}
+  tbody tr:nth-child(even){background:var(--grey)}
+  .widget{background:#fff;border:2px solid var(--border);border-radius:8px;padding:18px 20px 20px;margin:24px 0}
+  .widget > h3{margin-top:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .widget .tryit{font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                 color:var(--orange-text);background:var(--orange-soft);padding:3px 9px;border-radius:10px}
+  svg,canvas{display:block;max-width:100%}
+  .ctrls{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 4px;align-items:flex-end}
+  .ctrl{flex:1 1 240px}
+  .ctrl label{display:block;font-size:13.5px;font-weight:700;letter-spacing:.04em;
+              text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .ctrl .val{color:var(--teal);font-size:15px}
+  input[type=range]{width:100%;accent-color:var(--teal);height:26px;cursor:pointer}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  button{font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;border-radius:5px;
+         padding:8px 15px;border:2px solid var(--teal);background:#fff;color:var(--teal);transition:background .12s}
+  button:hover{background:var(--teal);color:#fff}
+  button.primary{background:var(--teal);color:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .readouts{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0}
+  .ro{flex:1 1 130px;background:var(--grey);border-radius:6px;padding:9px 12px;text-align:center}
+  .ro .k{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .ro .v{display:block;font-size:22px;font-weight:700;color:var(--teal);line-height:1.25}
+  .commentary{margin:14px 0 0;padding:11px 14px;background:var(--teal-soft);border-left:5px solid var(--teal);
+              border-radius:0 5px 5px 0;font-size:16px}
+  /* predict-first gate */
+  .predict{background:var(--orange-soft);border:2px solid var(--orange);border-radius:8px;padding:18px 20px;margin:24px 0}
+  .predict .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;
+                  text-transform:uppercase;color:var(--orange-text);margin-bottom:6px}
+  .predict h3{margin:0 0 10px;color:var(--orange-text)}
+  .predict .opts{display:flex;flex-direction:column;gap:8px;margin:12px 0 0}
+  .predict .opt{display:block;width:100%;text-align:left;border:2px solid var(--border);background:#fff;
+                border-radius:6px;padding:11px 14px;font-size:16.5px;font-weight:500;color:var(--text);cursor:pointer}
+  .predict .opt:hover{border-color:var(--orange);background:#fff}
+  .predict .opt.picked{border-color:var(--teal);background:var(--teal-soft);font-weight:700}
+  .predict .outcome{display:none;margin:14px 0 0;padding:12px 15px;background:#fff;border-radius:6px;
+                    border-left:5px solid var(--teal);font-size:16.5px}
+  .predict .outcome.open{display:block}
+  .locked{filter:blur(5px);pointer-events:none;user-select:none;opacity:.55}
+  /* games */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .chip{border:2px solid var(--border);background:#fff;border-radius:20px;padding:7px 15px;font-size:16px;
+        cursor:pointer;font-family:inherit;color:var(--text);font-weight:500}
+  .chip:hover{border-color:var(--teal);background:#fff}
+  .chip.sel{border-color:var(--teal);background:var(--teal-soft);font-weight:700}
+  .chip.done{opacity:.35;cursor:default;text-decoration:line-through}
+  .bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+  .bin{border:3px dashed var(--border);border-radius:8px;padding:12px;min-height:130px;background:#fff;cursor:pointer}
+  .bin:hover{border-color:var(--teal)}
+  .bin h4{margin:0 0 8px;text-align:center;font-size:16px;letter-spacing:.05em;text-transform:uppercase}
+  .bin.s h4{color:var(--solid)} .bin.l h4{color:var(--liquid)} .bin.g h4{color:var(--gas)}
+  .bin.s{border-color:var(--solid)} .bin.l{border-color:var(--liquid)} .bin.g{border-color:var(--gas)}
+  .bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .bin .it{font-size:14.5px;padding:4px 10px;border-radius:14px;background:var(--grey)}
+  .bin .it.ok{background:var(--green-soft);color:var(--green);font-weight:700}
+  .bin .it.no{background:var(--red-soft);color:var(--red);font-weight:700}
+  /* CER */
+  textarea{font-family:inherit;font-size:16.5px;line-height:1.6;width:100%;min-height:120px;padding:11px 13px;
+           border:2px solid var(--border);border-radius:6px;resize:vertical;background:#fff}
+  .field-row{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 16px}
+  .field-row label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.05em;
+                   text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .field-row input{font-family:inherit;font-size:16.5px;padding:8px 11px;border:2px solid var(--border);
+                   border-radius:6px;width:100%}
+  .levels{display:flex;gap:6px;margin:10px 0 0;flex-wrap:wrap}
+  .lvbtn{font-size:14px;padding:6px 12px;border-radius:5px;border:2px solid var(--border);
+         background:#fff;color:var(--muted);cursor:pointer;font-weight:600}
+  .lvbtn.on{border-color:var(--teal);background:var(--teal-soft);color:var(--teal-dark)}
+  .frames{margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
+  .frame{text-align:left;border:1px solid var(--border);background:var(--grey);border-radius:5px;
+         padding:8px 12px;font-size:15.5px;cursor:pointer;font-family:inherit;color:var(--text);font-weight:400}
+  .frame:hover{border-color:var(--teal);background:#fff;color:var(--text)}
+  .checks{margin:12px 0 0;display:flex;flex-direction:column;gap:5px;font-size:15.5px}
+  .checks .c{display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+  .checks .c .m{font-weight:700;width:18px;flex:0 0 18px;text-align:center}
+  .checks .c.pass{color:var(--green)}
+  .checks .c.warn{color:var(--orange-text)}
+  .selfcheck{margin:12px 0 0}
+  .selfcheck label{display:flex;gap:10px;align-items:flex-start;font-size:16px;margin:7px 0;cursor:pointer}
+  .selfcheck input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;flex:0 0 19px;cursor:pointer}
+  details{border:2px solid var(--border);border-radius:6px;padding:12px 16px;margin:18px 0;background:#fff}
+  details summary{font-weight:700;color:var(--teal);cursor:pointer;font-size:17px}
+  details[open] summary{margin-bottom:10px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  footer{margin-top:54px;padding:22px 0 0;border-top:2px solid var(--border);font-size:15px;color:var(--muted)}
+  .pagenav{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+  .pagenav a{flex:1 1 220px;border:2px solid var(--border);border-radius:6px;padding:12px 15px;
+             text-decoration:none;color:inherit;background:#fff}
+  .pagenav a:hover{border-color:var(--teal)}
+  .pagenav .dir{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .pagenav .t{display:block;font-weight:700;color:var(--teal);margin-top:2px}
+  @media (max-width:700px){
+    body{font-size:16.5px}
+    header.top h1{font-size:23px}
+    nav.jump a{padding:9px 8px;font-size:13.5px}
+    .ro .v{font-size:19px}
+  }
+  @media print{
+    body{background:#fff;font-size:11pt}
+    nav.jump,.crumbs,button,.btnrow,input[type=range],.pagenav,.levels,.frames{display:none!important}
+    header.top{background:#fff!important;color:var(--teal)!important;padding:0 0 10px}
+    .locked{filter:none;opacity:1}
+    .predict .outcome{display:block!important}
+    .widget,.box,table,details{break-inside:avoid;page-break-inside:avoid}
+    h2{break-after:avoid}
+    @page{size:A4;margin:15mm}
+  }
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 1</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">CER Builder | G7 Integrated Science</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 1 &bull; States of Matter</p>
+    <h1>CER Builder</h1>
+    <p class="tag">Claim, evidence, reasoning, with your sentence frames built in</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#what">What a CER Is</a></li>
+    <li><a href="#claim">1. Claim</a></li>
+    <li><a href="#evidence">2. Evidence</a></li>
+    <li><a href="#reasoning">3. Reasoning</a></li>
+    <li><a href="#words">Word Bank</a></li>
+    <li><a href="#example">Example</a></li>
+    <li><a href="#selfcheck">Self-Check</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<h2 id="what"><span></span>What a CER Is</h2>
+
+<p>You will write one CER for each of your two focus areas in the Unit 1 Summative. This page holds the same sentence frames and word bank as your handout, but it checks your writing as you go and saves it in your browser.</p>
+
+<table>
+  <thead><tr><th style="width:20%">Part</th><th style="width:22%">In short</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Claim</strong></td><td>Your answer.</td><td>A short statement that directly answers your focus-area question about your phenomenon.</td></tr>
+    <tr><td><strong>Evidence</strong></td><td>Your proof.</td><td>Specific details from your model, diagrams, or observations that back up your claim.</td></tr>
+    <tr><td><strong>Reasoning</strong></td><td>Your "so what."</td><td>The science explanation that connects your evidence to your claim, and why the evidence proves it is true.</td></tr>
+  </tbody>
+</table>
+
+<div class="widget">
+  <h3>Start here</h3>
+  <div class="field-row">
+    <div style="flex:1 1 300px">
+      <label for="phenom">My phenomenon</label>
+      <input id="phenom" type="text" placeholder="for example: water boiling in a kettle">
+    </div>
+    <div style="flex:1 1 300px">
+      <label for="focus">My focus area</label>
+      <input id="focus" type="text" placeholder="for example: thermal energy change">
+    </div>
+  </div>
+  <p class="commentary" id="saveNote" aria-live="polite">Your writing saves automatically in this browser as you type. Use the same device each time.</p>
+</div>
+
+<h2 id="claim"><span></span>1. Claim</h2>
+
+<p><strong>Why this part matters:</strong> Your claim is the specific answer to your focus-area question. It should be clear enough that someone could check it against your model.</p>
+
+<div class="widget">
+  <h3>Write your claim <span class="tryit">1 to 2 sentences</span></h3>
+
+  <p style="margin:0 0 4px;font-size:15.5px;color:var(--muted)">Pick the level that helps you most. Click a frame to drop it into your writing. You can change the words, mix levels, or write your own.</p>
+
+  <div class="levels" data-part="claim">
+    <button class="lvbtn on" type="button" data-level="1">Level 1: More Support</button>
+    <button class="lvbtn" type="button" data-level="2">Level 2: Some Support</button>
+    <button class="lvbtn" type="button" data-level="3">Level 3: Least Support</button>
+  </div>
+
+      <div class="frames" data-part="claim" data-level="1">
+        <button class="frame" type="button" data-ins="claim">In my phenomenon, ______ happens because thermal energy is [added / removed].</button>
+        <button class="frame" type="button" data-ins="claim">When thermal energy is [added / removed], the particles ______.</button>
+        <button class="frame" type="button" data-ins="claim">My phenomenon shows [state 1] changing to [state 2].</button>
+      </div>
+      <div class="frames" data-part="claim" data-level="2" hidden>
+        <button class="frame" type="button" data-ins="claim">In [phenomenon], the [atoms / molecules / particles] ______ when ______.</button>
+        <button class="frame" type="button" data-ins="claim">This happens because the [substance] has particles that ______.</button>
+        <button class="frame" type="button" data-ins="claim">The [intermolecular forces / particle motion] in my phenomenon cause ______.</button>
+      </div>
+      <div class="frames" data-part="claim" data-level="3" hidden>
+        <button class="frame" type="button" data-ins="claim">In [phenomenon], the [particles / molecules / intermolecular forces] cause ______ because ______.</button>
+        <button class="frame" type="button" data-ins="claim">As thermal energy is [added to / removed from] [phenomenon], ______.</button>
+        <button class="frame" type="button" data-ins="claim">Write your own 1 to 2 sentence claim that directly answers your focus-area question.</button>
+      </div>
+
+  <label for="ta-claim" class="sr">Your claim</label>
+  <textarea id="ta-claim" placeholder="Write your claim here, or click a frame above to start."></textarea>
+
+  <div class="checks" id="ck-claim"></div>
+
+  <p style="margin:12px 0 0;font-size:15.5px;color:var(--orange-text)"><strong>Avoid:</strong> Do not just restate the question, and do not describe the whole phenomenon in general. A claim is ONE specific, checkable answer, not a summary.</p>
+</div>
+
+<h2 id="evidence"><span></span>2. Evidence</h2>
+
+<p><strong>Why this part matters:</strong> Evidence is your proof: exact details from your model, such as particle spacing, motion, arrows, and labels, that support your claim. Vague statements like "it looks cool" are not evidence.</p>
+
+<div class="widget">
+  <h3>Write your evidence <span class="tryit">3 to 5 sentences</span></h3>
+
+  <p style="margin:0 0 4px;font-size:15.5px;color:var(--muted)">Pick the level that helps you most. Click a frame to drop it into your writing. You can change the words, mix levels, or write your own.</p>
+
+  <div class="levels" data-part="evidence">
+    <button class="lvbtn on" type="button" data-level="1">Level 1: More Support</button>
+    <button class="lvbtn" type="button" data-level="2">Level 2: Some Support</button>
+    <button class="lvbtn" type="button" data-level="3">Level 3: Least Support</button>
+  </div>
+
+      <div class="frames" data-part="evidence" data-level="1">
+        <button class="frame" type="button" data-ins="evidence">In my model, I drew ______.</button>
+        <button class="frame" type="button" data-ins="evidence">The particles are shown ______ (close together / far apart / moving fast / moving slow).</button>
+        <button class="frame" type="button" data-ins="evidence">My model shows [state 1] changing to [state 2].</button>
+      </div>
+      <div class="frames" data-part="evidence" data-level="2" hidden>
+        <button class="frame" type="button" data-ins="evidence">My model shows that the particles are ______, which means ______.</button>
+        <button class="frame" type="button" data-ins="evidence">Before the change, the particles were ______. After the change, they were ______.</button>
+        <button class="frame" type="button" data-ins="evidence">The arrows and labels in my model show that thermal energy was [added / removed].</button>
+      </div>
+      <div class="frames" data-part="evidence" data-level="3" hidden>
+        <button class="frame" type="button" data-ins="evidence">According to my model, ______, which shows that ______.</button>
+        <button class="frame" type="button" data-ins="evidence">One piece of evidence is ______. Another piece of evidence is ______.</button>
+        <button class="frame" type="button" data-ins="evidence">My observations of [phenomenon] also show ______.</button>
+      </div>
+
+  <label for="ta-evidence" class="sr">Your evidence</label>
+  <textarea id="ta-evidence" placeholder="Write your evidence here, or click a frame above to start."></textarea>
+
+  <div class="checks" id="ck-evidence"></div>
+
+  <p style="margin:12px 0 0;font-size:15.5px;color:var(--orange-text)"><strong>Avoid:</strong> Do not just repeat your claim in different words. Evidence must point to something specific in your model or observations: particle spacing, particle motion, forces, or energy direction.</p>
+</div>
+
+<h2 id="reasoning"><span></span>3. Reasoning</h2>
+
+<p><strong>Why this part matters:</strong> Reasoning connects your evidence back to the science ideas and explains WHY the evidence proves your claim. This is the part students skip most often, so do not skip it.</p>
+
+<div class="widget">
+  <h3>Write your reasoning <span class="tryit">3 to 5 sentences</span></h3>
+
+  <p style="margin:0 0 4px;font-size:15.5px;color:var(--muted)">Pick the level that helps you most. Click a frame to drop it into your writing. You can change the words, mix levels, or write your own.</p>
+
+  <div class="levels" data-part="reasoning">
+    <button class="lvbtn on" type="button" data-level="1">Level 1: More Support</button>
+    <button class="lvbtn" type="button" data-level="2">Level 2: Some Support</button>
+    <button class="lvbtn" type="button" data-level="3">Level 3: Least Support</button>
+  </div>
+
+      <div class="frames" data-part="reasoning" data-level="1">
+        <button class="frame" type="button" data-ins="reasoning">This happens because when energy is [added / removed], particles ______.</button>
+        <button class="frame" type="button" data-ins="reasoning">This shows that ______ because particles need [more / less] energy to ______.</button>
+        <button class="frame" type="button" data-ins="reasoning">This causes the substance to change from ______ to ______.</button>
+      </div>
+      <div class="frames" data-part="reasoning" data-level="2" hidden>
+        <button class="frame" type="button" data-ins="reasoning">This evidence shows my claim is correct because ______.</button>
+        <button class="frame" type="button" data-ins="reasoning">This happens because particles ______ when thermal energy is [added / removed], which causes ______.</button>
+        <button class="frame" type="button" data-ins="reasoning">As a result, ______.</button>
+      </div>
+      <div class="frames" data-part="reasoning" data-level="3" hidden>
+        <button class="frame" type="button" data-ins="reasoning">This evidence supports my claim because, according to the kinetic molecular theory, ______.</button>
+        <button class="frame" type="button" data-ins="reasoning">Therefore, ______, which explains why ______ occurs in my phenomenon.</button>
+        <button class="frame" type="button" data-ins="reasoning">This connects to particle motion, spacing, and energy because ______.</button>
+      </div>
+
+  <label for="ta-reasoning" class="sr">Your reasoning</label>
+  <textarea id="ta-reasoning" placeholder="Write your reasoning here, or click a frame above to start."></textarea>
+
+  <div class="checks" id="ck-reasoning"></div>
+
+  <p style="margin:12px 0 0;font-size:15.5px;color:var(--orange-text)"><strong>Avoid:</strong> Do not just repeat your evidence again. Reasoning has to explain WHY, using a science idea such as particle motion, spacing, intermolecular forces, or energy.</p>
+</div>
+
+<h2 id="words">Word Bank</h2>
+
+<p>Click any word to drop it into whichever box you were last writing in.</p>
+
+<h4>Science words</h4>
+<div class="chips" id="sciWords"></div>
+
+<h4>Reasoning and transition words</h4>
+<div class="chips" id="transWords"></div>
+
+<h2 id="example">Annotated Example</h2>
+
+<details>
+  <summary>Show the worked example: water boiling in a kettle</summary>
+  <p style="color:var(--muted);font-size:15.5px;margin-top:0"><strong>Phenomenon:</strong> Water boiling in a kettle &nbsp;|&nbsp; <strong>Focus area:</strong> Thermal energy change</p>
+  <h4 style="color:var(--teal)">Claim</h4>
+  <p>In water boiling in a kettle, the water particles move faster and spread farther apart because thermal energy is being added.</p>
+  <h4 style="color:var(--teal)">Evidence</h4>
+  <p>In my model, I drew the liquid water particles close together and moving at a medium speed before heating. After heating, I drew the particles as gas (steam) far apart and moving very fast, with arrows showing energy entering the pot. The bubbles in my model show the liquid changing to gas as it reaches its boiling point.</p>
+  <h4 style="color:var(--teal)">Reasoning</h4>
+  <p>This evidence supports my claim because, according to the kinetic molecular theory, adding thermal energy increases the kinetic energy of particles, causing them to move faster and spread farther apart. This is why the tightly-packed liquid water particles become widely-spaced gas particles (steam), since the added energy overcomes the intermolecular forces holding the liquid particles together. As a result, water changes state from liquid to gas.</p>
+  <p class="commentary" style="margin-top:14px">Notice that each part does a different job. The claim states the answer. The evidence points to exact details in the model. The reasoning explains why the evidence proves the claim, using particle motion, spacing, forces, and energy, rather than repeating the evidence.</p>
+</details>
+
+<h2 id="selfcheck">Self-Check Before You Submit</h2>
+
+<div class="widget">
+  <h3>Tick each one</h3>
+  <div class="selfcheck" id="scList"></div>
+  <div class="btnrow">
+    <button class="primary" type="button" id="copyBtn">Copy my whole CER</button>
+    <button type="button" id="printBtn">Print this page</button>
+    <button type="button" id="clearBtn">Clear everything</button>
+  </div>
+  <p class="commentary" id="copyNote" aria-live="polite">When you are finished, copy your CER and paste it into your summative document.</p>
+</div>
+
+<div class="pagenav">
+  <a href="particle-lab.html"><span class="dir">&larr; Previous</span><span class="t">The Particle Lab</span></a>
+  <a href="practice-games.html"><span class="dir">Next &rarr;</span><span class="t">Practice Games</span></a>
+</div>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 1: States of Matter. Aligned to MS-PS1-1 and MS-PS1-4.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true;}catch(e){return false;} }
+function recall(k,d){ try{ var s=localStorage.getItem(k); return s===null?d:JSON.parse(s);}catch(e){return d;} }
+function predictGate(rootId, targetId, correctIdx, outcomes){
+  var root=document.getElementById(rootId);
+  var opts=root.querySelectorAll('.opt');
+  var out=root.querySelector('.outcome');
+  var target=targetId?document.getElementById(targetId):null;
+  if(target) target.classList.add('locked');
+  opts.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      opts.forEach(function(o){o.classList.remove('picked')});
+      b.classList.add('picked');
+      out.innerHTML = outcomes[i];
+      out.classList.add('open');
+      if(target) target.classList.remove('locked');
+    });
+  });
+}
+
+var SCI=["atom","molecule","particle","particles","element","compound","mixture","intermolecular force",
+ "intermolecular forces","kinetic energy","thermal energy","solid","liquid","gas","state of matter",
+ "state change","melting","freezing","boiling","condensation","evaporation","sublimation",
+ "particle spacing","particle motion","energy"];
+var TRANS=["because","since","as a result","this shows that","this proves that","this means that",
+ "therefore","due to","which causes","before","after","this supports my claim because"];
+var PARTS=["claim","evidence","reasoning"];
+var TARGET={claim:[1,2],evidence:[3,5],reasoning:[3,5]};
+var KEY="g7u1-cer";
+var lastFocus="claim";
+
+function sentences(t){
+  return t.split(/[.!?]+/).map(function(s){return s.trim();}).filter(function(s){return s.length>2;});
+}
+function hasAny(t,list){
+  var low=t.toLowerCase();
+  var hits=list.filter(function(w){ return low.indexOf(w.toLowerCase())>=0; });
+  // drop a hit that is contained in a longer hit, so "particle" and "particles" do not both show
+  return hits.filter(function(w){
+    return !hits.some(function(o){ return o!==w && o.toLowerCase().indexOf(w.toLowerCase())>=0; });
+  });
+}
+function plural(n,word){ return n+' '+word+(n===1?'':'s'); }
+var PARTNAME={claim:'your claim',evidence:'your evidence',reasoning:'your reasoning'};
+function row(state,msg){
+  var m = state==='pass'?'\u2713' : (state==='warn'?'!':'\u25CB');
+  return '<div class="c '+(state==='none'?'':state)+'"><span class="m">'+m+'</span><span>'+msg+'</span></div>';
+}
+function check(part){
+  var t=document.getElementById('ta-'+part).value;
+  var n=sentences(t).length;
+  var lo=TARGET[part][0], hi=TARGET[part][1];
+  var out='';
+  if(!t.trim()){
+    out=row('none','Nothing written yet.');
+  } else {
+    if(n<lo) out+=row('warn','You have '+plural(n,'sentence')+'. Aim for '+lo+' to '+hi+'.');
+    else if(n>hi) out+=row('warn','You have '+plural(n,'sentence')+'. Aim for '+lo+' to '+hi+', so try tightening it.');
+    else out+=row('pass',plural(n,'sentence')+', which is right for '+PARTNAME[part]+'.');
+    var sci=hasAny(t,SCI);
+    if(sci.length) out+=row('pass','Uses science words: '+sci.slice(0,4).join(', ')+(sci.length>4?', and more':'')+'.');
+    else out+=row('warn','No word bank science words yet. Try particle, energy, spacing, or motion.');
+    if(part==='reasoning'){
+      var tr=hasAny(t,TRANS);
+      if(tr.length) out+=row('pass','Uses a reasoning word: '+tr.slice(0,3).join(', ')+'.');
+      else out+=row('warn','Add a reasoning word such as because, therefore, or this shows that.');
+      var ev=document.getElementById('ta-evidence').value.trim().toLowerCase();
+      if(ev && t.trim().toLowerCase()===ev) out+=row('warn','This is the same as your evidence. Reasoning has to explain WHY, not repeat it.');
+    }
+  }
+  document.getElementById('ck-'+part).innerHTML=out;
+}
+function save(){
+  var d={phenom:document.getElementById('phenom').value, focus:document.getElementById('focus').value};
+  PARTS.forEach(function(p){ d[p]=document.getElementById('ta-'+p).value; });
+  d.sc=[].slice.call(document.querySelectorAll('#scList input')).map(function(i){return i.checked;});
+  var ok=store(KEY,d);
+  document.getElementById('saveNote').textContent = ok
+    ? 'Saved in this browser. Use the same device each time.'
+    : 'This browser is not saving right now, so copy your work somewhere safe before you close the page.';
+}
+function load(){
+  var d=recall(KEY,null); if(!d) return;
+  if(d.phenom) document.getElementById('phenom').value=d.phenom;
+  if(d.focus) document.getElementById('focus').value=d.focus;
+  PARTS.forEach(function(p){ if(d[p]) document.getElementById('ta-'+p).value=d[p]; });
+  if(d.sc) [].slice.call(document.querySelectorAll('#scList input')).forEach(function(i,k){ i.checked=!!d.sc[k]; });
+}
+function insert(part,text){
+  var ta=document.getElementById('ta-'+part);
+  var cur=ta.value;
+  ta.value = cur + (cur && !/\s$/.test(cur) ? ' ' : '') + text + ' ';
+  ta.focus();
+  check(part); save();
+}
+
+// level switching
+document.querySelectorAll('.levels').forEach(function(bar){
+  var part=bar.getAttribute('data-part');
+  bar.querySelectorAll('.lvbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      bar.querySelectorAll('.lvbtn').forEach(function(o){o.classList.remove('on')});
+      b.classList.add('on');
+      var lv=b.getAttribute('data-level');
+      document.querySelectorAll('.frames[data-part="'+part+'"]').forEach(function(g){
+        g.hidden = g.getAttribute('data-level')!==lv;
+      });
+    });
+  });
+});
+document.querySelectorAll('.frame').forEach(function(b){
+  b.addEventListener('click',function(){ insert(b.getAttribute('data-ins'), b.textContent.trim()); });
+});
+PARTS.forEach(function(p){
+  var ta=document.getElementById('ta-'+p);
+  ta.addEventListener('input',function(){ check(p); save(); });
+  ta.addEventListener('focus',function(){ lastFocus=p; });
+});
+['phenom','focus'].forEach(function(id){ document.getElementById(id).addEventListener('input',save); });
+
+// word bank chips
+function chips(hostId,list){
+  var host=document.getElementById(hostId);
+  list.forEach(function(w){
+    var b=document.createElement('button');
+    b.className='chip'; b.type='button'; b.textContent=w;
+    b.addEventListener('click',function(){ insert(lastFocus,w); });
+    host.appendChild(b);
+  });
+}
+chips('sciWords',SCI.filter(function(w,i,a){return a.indexOf(w)===i;}));
+chips('transWords',TRANS);
+
+// self-check list, wording from the handout
+var SC=[
+ "My claim directly answers my focus-area question (Rubric S5).",
+ "My claim is 1 to 2 sentences and does not just repeat the question.",
+ "My evidence describes specific details from my model: particle spacing, motion, forces, or energy (Rubric S6).",
+ "My evidence is 3 to 5 sentences.",
+ "My reasoning explains WHY my evidence proves my claim, using a science idea (Rubric S7).",
+ "My reasoning is 3 to 5 sentences and uses at least one reasoning word.",
+ "I used words from the Word Bank where they fit.",
+ "I read my CER out loud. Would it make sense to someone who has not seen my model?"
+];
+var scHost=document.getElementById('scList');
+SC.forEach(function(txt){
+  var l=document.createElement('label');
+  var i=document.createElement('input'); i.type='checkbox';
+  i.addEventListener('change',save);
+  var s=document.createElement('span'); s.textContent=txt;
+  l.appendChild(i); l.appendChild(s); scHost.appendChild(l);
+});
+
+document.getElementById('copyBtn').addEventListener('click',function(){
+  var ph=document.getElementById('phenom').value||'(phenomenon)';
+  var fo=document.getElementById('focus').value||'(focus area)';
+  var txt='Phenomenon: '+ph+'\nFocus area: '+fo+'\n\nCLAIM\n'+
+    document.getElementById('ta-claim').value+'\n\nEVIDENCE\n'+
+    document.getElementById('ta-evidence').value+'\n\nREASONING\n'+
+    document.getElementById('ta-reasoning').value+'\n';
+  var done=function(ok){
+    document.getElementById('copyNote').textContent = ok
+      ? 'Copied. Paste it into your summative document.'
+      : 'Could not copy automatically. Select your text in the boxes above and copy it by hand.';
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});
+  } else done(false);
+});
+document.getElementById('printBtn').addEventListener('click',function(){ window.print(); });
+document.getElementById('clearBtn').addEventListener('click',function(){
+  if(!confirm('Clear your phenomenon, all three boxes, and the checklist?')) return;
+  document.getElementById('phenom').value=''; document.getElementById('focus').value='';
+  PARTS.forEach(function(p){ document.getElementById('ta-'+p).value=''; check(p); });
+  document.querySelectorAll('#scList input').forEach(function(i){ i.checked=false; });
+  save();
+  document.getElementById('copyNote').textContent='Cleared.';
+});
+
+load();
+PARTS.forEach(check);
+
+</script>
+
+</body>
+</html>

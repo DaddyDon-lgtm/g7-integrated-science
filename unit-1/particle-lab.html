@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Particle Lab | G7 Integrated Science</title>
+<style>
+  :root{
+    --teal:#12595a; --teal-dark:#0c4142; --teal-soft:#e8f2f2;
+    --orange:#c2621c; --orange-soft:#fdefe3; --orange-text:#96490f;
+    --green:#1e6b45; --green-soft:#e6f4ec; --red:#9c2a2a; --red-soft:#fce8e8;
+    --grey:#f2f4f6; --border:#d9dde4; --text:#1c1c1c; --muted:#5a6070;
+    --solid:#2c5f8a; --liquid:#1d7a6c; --gas:#b06a1f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+       font-size:17.5px;line-height:1.65;color:var(--text);background:#f7f8fa}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px 70px}
+  .crumbs{background:#fff;border-bottom:1px solid var(--border);font-size:14.5px}
+  .crumbs .inner{max-width:940px;margin:0 auto;padding:10px 20px}
+  .crumbs a{color:var(--teal);text-decoration:none;font-weight:600}
+  .crumbs a:hover{text-decoration:underline}
+  .crumbs .sep{color:var(--border);margin:0 8px}
+  .crumbs .here{color:var(--muted)}
+  header.top{background:var(--teal);color:#fff;padding:30px 20px 26px}
+  header.top .inner{max-width:940px;margin:0 auto}
+  header.top .kicker{font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;opacity:.82;margin:0 0 6px}
+  header.top h1{margin:0;font-size:29px;line-height:1.2}
+  header.top p.tag{margin:8px 0 0;font-size:17px;opacity:.93}
+  nav.jump{background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:30}
+  nav.jump ul{max-width:940px;margin:0 auto;padding:0 20px;list-style:none;display:flex;flex-wrap:wrap;gap:2px}
+  nav.jump a{display:block;padding:11px 12px;font-size:14.5px;font-weight:600;color:var(--teal);
+             text-decoration:none;border-bottom:3px solid transparent}
+  nav.jump a:hover{border-bottom-color:var(--orange);background:#f6f9f9}
+  h2{font-size:23px;color:var(--teal);margin:44px 0 6px;padding-bottom:8px;
+     border-bottom:3px solid var(--teal);scroll-margin-top:124px}
+  h3{font-size:19px;color:var(--teal-dark);margin:28px 0 8px}
+  h4{font-size:16.5px;margin:18px 0 6px}
+  p{margin:11px 0}
+  ul,ol{margin:11px 0;padding-left:26px}
+  li{margin:5px 0}
+  code{background:var(--grey);padding:1px 6px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em}
+  .box{border-radius:6px;padding:16px 20px;margin:22px 0;border-left:6px solid}
+  .box p:first-child{margin-top:0}
+  .box p:last-child{margin-bottom:0}
+  .box .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+  .box.tip{background:var(--orange-soft);border-color:var(--orange)}
+  .box.tip .label{color:var(--orange-text)}
+  .box.key{background:var(--teal-soft);border-color:var(--teal)}
+  .box.key .label{color:var(--teal)}
+  .box.good{background:var(--green-soft);border-color:var(--green)}
+  .box.good .label{color:var(--green)}
+  table{border-collapse:collapse;width:100%;margin:20px 0;font-size:16.5px}
+  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top}
+  thead th{background:var(--teal);color:#fff;font-weight:600}
+  tbody tr:nth-child(even){background:var(--grey)}
+  .widget{background:#fff;border:2px solid var(--border);border-radius:8px;padding:18px 20px 20px;margin:24px 0}
+  .widget > h3{margin-top:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .widget .tryit{font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                 color:var(--orange-text);background:var(--orange-soft);padding:3px 9px;border-radius:10px}
+  svg,canvas{display:block;max-width:100%}
+  .ctrls{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 4px;align-items:flex-end}
+  .ctrl{flex:1 1 240px}
+  .ctrl label{display:block;font-size:13.5px;font-weight:700;letter-spacing:.04em;
+              text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .ctrl .val{color:var(--teal);font-size:15px}
+  input[type=range]{width:100%;accent-color:var(--teal);height:26px;cursor:pointer}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  button{font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;border-radius:5px;
+         padding:8px 15px;border:2px solid var(--teal);background:#fff;color:var(--teal);transition:background .12s}
+  button:hover{background:var(--teal);color:#fff}
+  button.primary{background:var(--teal);color:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .readouts{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0}
+  .ro{flex:1 1 130px;background:var(--grey);border-radius:6px;padding:9px 12px;text-align:center}
+  .ro .k{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .ro .v{display:block;font-size:22px;font-weight:700;color:var(--teal);line-height:1.25}
+  .commentary{margin:14px 0 0;padding:11px 14px;background:var(--teal-soft);border-left:5px solid var(--teal);
+              border-radius:0 5px 5px 0;font-size:16px}
+  /* predict-first gate */
+  .predict{background:var(--orange-soft);border:2px solid var(--orange);border-radius:8px;padding:18px 20px;margin:24px 0}
+  .predict .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;
+                  text-transform:uppercase;color:var(--orange-text);margin-bottom:6px}
+  .predict h3{margin:0 0 10px;color:var(--orange-text)}
+  .predict .opts{display:flex;flex-direction:column;gap:8px;margin:12px 0 0}
+  .predict .opt{display:block;width:100%;text-align:left;border:2px solid var(--border);background:#fff;
+                border-radius:6px;padding:11px 14px;font-size:16.5px;font-weight:500;color:var(--text);cursor:pointer}
+  .predict .opt:hover{border-color:var(--orange);background:#fff}
+  .predict .opt.picked{border-color:var(--teal);background:var(--teal-soft);font-weight:700}
+  .predict .outcome{display:none;margin:14px 0 0;padding:12px 15px;background:#fff;border-radius:6px;
+                    border-left:5px solid var(--teal);font-size:16.5px}
+  .predict .outcome.open{display:block}
+  .locked{filter:blur(5px);pointer-events:none;user-select:none;opacity:.55}
+  /* games */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .chip{border:2px solid var(--border);background:#fff;border-radius:20px;padding:7px 15px;font-size:16px;
+        cursor:pointer;font-family:inherit;color:var(--text);font-weight:500}
+  .chip:hover{border-color:var(--teal);background:#fff}
+  .chip.sel{border-color:var(--teal);background:var(--teal-soft);font-weight:700}
+  .chip.done{opacity:.35;cursor:default;text-decoration:line-through}
+  .bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+  .bin{border:3px dashed var(--border);border-radius:8px;padding:12px;min-height:130px;background:#fff;cursor:pointer}
+  .bin:hover{border-color:var(--teal)}
+  .bin h4{margin:0 0 8px;text-align:center;font-size:16px;letter-spacing:.05em;text-transform:uppercase}
+  .bin.s h4{color:var(--solid)} .bin.l h4{color:var(--liquid)} .bin.g h4{color:var(--gas)}
+  .bin.s{border-color:var(--solid)} .bin.l{border-color:var(--liquid)} .bin.g{border-color:var(--gas)}
+  .bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .bin .it{font-size:14.5px;padding:4px 10px;border-radius:14px;background:var(--grey)}
+  .bin .it.ok{background:var(--green-soft);color:var(--green);font-weight:700}
+  .bin .it.no{background:var(--red-soft);color:var(--red);font-weight:700}
+  /* CER */
+  textarea{font-family:inherit;font-size:16.5px;line-height:1.6;width:100%;min-height:120px;padding:11px 13px;
+           border:2px solid var(--border);border-radius:6px;resize:vertical;background:#fff}
+  .field-row{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 16px}
+  .field-row label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.05em;
+                   text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .field-row input{font-family:inherit;font-size:16.5px;padding:8px 11px;border:2px solid var(--border);
+                   border-radius:6px;width:100%}
+  .levels{display:flex;gap:6px;margin:10px 0 0;flex-wrap:wrap}
+  .lvbtn{font-size:14px;padding:6px 12px;border-radius:5px;border:2px solid var(--border);
+         background:#fff;color:var(--muted);cursor:pointer;font-weight:600}
+  .lvbtn.on{border-color:var(--teal);background:var(--teal-soft);color:var(--teal-dark)}
+  .frames{margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
+  .frame{text-align:left;border:1px solid var(--border);background:var(--grey);border-radius:5px;
+         padding:8px 12px;font-size:15.5px;cursor:pointer;font-family:inherit;color:var(--text);font-weight:400}
+  .frame:hover{border-color:var(--teal);background:#fff;color:var(--text)}
+  .checks{margin:12px 0 0;display:flex;flex-direction:column;gap:5px;font-size:15.5px}
+  .checks .c{display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+  .checks .c .m{font-weight:700;width:18px;flex:0 0 18px;text-align:center}
+  .checks .c.pass{color:var(--green)}
+  .checks .c.warn{color:var(--orange-text)}
+  .selfcheck{margin:12px 0 0}
+  .selfcheck label{display:flex;gap:10px;align-items:flex-start;font-size:16px;margin:7px 0;cursor:pointer}
+  .selfcheck input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;flex:0 0 19px;cursor:pointer}
+  details{border:2px solid var(--border);border-radius:6px;padding:12px 16px;margin:18px 0;background:#fff}
+  details summary{font-weight:700;color:var(--teal);cursor:pointer;font-size:17px}
+  details[open] summary{margin-bottom:10px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  footer{margin-top:54px;padding:22px 0 0;border-top:2px solid var(--border);font-size:15px;color:var(--muted)}
+  .pagenav{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+  .pagenav a{flex:1 1 220px;border:2px solid var(--border);border-radius:6px;padding:12px 15px;
+             text-decoration:none;color:inherit;background:#fff}
+  .pagenav a:hover{border-color:var(--teal)}
+  .pagenav .dir{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .pagenav .t{display:block;font-weight:700;color:var(--teal);margin-top:2px}
+  @media (max-width:700px){
+    body{font-size:16.5px}
+    header.top h1{font-size:23px}
+    nav.jump a{padding:9px 8px;font-size:13.5px}
+    .ro .v{font-size:19px}
+  }
+  @media print{
+    body{background:#fff;font-size:11pt}
+    nav.jump,.crumbs,button,.btnrow,input[type=range],.pagenav,.levels,.frames{display:none!important}
+    header.top{background:#fff!important;color:var(--teal)!important;padding:0 0 10px}
+    .locked{filter:none;opacity:1}
+    .predict .outcome{display:block!important}
+    .widget,.box,table,details{break-inside:avoid;page-break-inside:avoid}
+    h2{break-after:avoid}
+    @page{size:A4;margin:15mm}
+  }
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 1</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">Particle Lab | G7 Integrated Science</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 1 &bull; States of Matter</p>
+    <h1>The Particle Lab</h1>
+    <p class="tag">Heat it up and watch what the particles actually do</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#start">Predict First</a></li>
+    <li><a href="#lab">The Particle Lab</a></li>
+    <li><a href="#flat">The Flat Parts</a></li>
+    <li><a href="#check">Check Yourself</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<h2 id="start"><span></span>Before You Touch Anything</h2>
+
+<p>This page lets you heat a substance and watch what the particles do. But first, make a prediction. Thinking before you look is what turns this into learning instead of a cartoon.</p>
+
+<div class="predict" id="p1">
+  <span class="label">Predict first</span>
+  <h3>You take a block of ice and start heating it. What happens to the particles first?</h3>
+  <div class="opts">
+    <button class="opt" type="button">A. They immediately fly apart and fill the container.</button>
+    <button class="opt" type="button">B. They stay in their fixed positions but vibrate faster.</button>
+    <button class="opt" type="button">C. They melt into a puddle straight away.</button>
+    <button class="opt" type="button">D. Nothing happens until the ice reaches 0 degrees.</button>
+  </div>
+  <div class="outcome"></div>
+</div>
+
+<h2 id="lab">The Particle Lab</h2>
+
+<div class="widget" id="labBox">
+  <h3>Add thermal energy and watch <span class="tryit">Interactive</span></h3>
+  <p style="margin-top:0">Drag the slider to add energy. The box on the left shows the particles. The graph on the right shows the temperature. Watch both at the same time.</p>
+
+  <div style="display:grid;grid-template-columns:minmax(220px,1fr) minmax(260px,1.25fr);gap:18px;align-items:start">
+    <div>
+      <canvas id="pCanvas" width="420" height="420" style="width:100%;border:2px solid var(--border);border-radius:6px;background:#fbfcfd"></canvas>
+      <p style="text-align:center;font-size:14px;color:var(--muted);margin:6px 0 0">The particles</p>
+    </div>
+    <div>
+      <svg id="hcSvg" viewBox="0 0 460 420" role="img" aria-label="Heating curve with a marker that moves as energy is added"></svg>
+      <p style="text-align:center;font-size:14px;color:var(--muted);margin:6px 0 0">The heating curve</p>
+    </div>
+  </div>
+
+  <div class="ctrls">
+    <div class="ctrl" style="flex:1 1 100%">
+      <label for="eSlider">Thermal energy added <span class="val" id="eVal">0%</span></label>
+      <input id="eSlider" type="range" min="0" max="100" value="0" step="0.5">
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">Temperature</span><span class="v" id="roTemp">-20&deg;C</span></div>
+    <div class="ro"><span class="k">State</span><span class="v" id="roState" style="font-size:19px">solid</span></div>
+    <div class="ro"><span class="k">Particle motion</span><span class="v" id="roMotion" style="font-size:17px">vibrating in place</span></div>
+  </div>
+
+  <p class="commentary" id="labNote" aria-live="polite"></p>
+
+  <div class="btnrow">
+    <button type="button" data-jump="5">Cold solid</button>
+    <button type="button" data-jump="25">Melting</button>
+    <button type="button" data-jump="48">Liquid</button>
+    <button type="button" data-jump="75">Boiling</button>
+    <button type="button" data-jump="96">Hot gas</button>
+    <button type="button" id="autoBtn" class="primary">Heat it slowly</button>
+  </div>
+</div>
+
+<h2 id="flat">The Flat Parts</h2>
+
+<p>Move the slider slowly through the <strong>melting</strong> section and watch the thermometer. The energy is still going in. The temperature stops rising.</p>
+
+<div class="predict" id="p2">
+  <span class="label">Predict first</span>
+  <h3>While the ice is melting, you keep the flame on. What does the thermometer do?</h3>
+  <div class="opts">
+    <button class="opt" type="button">A. It keeps rising steadily, because energy is still going in.</button>
+    <button class="opt" type="button">B. It stays at 0 degrees until all the ice has melted.</button>
+    <button class="opt" type="button">C. It drops, because melting uses up heat.</button>
+  </div>
+  <div class="outcome"></div>
+</div>
+
+<div class="box key" id="flatBox">
+  <span class="label">Why the line refuses to climb</span>
+  <p>Temperature measures how fast the particles are moving, on average.</p>
+  <p>During a flat section, the energy going in is not making particles move faster. It is being used to <strong>break the attractions holding the particles together</strong>. Pulling particles apart takes energy, and while that job is being done, the speed does not change, so the thermometer does not change either.</p>
+  <p>Once every particle has been freed, the energy goes back to speeding them up, and the line climbs again.</p>
+</div>
+
+<table>
+  <thead><tr><th style="width:30%">On the graph</th><th>What the energy is doing</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Going up</strong></td><td>Making the particles move faster, so the temperature rises</td></tr>
+    <tr><td><strong>Flat</strong></td><td>Pulling the particles apart from each other, so the temperature stays the same</td></tr>
+  </tbody>
+</table>
+
+<div class="box tip">
+  <span class="label">A cooling curve is the same graph in reverse</span>
+  <p>Remove energy instead of adding it, and the line goes down, then flat while the substance freezes or condenses, then down again. The flat parts are still phase changes. The attractions are re-forming instead of breaking.</p>
+</div>
+
+<h2 id="check">Check Yourself</h2>
+
+<p>Use the lab above to test your answer before you reveal it.</p>
+
+<div class="widget">
+  <h3>Three questions</h3>
+  <div id="qs"></div>
+</div>
+
+<div class="pagenav">
+  <a href="states-of-matter-guide.html"><span class="dir">&larr; Previous</span><span class="t">States of Matter Study Guide</span></a>
+  <a href="cer-builder.html"><span class="dir">Next &rarr;</span><span class="t">CER Builder</span></a>
+</div>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 1: States of Matter. Aligned to MS-PS1-1 and MS-PS1-4.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true;}catch(e){return false;} }
+function recall(k,d){ try{ var s=localStorage.getItem(k); return s===null?d:JSON.parse(s);}catch(e){return d;} }
+function predictGate(rootId, targetId, correctIdx, outcomes){
+  var root=document.getElementById(rootId);
+  var opts=root.querySelectorAll('.opt');
+  var out=root.querySelector('.outcome');
+  var target=targetId?document.getElementById(targetId):null;
+  if(target) target.classList.add('locked');
+  opts.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      opts.forEach(function(o){o.classList.remove('picked')});
+      b.classList.add('picked');
+      out.innerHTML = outcomes[i];
+      out.classList.add('open');
+      if(target) target.classList.remove('locked');
+    });
+  });
+}
+
+predictGate('p1','labBox',1,[
+ "Not yet. Particles need a lot of energy before they break free and fill a container, and that only happens when the substance becomes a gas. Set the slider to 5 and then to 96 to see the difference.",
+ "Correct. In a solid the particles are locked in a fixed pattern. Adding energy first makes them vibrate harder in place. They only break out of the pattern once they have enough energy to overcome the attractions holding them. Try the slider now and watch the vibration grow.",
+ "Not straight away. The ice has to warm up to its melting point first, and that takes energy. Only then does melting begin. Drag the slider slowly from 0 and watch what happens before melting starts.",
+ "Close, but something is happening. Below 0 degrees the particles are already gaining energy and vibrating faster, the ice just is not melting yet. Drag the slider from 0 to 15 and watch the vibration increase."
+]);
+predictGate('p2','flatBox',1,[
+ "Have a look at the graph. During melting the line goes flat, so the temperature is not rising even though the flame is still on. The explanation below says where that energy is going.",
+ "Correct. The temperature holds at 0 degrees for the whole of melting. The energy is not wasted, it is doing a different job. Read on.",
+ "It does not drop. The line goes flat, so the temperature stays the same. Energy is still going in, it is just not speeding the particles up. Read on for why."
+]);
+
+// ============ the heating curve model ============
+// segments: [energyStart, energyEnd, tempStart, tempEnd, phase]
+var SEG = [
+  [0,   15,  -20,   0,  'solid'],
+  [15,  35,    0,   0,  'melting'],
+  [35,  60,    0, 100,  'liquid'],
+  [60,  90,  100, 100,  'boiling'],
+  [90, 100,  100, 140,  'gas']
+];
+function model(E){
+  for(var i=0;i<SEG.length;i++){
+    var s=SEG[i];
+    if(E<=s[1]||i===SEG.length-1){
+      var f=(E-s[0])/(s[1]-s[0]);
+      f=Math.max(0,Math.min(1,f));
+      return {temp:s[2]+(s[3]-s[2])*f, phase:s[4], frac:f};
+    }
+  }
+}
+// fraction of particles that are liquid / gas at this energy
+function phaseMix(E){
+  var m=model(E);
+  if(m.phase==='solid')   return {sol:1, liq:0, gas:0};
+  if(m.phase==='melting') return {sol:1-m.frac, liq:m.frac, gas:0};
+  if(m.phase==='liquid')  return {sol:0, liq:1, gas:0};
+  if(m.phase==='boiling') return {sol:0, liq:1-m.frac, gas:m.frac};
+  return {sol:0, liq:0, gas:1};
+}
+
+// ============ heating curve drawing ============
+(function(){
+  var svg=document.getElementById('hcSvg');
+  var X0=58,X1=440,Y0=30,Y1=350;
+  var FONT='Segoe UI, Arial, sans-serif';
+  function S(t,a){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var px=function(E){return X0+E/100*(X1-X0);};
+  var py=function(T){return Y1-(T+40)/200*(Y1-Y0);};
+  svg.appendChild(S('line',{x1:X0,y1:Y1,x2:X1,y2:Y1,stroke:'#1c1c1c','stroke-width':2}));
+  svg.appendChild(S('line',{x1:X0,y1:Y0,x2:X0,y2:Y1,stroke:'#1c1c1c','stroke-width':2}));
+  [-20,0,50,100,140].forEach(function(T){
+    svg.appendChild(S('line',{x1:X0,y1:py(T),x2:X1,y2:py(T),stroke:'#e2e6ec','stroke-width':1.3}));
+    var t=S('text',{x:X0-8,y:py(T)+4,'text-anchor':'end','font-size':12.5,fill:'#5a6070','font-family':FONT});
+    t.textContent=T; svg.appendChild(t);
+  });
+  var yl=S('text',{x:18,y:(Y0+Y1)/2,'text-anchor':'middle','font-size':13.5,'font-family':FONT,
+                   transform:'rotate(-90 18 '+((Y0+Y1)/2)+')'});
+  yl.textContent='Temperature (\u00B0C)'; svg.appendChild(yl);
+  var xl=S('text',{x:(X0+X1)/2,y:Y1+34,'text-anchor':'middle','font-size':13.5,'font-family':FONT});
+  xl.textContent='thermal energy added'; svg.appendChild(xl);
+  var d='';
+  SEG.forEach(function(s,i){
+    d += (i?'L':'M')+px(s[0]).toFixed(1)+' '+py(s[2]).toFixed(1);
+    d += 'L'+px(s[1]).toFixed(1)+' '+py(s[3]).toFixed(1);
+  });
+  svg.appendChild(S('path',{d:d,fill:'none',stroke:'#12595a','stroke-width':4,'stroke-linejoin':'round','stroke-linecap':'round'}));
+  [[25,10,'MELTING','#2c5f8a'],[75,110,'BOILING','#b06a1f']].forEach(function(p){
+    var t=S('text',{x:px(p[0]),y:py(p[1])-10,'text-anchor':'middle','font-size':13,'font-weight':'700',
+                    fill:p[3],'font-family':FONT});
+    t.textContent=p[2]; svg.appendChild(t);
+  });
+  var marker=S('circle',{r:9,fill:'#c2621c',stroke:'#fff','stroke-width':3});
+  svg.appendChild(marker);
+  window.__moveMarker=function(E){ var m=model(E); marker.setAttribute('cx',px(E)); marker.setAttribute('cy',py(m.temp)); };
+  window.__moveMarker(0);
+})();
+
+// ============ particle animation ============
+(function(){
+  var cv=document.getElementById('pCanvas'), ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height, PAD=14, N=64;
+  var COLS=8, ROWS=8;
+  var ps=[];
+  for(var i=0;i<N;i++){
+    var c=i%COLS, r=Math.floor(i/COLS);
+    var hx=PAD+40+c*((W-2*PAD-80)/(COLS-1));
+    var hy=H-PAD-40-r*((H-2*PAD-110)/(ROWS-1));
+    ps.push({hx:hx,hy:hy,x:hx,y:hy,vx:0,vy:0,ph:Math.random()*Math.PI*2,rank:Math.random()});
+  }
+  ps.sort(function(a,b){return a.rank-b.rank;});
+  var E=0, t=0;
+  function step(){
+    t+=1;
+    var m=model(E), mix=phaseMix(E);
+    var nSol=Math.round(mix.sol*N), nGas=Math.round(mix.gas*N);
+    var speed=0.35+Math.max(0,(m.temp+20))/160*2.6;
+    ctx.clearRect(0,0,W,H);
+    // container
+    ctx.strokeStyle='#c8ced8'; ctx.lineWidth=2;
+    ctx.strokeRect(PAD,PAD,W-2*PAD,H-2*PAD);
+    for(var i=0;i<N;i++){
+      var p=ps[i], phase;
+      if(i<nSol) phase='s'; else if(i>=N-nGas) phase='g'; else phase='l';
+      if(phase==='s'){
+        var amp=1.2+Math.max(0,(m.temp+20))/60*3.2;
+        p.x=p.hx+Math.sin(t*0.13*speed+p.ph)*amp;
+        p.y=p.hy+Math.cos(t*0.11*speed+p.ph*1.7)*amp;
+        p.vx=0; p.vy=0;
+      } else if(phase==='l'){
+        if(p.vx===0&&p.vy===0){ p.vx=(Math.random()-0.5)*1.4; p.vy=(Math.random()-0.5)*1.4; }
+        p.vx+=(Math.random()-0.5)*0.34; p.vy+=(Math.random()-0.5)*0.34;
+        p.vy+=0.06; // settles downward, liquids keep a surface
+        var sp=Math.hypot(p.vx,p.vy), cap=0.75*speed;
+        if(sp>cap){ p.vx*=cap/sp; p.vy*=cap/sp; }
+        p.x+=p.vx; p.y+=p.vy;
+        var top=H*0.42;
+        if(p.y<top){ p.y=top; p.vy=Math.abs(p.vy)*0.4; }
+        if(p.y>H-PAD-9){ p.y=H-PAD-9; p.vy=-Math.abs(p.vy)*0.5; }
+        if(p.x<PAD+9){ p.x=PAD+9; p.vx=Math.abs(p.vx); }
+        if(p.x>W-PAD-9){ p.x=W-PAD-9; p.vx=-Math.abs(p.vx); }
+      } else {
+        if(Math.hypot(p.vx,p.vy)<0.4){
+          var a=Math.random()*Math.PI*2; p.vx=Math.cos(a)*2; p.vy=Math.sin(a)*2;
+        }
+        var g=1.15*speed, s2=Math.hypot(p.vx,p.vy);
+        p.vx*=g/s2; p.vy*=g/s2;
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<PAD+9){p.x=PAD+9;p.vx=-p.vx;} if(p.x>W-PAD-9){p.x=W-PAD-9;p.vx=-p.vx;}
+        if(p.y<PAD+9){p.y=PAD+9;p.vy=-p.vy;} if(p.y>H-PAD-9){p.y=H-PAD-9;p.vy=-p.vy;}
+      }
+      ctx.beginPath(); ctx.arc(p.x,p.y,9,0,Math.PI*2);
+      ctx.fillStyle = phase==='s'?'#2c5f8a':(phase==='l'?'#1d7a6c':'#b06a1f');
+      ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1.6; ctx.stroke();
+    }
+    requestAnimationFrame(step);
+  }
+  step();
+
+  var NOTES={
+    solid:'The particles are locked in a fixed pattern. Adding energy makes them vibrate harder, but they cannot leave their places yet.',
+    melting:'The temperature has stopped rising. The energy going in is breaking the attractions that hold the particles in place, so one by one they break free and start to slide.',
+    liquid:'The particles are free to slide past each other but still stay close together. Adding energy now makes them move faster, so the temperature rises again.',
+    boiling:'The temperature has stopped rising again. This time the energy is tearing particles away from each other completely, so they escape as a gas.',
+    gas:'The particles are far apart and moving fast in every direction, filling the whole container. Adding more energy now just makes them move faster still.'
+  };
+  var MOTION={solid:'vibrating in place',melting:'starting to break free',liquid:'sliding past each other',
+              boiling:'escaping into gas',gas:'fast and free'};
+  var STATE={solid:'solid',melting:'solid + liquid',liquid:'liquid',boiling:'liquid + gas',gas:'gas'};
+
+  function update(v){
+    E=v;
+    var m=model(E);
+    document.getElementById('eVal').textContent=Math.round(E)+'%';
+    document.getElementById('roTemp').textContent=Math.round(m.temp)+'\u00B0C';
+    document.getElementById('roState').textContent=STATE[m.phase];
+    document.getElementById('roMotion').textContent=MOTION[m.phase];
+    document.getElementById('labNote').textContent=NOTES[m.phase];
+    window.__moveMarker(E);
+  }
+  var sl=document.getElementById('eSlider');
+  sl.addEventListener('input',function(){ stopAuto(); update(+sl.value); });
+  document.querySelectorAll('[data-jump]').forEach(function(b){
+    b.addEventListener('click',function(){ stopAuto(); sl.value=b.getAttribute('data-jump'); update(+sl.value); });
+  });
+  var auto=null;
+  function stopAuto(){ if(auto){ clearInterval(auto); auto=null; document.getElementById('autoBtn').textContent='Heat it slowly'; } }
+  document.getElementById('autoBtn').addEventListener('click',function(){
+    if(auto){ stopAuto(); return; }
+    this.textContent='Stop';
+    if(+sl.value>=100) sl.value=0;
+    auto=setInterval(function(){
+      var v=+sl.value+0.35;
+      if(v>=100){ v=100; stopAuto(); }
+      sl.value=v; update(v);
+    },40);
+  });
+  update(0);
+})();
+
+// ============ check yourself ============
+(function(){
+  var QS=[
+    {q:'The slider is in the middle of the MELTING section and you keep adding energy. What is happening to the temperature, and why?',
+     a:'The temperature stays at 0 degrees. The energy is not speeding the particles up, it is breaking the attractions that hold them in their fixed pattern. Only once every particle is free does the temperature start rising again.'},
+    {q:'Set the slider to 48, then to 96. Describe how the particle spacing and particle motion change between those two settings.',
+     a:'At 48 the substance is a liquid, so the particles are close together and slide past each other. At 96 it is a gas, so the particles are far apart and move quickly in every direction, filling the whole container. Adding energy increased both the spacing and the speed.'},
+    {q:'A student says heating always makes the temperature go up. Use the graph to explain why that is not quite right.',
+     a:'The graph has two flat sections, at melting and at boiling. During those sections energy is still being added but the temperature does not change, because the energy is being used to pull particles apart instead of to speed them up.'}
+  ];
+  var box=document.getElementById('qs');
+  QS.forEach(function(item,i){
+    var d=document.createElement('div');
+    d.style.cssText='border:2px solid var(--border);border-radius:6px;padding:14px 16px;margin:12px 0;background:#fff';
+    d.innerHTML='<p style="font-weight:600;margin:0 0 10px">'+(i+1)+'. '+item.q+'</p>'+
+      '<button type="button">Show answer</button>'+
+      '<div style="display:none;border-top:2px dashed var(--border);margin-top:11px;padding-top:11px"><p style="margin:0">'+item.a+'</p></div>';
+    var btn=d.querySelector('button'), ans=d.querySelector('div');
+    btn.addEventListener('click',function(){
+      var open=ans.style.display==='none';
+      ans.style.display=open?'block':'none';
+      btn.textContent=open?'Hide answer':'Show answer';
+    });
+    box.appendChild(d);
+  });
+})();
+
+</script>
+
+</body>
+</html>

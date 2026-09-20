@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Practice Games | G7 Integrated Science</title>
+<style>
+  :root{
+    --teal:#12595a; --teal-dark:#0c4142; --teal-soft:#e8f2f2;
+    --orange:#c2621c; --orange-soft:#fdefe3; --orange-text:#96490f;
+    --green:#1e6b45; --green-soft:#e6f4ec; --red:#9c2a2a; --red-soft:#fce8e8;
+    --grey:#f2f4f6; --border:#d9dde4; --text:#1c1c1c; --muted:#5a6070;
+    --solid:#2c5f8a; --liquid:#1d7a6c; --gas:#b06a1f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+       font-size:17.5px;line-height:1.65;color:var(--text);background:#f7f8fa}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px 70px}
+  .crumbs{background:#fff;border-bottom:1px solid var(--border);font-size:14.5px}
+  .crumbs .inner{max-width:940px;margin:0 auto;padding:10px 20px}
+  .crumbs a{color:var(--teal);text-decoration:none;font-weight:600}
+  .crumbs a:hover{text-decoration:underline}
+  .crumbs .sep{color:var(--border);margin:0 8px}
+  .crumbs .here{color:var(--muted)}
+  header.top{background:var(--teal);color:#fff;padding:30px 20px 26px}
+  header.top .inner{max-width:940px;margin:0 auto}
+  header.top .kicker{font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;opacity:.82;margin:0 0 6px}
+  header.top h1{margin:0;font-size:29px;line-height:1.2}
+  header.top p.tag{margin:8px 0 0;font-size:17px;opacity:.93}
+  nav.jump{background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:30}
+  nav.jump ul{max-width:940px;margin:0 auto;padding:0 20px;list-style:none;display:flex;flex-wrap:wrap;gap:2px}
+  nav.jump a{display:block;padding:11px 12px;font-size:14.5px;font-weight:600;color:var(--teal);
+             text-decoration:none;border-bottom:3px solid transparent}
+  nav.jump a:hover{border-bottom-color:var(--orange);background:#f6f9f9}
+  h2{font-size:23px;color:var(--teal);margin:44px 0 6px;padding-bottom:8px;
+     border-bottom:3px solid var(--teal);scroll-margin-top:124px}
+  h3{font-size:19px;color:var(--teal-dark);margin:28px 0 8px}
+  h4{font-size:16.5px;margin:18px 0 6px}
+  p{margin:11px 0}
+  ul,ol{margin:11px 0;padding-left:26px}
+  li{margin:5px 0}
+  code{background:var(--grey);padding:1px 6px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em}
+  .box{border-radius:6px;padding:16px 20px;margin:22px 0;border-left:6px solid}
+  .box p:first-child{margin-top:0}
+  .box p:last-child{margin-bottom:0}
+  .box .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+  .box.tip{background:var(--orange-soft);border-color:var(--orange)}
+  .box.tip .label{color:var(--orange-text)}
+  .box.key{background:var(--teal-soft);border-color:var(--teal)}
+  .box.key .label{color:var(--teal)}
+  .box.good{background:var(--green-soft);border-color:var(--green)}
+  .box.good .label{color:var(--green)}
+  table{border-collapse:collapse;width:100%;margin:20px 0;font-size:16.5px}
+  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top}
+  thead th{background:var(--teal);color:#fff;font-weight:600}
+  tbody tr:nth-child(even){background:var(--grey)}
+  .widget{background:#fff;border:2px solid var(--border);border-radius:8px;padding:18px 20px 20px;margin:24px 0}
+  .widget > h3{margin-top:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .widget .tryit{font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                 color:var(--orange-text);background:var(--orange-soft);padding:3px 9px;border-radius:10px}
+  svg,canvas{display:block;max-width:100%}
+  .ctrls{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 4px;align-items:flex-end}
+  .ctrl{flex:1 1 240px}
+  .ctrl label{display:block;font-size:13.5px;font-weight:700;letter-spacing:.04em;
+              text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .ctrl .val{color:var(--teal);font-size:15px}
+  input[type=range]{width:100%;accent-color:var(--teal);height:26px;cursor:pointer}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  button{font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;border-radius:5px;
+         padding:8px 15px;border:2px solid var(--teal);background:#fff;color:var(--teal);transition:background .12s}
+  button:hover{background:var(--teal);color:#fff}
+  button.primary{background:var(--teal);color:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .readouts{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0}
+  .ro{flex:1 1 130px;background:var(--grey);border-radius:6px;padding:9px 12px;text-align:center}
+  .ro .k{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .ro .v{display:block;font-size:22px;font-weight:700;color:var(--teal);line-height:1.25}
+  .commentary{margin:14px 0 0;padding:11px 14px;background:var(--teal-soft);border-left:5px solid var(--teal);
+              border-radius:0 5px 5px 0;font-size:16px}
+  /* predict-first gate */
+  .predict{background:var(--orange-soft);border:2px solid var(--orange);border-radius:8px;padding:18px 20px;margin:24px 0}
+  .predict .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;
+                  text-transform:uppercase;color:var(--orange-text);margin-bottom:6px}
+  .predict h3{margin:0 0 10px;color:var(--orange-text)}
+  .predict .opts{display:flex;flex-direction:column;gap:8px;margin:12px 0 0}
+  .predict .opt{display:block;width:100%;text-align:left;border:2px solid var(--border);background:#fff;
+                border-radius:6px;padding:11px 14px;font-size:16.5px;font-weight:500;color:var(--text);cursor:pointer}
+  .predict .opt:hover{border-color:var(--orange);background:#fff}
+  .predict .opt.picked{border-color:var(--teal);background:var(--teal-soft);font-weight:700}
+  .predict .outcome{display:none;margin:14px 0 0;padding:12px 15px;background:#fff;border-radius:6px;
+                    border-left:5px solid var(--teal);font-size:16.5px}
+  .predict .outcome.open{display:block}
+  .locked{filter:blur(5px);pointer-events:none;user-select:none;opacity:.55}
+  /* games */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .chip{border:2px solid var(--border);background:#fff;border-radius:20px;padding:7px 15px;font-size:16px;
+        cursor:pointer;font-family:inherit;color:var(--text);font-weight:500}
+  .chip:hover{border-color:var(--teal);background:#fff}
+  .chip.sel{border-color:var(--teal);background:var(--teal-soft);font-weight:700}
+  .chip.done{opacity:.35;cursor:default;text-decoration:line-through}
+  .bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+  .bin{border:3px dashed var(--border);border-radius:8px;padding:12px;min-height:130px;background:#fff;cursor:pointer}
+  .bin:hover{border-color:var(--teal)}
+  .bin h4{margin:0 0 8px;text-align:center;font-size:16px;letter-spacing:.05em;text-transform:uppercase}
+  .bin.s h4{color:var(--solid)} .bin.l h4{color:var(--liquid)} .bin.g h4{color:var(--gas)}
+  .bin.s{border-color:var(--solid)} .bin.l{border-color:var(--liquid)} .bin.g{border-color:var(--gas)}
+  .bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .bin .it{font-size:14.5px;padding:4px 10px;border-radius:14px;background:var(--grey)}
+  .bin .it.ok{background:var(--green-soft);color:var(--green);font-weight:700}
+  .bin .it.no{background:var(--red-soft);color:var(--red);font-weight:700}
+  /* CER */
+  textarea{font-family:inherit;font-size:16.5px;line-height:1.6;width:100%;min-height:120px;padding:11px 13px;
+           border:2px solid var(--border);border-radius:6px;resize:vertical;background:#fff}
+  .field-row{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 16px}
+  .field-row label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.05em;
+                   text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .field-row input{font-family:inherit;font-size:16.5px;padding:8px 11px;border:2px solid var(--border);
+                   border-radius:6px;width:100%}
+  .levels{display:flex;gap:6px;margin:10px 0 0;flex-wrap:wrap}
+  .lvbtn{font-size:14px;padding:6px 12px;border-radius:5px;border:2px solid var(--border);
+         background:#fff;color:var(--muted);cursor:pointer;font-weight:600}
+  .lvbtn.on{border-color:var(--teal);background:var(--teal-soft);color:var(--teal-dark)}
+  .frames{margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
+  .frame{text-align:left;border:1px solid var(--border);background:var(--grey);border-radius:5px;
+         padding:8px 12px;font-size:15.5px;cursor:pointer;font-family:inherit;color:var(--text);font-weight:400}
+  .frame:hover{border-color:var(--teal);background:#fff;color:var(--text)}
+  .checks{margin:12px 0 0;display:flex;flex-direction:column;gap:5px;font-size:15.5px}
+  .checks .c{display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+  .checks .c .m{font-weight:700;width:18px;flex:0 0 18px;text-align:center}
+  .checks .c.pass{color:var(--green)}
+  .checks .c.warn{color:var(--orange-text)}
+  .selfcheck{margin:12px 0 0}
+  .selfcheck label{display:flex;gap:10px;align-items:flex-start;font-size:16px;margin:7px 0;cursor:pointer}
+  .selfcheck input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;flex:0 0 19px;cursor:pointer}
+  details{border:2px solid var(--border);border-radius:6px;padding:12px 16px;margin:18px 0;background:#fff}
+  details summary{font-weight:700;color:var(--teal);cursor:pointer;font-size:17px}
+  details[open] summary{margin-bottom:10px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  footer{margin-top:54px;padding:22px 0 0;border-top:2px solid var(--border);font-size:15px;color:var(--muted)}
+  .pagenav{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+  .pagenav a{flex:1 1 220px;border:2px solid var(--border);border-radius:6px;padding:12px 15px;
+             text-decoration:none;color:inherit;background:#fff}
+  .pagenav a:hover{border-color:var(--teal)}
+  .pagenav .dir{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .pagenav .t{display:block;font-weight:700;color:var(--teal);margin-top:2px}
+  @media (max-width:700px){
+    body{font-size:16.5px}
+    header.top h1{font-size:23px}
+    nav.jump a{padding:9px 8px;font-size:13.5px}
+    .ro .v{font-size:19px}
+  }
+  @media print{
+    body{background:#fff;font-size:11pt}
+    nav.jump,.crumbs,button,.btnrow,input[type=range],.pagenav,.levels,.frames{display:none!important}
+    header.top{background:#fff!important;color:var(--teal)!important;padding:0 0 10px}
+    .locked{filter:none;opacity:1}
+    .predict .outcome{display:block!important}
+    .widget,.box,table,details{break-inside:avoid;page-break-inside:avoid}
+    h2{break-after:avoid}
+    @page{size:A4;margin:15mm}
+  }
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 1</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">Practice Games | G7 Integrated Science</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 1 &bull; States of Matter</p>
+    <h1>Practice Games</h1>
+    <p class="tag">Three quick games to check that the words have stuck</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#how">How to Use This</a></li>
+    <li><a href="#sort">Sort the Matter</a></li>
+    <li><a href="#which">Which State?</a></li>
+    <li><a href="#changes">Name the Change</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<h2 id="how"><span></span>How to Use This Page</h2>
+
+<p>Three quick games. Try them before a quiz, or whenever you want to check that the words have stuck. Nothing here is graded, so guessing is fine. Read the feedback when you get one wrong, because that is where the learning is.</p>
+
+<h2 id="sort">Game 1: Sort the Matter</h2>
+
+<div class="widget">
+  <h3>Click an item, then click a bin <span class="tryit">Game</span></h3>
+  <p style="margin-top:0">Twelve everyday things. Decide whether each one is a solid, a liquid, or a gas.</p>
+
+  <div class="chips" id="sortItems"></div>
+
+  <div class="bins">
+    <div class="bin s" data-bin="s" tabindex="0" role="button" aria-label="Solid bin"><h4>Solid</h4><div class="items"></div></div>
+    <div class="bin l" data-bin="l" tabindex="0" role="button" aria-label="Liquid bin"><h4>Liquid</h4><div class="items"></div></div>
+    <div class="bin g" data-bin="g" tabindex="0" role="button" aria-label="Gas bin"><h4>Gas</h4><div class="items"></div></div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">Correct</span><span class="v" id="sortScore">0 of 12</span></div>
+  </div>
+  <p class="commentary" id="sortNote" aria-live="polite">Pick an item above to begin.</p>
+  <div class="btnrow"><button type="button" id="sortReset">Start over</button></div>
+</div>
+
+<h2 id="which">Game 2: Which State Is This?</h2>
+
+<div class="widget">
+  <h3>Read the particles <span class="tryit">Game</span></h3>
+  <p style="margin-top:0">Look at how the particles are arranged and how they are moving. Then name the state.</p>
+
+  <svg id="whichSvg" viewBox="0 0 420 240" style="margin:0 auto;border:2px solid var(--border);border-radius:6px;background:#fbfcfd;max-width:420px"
+       role="img" aria-label="A diagram of particles to identify"></svg>
+
+  <p id="whichHint" style="text-align:center;font-size:16px;color:var(--muted);margin:10px 0 0"></p>
+
+  <div class="btnrow" style="justify-content:center" id="whichBtns">
+    <button type="button" data-st="s">Solid</button>
+    <button type="button" data-st="l">Liquid</button>
+    <button type="button" data-st="g">Gas</button>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">Round</span><span class="v" id="whichRound">1 of 6</span></div>
+    <div class="ro"><span class="k">Correct</span><span class="v" id="whichScore">0</span></div>
+  </div>
+  <p class="commentary" id="whichNote" aria-live="polite">Name the state shown above.</p>
+  <div class="btnrow"><button type="button" id="whichNext" style="display:none">Next</button><button type="button" id="whichReset">Start over</button></div>
+</div>
+
+<h2 id="changes">Game 3: Name the Change</h2>
+
+<div class="widget">
+  <h3>Six changes of state <span class="tryit">Game</span></h3>
+  <p style="margin-top:0">Read what happens, then pick the right word for it.</p>
+
+  <div id="chgCard" style="background:var(--grey);border-radius:6px;padding:18px 20px;text-align:center;font-size:19px;font-weight:600;color:var(--teal-dark)"></div>
+
+  <div class="chips" style="justify-content:center;margin-top:16px" id="chgBtns"></div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">Round</span><span class="v" id="chgRound">1 of 6</span></div>
+    <div class="ro"><span class="k">Correct</span><span class="v" id="chgScore">0</span></div>
+  </div>
+  <p class="commentary" id="chgNote" aria-live="polite">Pick the word that names this change.</p>
+  <div class="btnrow"><button type="button" id="chgNext" style="display:none">Next</button><button type="button" id="chgReset">Start over</button></div>
+</div>
+
+<div class="box tip">
+  <span class="label">Stuck on boiling versus evaporation?</span>
+  <p>Both are a liquid turning into a gas. <strong>Boiling</strong> happens throughout the whole liquid once it reaches its boiling point, which is why you see bubbles. <strong>Evaporation</strong> happens slowly, only at the surface, and at temperatures well below boiling. A puddle drying up is evaporation. A kettle is boiling.</p>
+</div>
+
+<p>Want the full vocabulary list and the particle diagrams? They are on the <a href="states-of-matter-guide.html">States of Matter Study Guide</a>.</p>
+
+<div class="pagenav">
+  <a href="cer-builder.html"><span class="dir">&larr; Previous</span><span class="t">CER Builder</span></a>
+</div>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 1: States of Matter. Aligned to MS-PS1-1 and MS-PS1-4.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true;}catch(e){return false;} }
+function recall(k,d){ try{ var s=localStorage.getItem(k); return s===null?d:JSON.parse(s);}catch(e){return d;} }
+function predictGate(rootId, targetId, correctIdx, outcomes){
+  var root=document.getElementById(rootId);
+  var opts=root.querySelectorAll('.opt');
+  var out=root.querySelector('.outcome');
+  var target=targetId?document.getElementById(targetId):null;
+  if(target) target.classList.add('locked');
+  opts.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      opts.forEach(function(o){o.classList.remove('picked')});
+      b.classList.add('picked');
+      out.innerHTML = outcomes[i];
+      out.classList.add('open');
+      if(target) target.classList.remove('locked');
+    });
+  });
+}
+
+function S(t,a){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+var COL={s:'#2c5f8a',l:'#1d7a6c',g:'#b06a1f'};
+var NAME={s:'solid',l:'liquid',g:'gas'};
+
+// ================= GAME 1: sort =================
+(function(){
+  var ITEMS=[
+    {n:'ice',b:'s',w:'Ice is water in its solid state. The particles are locked in a fixed pattern.'},
+    {n:'steam',b:'g',w:'Steam is water in its gas state. The particles are far apart and moving fast.'},
+    {n:'orange juice',b:'l',w:'Juice takes the shape of its container but keeps its volume, so it is a liquid.'},
+    {n:'a wooden desk',b:'s',w:'A desk keeps its own shape and volume, so it is a solid.'},
+    {n:'helium in a balloon',b:'g',w:'Helium spreads out to fill whatever it is in, so it is a gas.'},
+    {n:'cooking oil',b:'l',w:'Oil pours and takes the shape of its container, so it is a liquid.'},
+    {n:'a rock',b:'s',w:'A rock holds its shape on its own, so it is a solid.'},
+    {n:'the air in this room',b:'g',w:'Air fills the whole room, which is what gases do.'},
+    {n:'milk',b:'l',w:'Milk has a fixed volume but takes the shape of its container, so it is a liquid.'},
+    {n:'water vapour',b:'g',w:'Water vapour is water as a gas. You cannot see it, but it is there.'},
+    {n:'a gold ring',b:'s',w:'Metals at room temperature are solids.'},
+    {n:'sand',b:'s',w:'Tricky one. Sand pours like a liquid, but each grain is a tiny solid that keeps its own shape. What pours is the pile, not the particles.'}
+  ];
+  var sel=null, done=0, right=0;
+  var host=document.getElementById('sortItems');
+  function build(){
+    host.innerHTML=''; done=0; right=0; sel=null;
+    document.querySelectorAll('.bin .items').forEach(function(b){ b.innerHTML=''; });
+    document.getElementById('sortScore').textContent='0 of 12';
+    document.getElementById('sortNote').textContent='Pick an item above to begin.';
+    ITEMS.slice().sort(function(){return Math.random()-0.5;}).forEach(function(it){
+      var b=document.createElement('button');
+      b.className='chip'; b.type='button'; b.textContent=it.n; b._it=it;
+      b.addEventListener('click',function(){
+        if(b.classList.contains('done')) return;
+        host.querySelectorAll('.chip').forEach(function(o){o.classList.remove('sel')});
+        b.classList.add('sel'); sel=b;
+        document.getElementById('sortNote').textContent='Now click the bin where "'+it.n+'" belongs.';
+      });
+      host.appendChild(b);
+    });
+  }
+  document.querySelectorAll('.bin').forEach(function(bin){
+    function place(){
+      if(!sel){ document.getElementById('sortNote').textContent='Pick an item first, then click a bin.'; return; }
+      var it=sel._it, guess=bin.getAttribute('data-bin'), ok=(guess===it.b);
+      var tag=document.createElement('span');
+      tag.className='it '+(ok?'ok':'no'); tag.textContent=it.n;
+      bin.querySelector('.items').appendChild(tag);
+      sel.classList.remove('sel'); sel.classList.add('done'); sel=null;
+      done++; if(ok) right++;
+      document.getElementById('sortScore').textContent=right+' of 12';
+      document.getElementById('sortNote').textContent = (ok?'Correct. ':'Not quite. ')+it.w+
+        (done===12?'  All twelve done, '+right+' correct.':'');
+    }
+    bin.addEventListener('click',place);
+    bin.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); place(); } });
+  });
+  document.getElementById('sortReset').addEventListener('click',build);
+  build();
+})();
+
+// ================= GAME 2: which state =================
+(function(){
+  var svg=document.getElementById('whichSvg');
+  var HINTS={s:'The particles are in a fixed pattern and only vibrate in place.',
+             l:'The particles are close together but not in a pattern, and they slide past each other.',
+             g:'The particles are far apart and moving quickly in every direction.'};
+  var order=[], round=0, score=0, answered=false, cur='s';
+  function draw(st){
+    svg.innerHTML='';
+    svg.appendChild(S('rect',{x:10,y:10,width:400,height:220,fill:'none',stroke:'#c8ced8','stroke-width':2,rx:4}));
+    var pts=[];
+    if(st==='s'){
+      for(var r=0;r<4;r++) for(var c=0;c<6;c++) pts.push([70+c*56, 56+r*44]);
+    } else if(st==='l'){
+      for(var r=0;r<3;r++) for(var c=0;c<6;c++)
+        pts.push([62+c*57+(Math.random()-0.5)*18, 108+r*42+(Math.random()-0.5)*16]);
+    } else {
+      for(var i=0;i<8;i++) pts.push([40+Math.random()*340, 34+Math.random()*172]);
+    }
+    pts.forEach(function(p){
+      svg.appendChild(S('circle',{cx:p[0],cy:p[1],r:12,fill:COL[st],'fill-opacity':.9,stroke:'#fff','stroke-width':2}));
+    });
+    if(st==='g'){
+      pts.forEach(function(p){
+        var a=Math.random()*Math.PI*2;
+        svg.appendChild(S('line',{x1:p[0]+Math.cos(a)*15,y1:p[1]+Math.sin(a)*15,
+          x2:p[0]+Math.cos(a)*30,y2:p[1]+Math.sin(a)*30,stroke:COL.g,'stroke-width':3,'stroke-linecap':'round','stroke-opacity':.75}));
+      });
+    }
+    if(st==='s'){
+      pts.forEach(function(p){
+        svg.appendChild(S('line',{x1:p[0]-17,y1:p[1],x2:p[0]-23,y2:p[1],stroke:COL.s,'stroke-width':2.5,'stroke-linecap':'round','stroke-opacity':.6}));
+        svg.appendChild(S('line',{x1:p[0]+17,y1:p[1],x2:p[0]+23,y2:p[1],stroke:COL.s,'stroke-width':2.5,'stroke-linecap':'round','stroke-opacity':.6}));
+      });
+    }
+  }
+  function next(){
+    if(round>=order.length){
+      document.getElementById('whichNote').textContent='Finished. You got '+score+' out of 6. Press Start over to play again.';
+      document.getElementById('whichNext').style.display='none';
+      return;
+    }
+    cur=order[round]; answered=false;
+    draw(cur);
+    document.getElementById('whichHint').textContent='';
+    document.getElementById('whichRound').textContent=(round+1)+' of 6';
+    document.getElementById('whichNote').textContent='Name the state shown above.';
+    document.getElementById('whichNext').style.display='none';
+    document.getElementById('whichBtns').querySelectorAll('button').forEach(function(b){ b.disabled=false; });
+  }
+  function start(){
+    order=['s','l','g','s','l','g'].sort(function(){return Math.random()-0.5;});
+    round=0; score=0;
+    document.getElementById('whichScore').textContent='0';
+    next();
+  }
+  document.getElementById('whichBtns').querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(answered) return;
+      answered=true;
+      var g=b.getAttribute('data-st'), ok=(g===cur);
+      if(ok) score++;
+      document.getElementById('whichScore').textContent=score;
+      document.getElementById('whichHint').textContent=HINTS[cur];
+      document.getElementById('whichNote').textContent = ok
+        ? 'Correct, this is a '+NAME[cur]+'.'
+        : 'Not quite. You said '+NAME[g]+', but this is a '+NAME[cur]+'.';
+      document.getElementById('whichBtns').querySelectorAll('button').forEach(function(x){ x.disabled=true; });
+      round++;
+      document.getElementById('whichNext').style.display='';
+    });
+  });
+  document.getElementById('whichNext').addEventListener('click',next);
+  document.getElementById('whichReset').addEventListener('click',start);
+  start();
+})();
+
+// ================= GAME 3: name the change =================
+(function(){
+  var CH=[
+    {t:'A solid turns into a liquid as thermal energy is added.',a:'melting',
+     w:'Adding energy frees the particles from their fixed pattern so they can slide. That is melting.'},
+    {t:'A liquid turns into a solid as thermal energy is removed.',a:'freezing',
+     w:'Removing energy slows the particles until the attractions lock them into a fixed pattern. That is freezing.'},
+    {t:'A liquid turns into a gas throughout the whole liquid, with bubbles, once it reaches its boiling point.',a:'boiling',
+     w:'Bubbles throughout the liquid at its boiling point means boiling, not evaporation.'},
+    {t:'A gas turns into a liquid as thermal energy is removed, such as droplets forming on a cold glass.',a:'condensation',
+     w:'The cold surface takes energy away from the gas particles, they slow down, and the attractions pull them into a liquid. That is condensation.'},
+    {t:'A liquid slowly turns into a gas at its surface only, well below its boiling point, such as a puddle drying up.',a:'evaporation',
+     w:'Slowly, at the surface, below boiling point. That is evaporation rather than boiling.'},
+    {t:'A solid turns straight into a gas without becoming a liquid first, such as dry ice.',a:'sublimation',
+     w:'Skipping the liquid state entirely is sublimation.'}
+  ];
+  var WORDS=['melting','freezing','boiling','condensation','evaporation','sublimation'];
+  var order=[], round=0, score=0, answered=false;
+  var btnHost=document.getElementById('chgBtns');
+  WORDS.forEach(function(w){
+    var b=document.createElement('button');
+    b.className='chip'; b.type='button'; b.textContent=w; b._w=w;
+    b.addEventListener('click',function(){
+      if(answered) return;
+      answered=true;
+      var cur=order[round], ok=(w===cur.a);
+      if(ok) score++;
+      document.getElementById('chgScore').textContent=score;
+      document.getElementById('chgNote').textContent=(ok?'Correct. ':'Not quite, the answer is '+cur.a+'. ')+cur.w;
+      btnHost.querySelectorAll('.chip').forEach(function(x){ x.disabled=true; x.style.opacity=(x._w===cur.a?'1':'.45'); });
+      round++;
+      document.getElementById('chgNext').style.display='';
+    });
+    btnHost.appendChild(b);
+  });
+  function next(){
+    if(round>=order.length){
+      document.getElementById('chgCard').textContent='All six done.';
+      document.getElementById('chgNote').textContent='You got '+score+' out of 6. Press Start over to play again.';
+      document.getElementById('chgNext').style.display='none';
+      return;
+    }
+    answered=false;
+    document.getElementById('chgCard').textContent=order[round].t;
+    document.getElementById('chgRound').textContent=(round+1)+' of 6';
+    document.getElementById('chgNote').textContent='Pick the word that names this change.';
+    document.getElementById('chgNext').style.display='none';
+    btnHost.querySelectorAll('.chip').forEach(function(x){ x.disabled=false; x.style.opacity='1'; });
+  }
+  function start(){
+    order=CH.slice().sort(function(){return Math.random()-0.5;});
+    round=0; score=0;
+    document.getElementById('chgScore').textContent='0';
+    next();
+  }
+  document.getElementById('chgNext').addEventListener('click',next);
+  document.getElementById('chgReset').addEventListener('click',start);
+  start();
+})();
+
+</script>
+
+</body>
+</html>
