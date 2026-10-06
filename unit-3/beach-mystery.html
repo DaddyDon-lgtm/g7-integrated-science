@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Beach Mystery | G7 Integrated Science</title>
+<style>@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+
+/* ---------------------------------------------------------------- base */
+:root{
+  --teal:#0d9488; --teal-d:#0f766e; --teal-l:#14b8a6; --teal-s:#ccfbf1; --teal-s2:#f0fdfa;
+  --amber:#f59e0b; --amber-s:#fffbeb; --amber-b:#fde68a; --amber-t:#b45309;
+  --green:#15803d; --green-s:#f0fdf4; --red:#b91c1c; --red-s:#fef2f2;
+  --ink:#0f172a; --muted:#5b6a7e; --line:#e2e8f0; --line-d:#cbd5e1;
+  --bg:#f1f5f9; --surface:#ffffff;
+  --solid:#2563eb; --liquid:#0d9488; --gas:#d97706;
+  --solid-t:#1d4ed8; --liquid-t:#0f766e; --gas-t:#b45309;
+  --shadow-s:0 1px 3px rgba(15,23,42,.07);
+  --shadow-m:0 2px 8px rgba(15,23,42,.07);
+  --shadow-l:0 4px 16px rgba(15,23,42,.08);
+  /* Aliases kept so older inline styles on any page still resolve. */
+  --border:#e2e8f0; --grey:#f8fafc; --teal-dark:#0f766e; --teal-soft:#f0fdfa;
+  --orange:#d97706; --orange-soft:#fffbeb; --orange-text:#b45309; --text:#0f172a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:16.5px;line-height:1.65;
+     color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--teal-d)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 70px}
+
+/* ---------------------------------------------------------------- chrome */
+.crumbs{background:var(--surface);font-size:13.5px;box-shadow:0 1px 2px rgba(15,23,42,.05);
+        position:relative;z-index:31}
+.crumbs .inner,.crumbs .wrap{max-width:860px;margin:0 auto;padding:12px 20px}
+.crumbs a{color:var(--teal-d);text-decoration:none;font-weight:600}
+.crumbs a:hover{text-decoration:underline}
+.crumbs .sep{color:var(--line-d);margin:0 8px}
+.crumbs .here{color:var(--muted)}
+
+/* Gradient stops are all dark enough that white text clears 4.5:1 anywhere along it. */
+header.top,.masthead{background:linear-gradient(135deg,#0a5f58 0%,#0f766e 55%,#12807a 100%);
+        color:#fff;padding:46px 20px 42px}
+header.top .inner,.masthead .wrap{max-width:860px;margin:0 auto;padding-bottom:0}
+/* The pill darkens the gradient rather than lightening it, so its white label
+   keeps enough contrast at the light end of the gradient too. */
+header.top .kicker,.masthead .course{display:inline-block;font-size:12px;font-weight:700;
+        letter-spacing:.09em;text-transform:uppercase;background:rgba(0,0,0,.20);
+        padding:5px 13px;border-radius:99px;margin:0 0 16px}
+header.top h1,.masthead h1{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:42px;line-height:1.1;
+        margin:0;letter-spacing:-.01em}
+header.top p.tag,.masthead p.tag{margin:12px 0 0;font-size:17.5px;opacity:.93}
+.masthead a{color:#fff}
+
+nav.jump{background:var(--surface);box-shadow:0 2px 8px rgba(15,23,42,.06);position:sticky;top:0;z-index:30}
+/* One row that scrolls sideways rather than wrapping: a wrapped bar would be
+   four rows tall on a phone, and this one is sticky. */
+nav.jump ul{max-width:860px;margin:0 auto;padding:10px 20px;list-style:none;
+        display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.jump li{flex:0 0 auto}
+nav.jump a{display:block;padding:8px 15px;font-size:14px;font-weight:600;color:var(--muted);
+        text-decoration:none;border-radius:99px;white-space:nowrap}
+nav.jump a:hover{background:var(--teal-s);color:var(--teal-d)}
+
+main{padding:8px 0 0}
+
+/* ---------------------------------------------------------------- type */
+h2{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:29px;font-weight:600;color:var(--ink);
+   margin:46px 0 12px;line-height:1.22;scroll-margin-top:96px}
+h3{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:21px;font-weight:600;color:var(--ink);margin:30px 0 10px}
+h4{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:17.5px;font-weight:600;margin:20px 0 6px}
+p{margin:13px 0}
+ul,ol{margin:13px 0;padding-left:26px}
+li{margin:5px 0}
+.lede{font-size:18.5px;color:var(--muted);margin:20px 0 4px}
+code{background:#f8fafc;border:1px solid var(--line);padding:1px 6px;border-radius:5px;
+     font-family:Consolas,Monaco,monospace;font-size:.92em}
+strong{font-weight:700}
+
+/* ---------------------------------------------------------------- boxes */
+.box,.note{border-radius:16px;padding:20px 24px;margin:24px 0;border:1px solid var(--amber-b);
+     background:var(--amber-s)}
+.box p:first-child,.note p:first-child{margin-top:0}
+.box p:last-child,.note p:last-child{margin-bottom:0}
+.box .label,.note .label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+     text-transform:uppercase;color:var(--amber-t);margin-bottom:8px}
+.box.key{background:var(--teal-s2);border-color:#99f6e4}
+.box.key .label{color:var(--teal-d)}
+.box.good{background:var(--green-s);border-color:#bbf7d0}
+.box.good .label{color:var(--green)}
+.pending{background:var(--surface);border:2px dashed var(--line-d);border-radius:16px;
+     padding:28px 20px;text-align:center;color:var(--muted);margin:22px 0}
+.pending strong{display:block;color:var(--ink);margin-bottom:4px;font-size:17px}
+
+/* ---------------------------------------------------------------- table */
+table{border-collapse:separate;border-spacing:0;width:100%;margin:26px 0;font-size:16px;
+      background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-s)}
+th,td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+thead th{background:#f8fafc;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+         color:var(--muted);font-weight:700}
+.term{font-weight:700;color:var(--teal-d)}
+
+/* ---------------------------------------------------------------- cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0}
+.card{display:block;background:var(--surface);border-radius:18px;padding:20px 22px;
+      text-decoration:none;color:inherit;box-shadow:var(--shadow-m);
+      border-top:4px solid var(--teal);transition:box-shadow .15s,transform .15s}
+a.card:hover{box-shadow:0 8px 22px rgba(15,23,42,.12);transform:translateY(-2px)}
+.card .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--teal-d);margin:0 0 5px}
+.card .title{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;margin:0 0 7px;line-height:1.25}
+.card .desc{font-size:15px;color:var(--muted);margin:0}
+.card.empty{border-top-color:var(--line-d);opacity:.75}
+.card.empty .kicker{color:var(--muted)}
+
+.resource{display:flex;justify-content:space-between;align-items:center;gap:18px;
+      background:var(--surface);border-radius:16px;padding:18px 22px;margin:12px 0;
+      text-decoration:none;color:inherit;box-shadow:var(--shadow-m)}
+a.resource:hover{box-shadow:0 6px 18px rgba(15,23,42,.11);transform:translateY(-1px)}
+.resource .title{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:19px;color:var(--ink);margin:0 0 3px}
+.resource .desc{font-size:15px;color:var(--muted);margin:0}
+.resource .go{color:var(--teal-d);font-weight:700;font-size:15px;white-space:nowrap}
+
+/* ---------------------------------------------------------------- widget */
+.widget{background:var(--surface);border-radius:20px;padding:26px 28px;margin:28px 0;
+        box-shadow:var(--shadow-l)}
+.widget > h3{margin-top:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.widget .tryit{font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+        text-transform:uppercase;color:var(--amber-t);background:#fef3c7;padding:5px 11px;border-radius:99px}
+svg,canvas{display:block;max-width:100%}
+canvas{border-radius:14px}
+/* Two-pane lab layout: particles beside the graph, stacked on a phone. */
+.labgrid{display:grid;grid-template-columns:minmax(220px,1fr) minmax(260px,1.25fr);
+         gap:18px;align-items:start}
+@media (max-width:680px){.labgrid{grid-template-columns:1fr}}
+/* Any table too wide for the screen scrolls sideways instead of pushing the page. */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll > table{margin-top:0;margin-bottom:0;min-width:520px}
+.tscroll{margin:26px 0}
+
+.ctrls{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0 4px;align-items:flex-end}
+.ctrl{flex:1 1 240px}
+.ctrl label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+        text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ctrl .val{color:var(--teal-d);font-size:15px;letter-spacing:0}
+input[type=range]{width:100%;accent-color:var(--teal);height:28px;cursor:pointer}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 0}
+button{font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;border-radius:99px;
+       padding:10px 20px;border:0;background:#f1f5f9;color:var(--ink);transition:background .12s}
+button:hover{background:var(--teal-s);color:var(--teal-d)}
+button.primary{background:var(--teal-d);color:#fff;box-shadow:0 3px 10px rgba(15,118,110,.35)}
+button.primary:hover{background:#0a5f58;color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible,
+select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+.readouts{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+.ro{flex:1 1 140px;background:#f8fafc;border-radius:14px;padding:14px 16px;text-align:center}
+.ro .k{display:block;font-size:11.5px;font-weight:700;letter-spacing:.07em;
+       text-transform:uppercase;color:var(--muted)}
+.ro .v{display:block;font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:26px;font-weight:600;color:var(--teal-d);line-height:1.3}
+.commentary{margin:16px 0 0;padding:14px 18px;background:var(--teal-s2);border-radius:14px;
+       border:1px solid #99f6e4;font-size:16px}
+
+/* ---------------------------------------------------------------- predict gate */
+.predict{background:var(--amber-s);border:1px solid var(--amber-b);border-radius:20px;
+       padding:22px 26px;margin:28px 0}
+.predict .label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+       text-transform:uppercase;color:var(--amber-t);margin-bottom:6px}
+.predict h3{margin:0 0 10px;color:var(--ink)}
+.predict .opts{display:flex;flex-direction:column;gap:9px;margin:14px 0 0}
+.predict .opt{display:block;width:100%;text-align:left;border:2px solid transparent;
+       background:var(--surface);border-radius:14px;padding:13px 16px;font-size:16.5px;
+       font-weight:500;color:var(--ink);cursor:pointer;box-shadow:var(--shadow-s)}
+.predict .opt:hover{border-color:var(--amber);background:var(--surface);color:var(--ink)}
+.predict .opt.picked{border-color:var(--teal);background:var(--teal-s2);font-weight:700;color:var(--ink)}
+.predict .outcome{display:none;margin:16px 0 0;padding:14px 18px;background:var(--surface);
+       border-radius:14px;box-shadow:var(--shadow-s);font-size:16.5px}
+.predict .outcome.open{display:block}
+.locked{filter:blur(5px);pointer-events:none;user-select:none;opacity:.55}
+
+/* ---------------------------------------------------------------- games */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+.chip{border:2px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 17px;
+      font-size:16px;cursor:pointer;font-family:inherit;color:var(--ink);font-weight:500;
+      box-shadow:var(--shadow-s)}
+.chip:hover{border-color:var(--teal);background:var(--surface);color:var(--ink)}
+.chip.sel{border-color:var(--teal);background:var(--teal-s);font-weight:700;color:var(--teal-d)}
+.chip.done{opacity:.35;cursor:default;text-decoration:line-through;box-shadow:none}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.bin{border:3px dashed var(--line-d);border-radius:18px;padding:14px;min-height:130px;
+     background:var(--surface);cursor:pointer}
+.bin:hover{border-color:var(--teal)}
+.bin h4{margin:0 0 10px;text-align:center;font-size:15px;letter-spacing:.07em;text-transform:uppercase}
+.bin.s h4{color:var(--solid-t)} .bin.l h4{color:var(--liquid-t)} .bin.g h4{color:var(--gas-t)}
+.bin.s{border-color:var(--solid)} .bin.l{border-color:var(--liquid)} .bin.g{border-color:var(--gas)}
+.bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.bin .it{font-size:14.5px;padding:5px 12px;border-radius:99px;background:#f1f5f9}
+.bin .it.ok{background:#dcfce7;color:var(--green);font-weight:700}
+.bin .it.no{background:#fee2e2;color:var(--red);font-weight:700}
+
+/* ---------------------------------------------------------------- CER */
+textarea{font-family:inherit;font-size:16.5px;line-height:1.6;width:100%;min-height:120px;
+       padding:13px 15px;border:2px solid var(--line);border-radius:14px;resize:vertical;
+       background:var(--surface);color:var(--ink)}
+textarea:focus{border-color:var(--teal)}
+.field-row{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 16px}
+.field-row label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+       text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.field-row input{font-family:inherit;font-size:16.5px;padding:10px 13px;border:2px solid var(--line);
+       border-radius:12px;width:100%;background:var(--surface);color:var(--ink)}
+.field-row input:focus{border-color:var(--teal)}
+.levels{display:flex;gap:7px;margin:12px 0 0;flex-wrap:wrap}
+.lvbtn{font-size:14px;padding:7px 14px;border-radius:99px;border:2px solid var(--line);
+       background:var(--surface);color:var(--muted);cursor:pointer;font-weight:600}
+.lvbtn.on{border-color:var(--teal);background:var(--teal-s);color:var(--teal-d)}
+.frames{margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+/* Scoped to .frames on purpose: the study guide uses td.frame for a table cell. */
+.frames button.frame{text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:12px;
+       padding:10px 14px;font-size:15.5px;cursor:pointer;font-family:inherit;color:var(--ink);
+       font-weight:400;box-shadow:none}
+.frames button.frame:hover{border-color:var(--teal);background:var(--surface);color:var(--ink)}
+.checks{margin:14px 0 0;display:flex;flex-direction:column;gap:6px;font-size:15.5px}
+.checks .c{display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+.checks .c .m{font-weight:700;width:18px;flex:0 0 18px;text-align:center}
+.checks .c.pass{color:var(--green)}
+.checks .c.warn{color:var(--amber-t)}
+.selfcheck{margin:14px 0 0}
+.selfcheck label{display:flex;gap:10px;align-items:flex-start;font-size:16px;margin:8px 0;cursor:pointer}
+.selfcheck input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;flex:0 0 19px;cursor:pointer}
+
+/* ---------------------------------------------------------------- misc */
+details{border:1px solid var(--line);border-radius:16px;padding:14px 20px;margin:20px 0;
+        background:var(--surface);box-shadow:var(--shadow-s)}
+details summary{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--teal-d);cursor:pointer;font-size:17px}
+details[open] summary{margin-bottom:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+figure{margin:26px 0}
+figure img{max-width:100%;height:auto;display:block;border-radius:16px;background:#fff;
+       box-shadow:var(--shadow-m)}
+figure.plain img{box-shadow:none}
+figcaption{font-size:15px;color:var(--muted);margin-top:10px;line-height:1.5}
+figure.half{max-width:460px}
+figure.center{margin-left:auto;margin-right:auto}
+.hero{margin:0 0 26px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-m)}
+.hero img{display:block;width:100%;height:auto}
+.img-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:24px 0}
+.img-row figure{margin:0}
+
+footer{margin-top:54px;padding:24px 0 30px;border-top:1px solid var(--line);
+       font-size:15px;color:var(--muted)}
+footer p{margin:4px 0}
+body > footer{background:var(--surface);margin-top:54px;padding:24px 0 30px}
+body > footer .wrap{padding-bottom:0}
+
+.pagenav{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 0}
+.pagenav a{flex:1 1 220px;background:var(--surface);border-radius:16px;padding:16px 20px;
+       text-decoration:none;color:inherit;box-shadow:var(--shadow-m)}
+.pagenav a:hover{box-shadow:0 6px 18px rgba(15,23,42,.11)}
+.pagenav .dir{display:block;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+       text-transform:uppercase;color:var(--muted)}
+.pagenav .t{display:block;font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--teal-d);margin-top:3px}
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width:700px){
+  body{font-size:16px}
+  header.top,.masthead{padding:34px 20px 30px}
+  header.top h1,.masthead h1{font-size:30px}
+  h2{font-size:24px}
+  nav.jump a{padding:7px 12px;font-size:13.5px}
+  .widget{padding:20px 18px;border-radius:16px}
+  .ro .v{font-size:22px}
+  .resource{flex-direction:column;align-items:flex-start;gap:8px}
+  th,td{padding:11px 13px}
+}
+
+/* ---------------------------------------------------------------- print */
+@media print{
+  body{background:#fff;font-size:11pt;color:#000}
+  nav.jump,.crumbs,button,.btnrow,input[type=range],.pagenav,.levels,.frames{display:none!important}
+  .tscroll{overflow:visible!important}
+  .tscroll > table{min-width:0!important}
+  .labgrid{grid-template-columns:1fr}
+  header.top,.masthead{background:#fff!important;color:var(--teal-d)!important;padding:0 0 10px}
+  header.top .kicker,.masthead .course{background:none;color:var(--amber-t);padding:0}
+  .widget,.box,.note,table,details,.resource,.card,figure,.hero,.img-row{
+    break-inside:avoid;page-break-inside:avoid;box-shadow:none!important}
+  .locked{filter:none;opacity:1}
+  .predict .outcome{display:block!important}
+  h2,h3{break-after:avoid}
+  @page{size:A4;margin:15mm}
+}
+
+/* ---------------------------------------------------------------- tea lab */
+.cups{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
+.cup{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px}
+.cup h4{margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cup h4 .temp{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:24px;font-weight:600}
+.cup.hot h4 .temp{color:var(--red)} .cup.cold h4 .temp{color:var(--solid-t)}
+.cup canvas{width:100%;height:auto;display:block;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.meter{margin:12px 0 0}
+.meter .k{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meter .k b{color:var(--ink);letter-spacing:0;font-size:13.5px}
+.bar{height:14px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal);border-radius:99px;transition:width .25s}
+.bar.tot i{background:var(--amber)}
+.sizes{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap}
+.sizes button{flex:1 1 auto;padding:7px 12px;font-size:13.5px}
+.speedkey{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:13.5px;color:var(--muted);margin:14px 0 0}
+.speedkey span{display:inline-flex;align-items:center;gap:6px}
+.speedkey i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.goals{display:flex;flex-direction:column;gap:10px;margin:18px 0 0}
+.goal{display:flex;gap:12px;align-items:flex-start;background:#f8fafc;border-radius:14px;padding:12px 16px;border:2px solid transparent}
+.goal .tick{flex:0 0 26px;height:26px;border-radius:50%;background:var(--line);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.goal.done{border-color:#bbf7d0;background:var(--green-s)}
+.goal.done .tick{background:var(--green)}
+.goal p{margin:0}
+.pq .opt.right{border-color:var(--green);background:var(--green-s);font-weight:700;color:var(--ink)}
+.pq .opt.wrong{border-color:var(--red);background:var(--red-s);color:var(--ink)}
+.pq .outcome.ok{border-left:0;background:var(--green-s)}
+.pscore{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;color:var(--teal-d);margin:6px 0 0}
+@media (max-width:680px){.cups{grid-template-columns:1fr}}
+
+/* ---------------------------------------------------------------- beach lab */
+.beakers{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:6px}
+.beakers.three{grid-template-columns:repeat(3,1fr)}
+.bk{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px}
+.bk h4{margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.bk h4 .temp{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:24px;font-weight:600;color:var(--red)}
+.bk h4 .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.bk canvas{width:100%;height:auto;display:block;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.bk .mass{font-size:13.5px;color:var(--muted);margin:8px 0 0;text-align:center}
+.subs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+.subs button{flex:1 1 40%;padding:7px 10px;font-size:13.5px}
+.clock{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:22px;font-weight:600;color:var(--teal-d)}
+.graphbox{margin:22px 0 0;background:#f8fafc;border-radius:16px;padding:12px 12px 6px;border:1px solid var(--line)}
+.graphbox svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:13.5px;color:var(--muted);margin:6px 0 4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
+table.data td,table.data th{text-align:center}
+@media (max-width:760px){.beakers.three{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.beakers,.beakers.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 3</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">The Beach Mystery</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 3 &bull; Energy Transfer</p>
+    <h1>The Beach Mystery</h1>
+    <p class="tag">Same sun, same flame, different stuff</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#start">Predict First</a></li>
+    <li><a href="#lab1">Different Stuff</a></li>
+    <li><a href="#explain">Specific Heat</a></li>
+    <li><a href="#lab2">Different Mass</a></li>
+    <li><a href="#practice">Practice Round</a></li>
+    <li><a href="#check">Check Yourself</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<h2 id="start">Predict First</h2>
+
+<p>The lab below stays blurry until you pick an answer, so commit to one before you look.</p>
+
+<div class="predict" id="p1">
+  <span class="label">Predict first</span>
+  <h3>It is a sunny afternoon at Kenting. The sand burns your feet, but the sea feels cool. Both have had the same sun all day. Why is the sand so much hotter?</h3>
+  <div class="opts">
+    <button class="opt" type="button">A. The sea gets less sunlight than the sand.</button>
+    <button class="opt" type="button">B. The sand has more mass than the sea.</button>
+    <button class="opt" type="button">C. Sand needs less energy to warm up than water does.</button>
+    <button class="opt" type="button">D. Water particles cannot speed up.</button>
+  </div>
+  <div class="outcome"></div>
+</div>
+
+<h2 id="lab1">Lab 1: Same Mass, Different Stuff</h2>
+
+<div class="widget" id="w1">
+  <h3>Heat two substances <span class="tryit">Interactive</span></h3>
+  <p style="margin-top:0">Pick a substance for each beaker. Both beakers hold <strong>100 g</strong>, start at <strong>20&deg;C</strong>, and sit on <strong>identical burners</strong>. That means both get the same amount of energy every second. Then heat them for 2 minutes and watch.</p>
+
+  <div class="beakers" id="b1"></div>
+
+  <div class="btnrow" style="align-items:center">
+    <button type="button" class="primary" id="go1">Heat for 2 minutes</button>
+    <button type="button" id="reset1">Reset</button>
+    <span style="margin-left:auto">Time: <span class="clock" id="clock1">0 s</span></span>
+  </div>
+
+  <div class="graphbox">
+    <div class="legend" id="leg1"></div>
+    <svg id="g1" viewBox="0 0 560 300" role="img" aria-label="Graph of temperature against time for both beakers"></svg>
+  </div>
+
+  <div class="tscroll"><table class="data" id="t1"></table></div>
+
+  <p class="commentary" id="note1" aria-live="polite">Pick two different substances, then press Heat for 2 minutes.</p>
+  <p style="font-size:13.5px;color:var(--muted);margin:14px 0 0">Look at the beakers before you heat them. Every beaker holds 100 g, but they are not the same size. Iron is so dense that 100 g is a small block.</p>
+</div>
+
+<div class="box key">
+  <span class="label">Same energy in, different temperature rise</span>
+  <p>The burners were identical and the time was the same, so <strong>both beakers got the same amount of energy</strong>. Yet the temperatures went up by very different amounts.</p>
+  <p>Remember that temperature measures how fast the particles move on average. Some substances need a lot of energy to make their particles speed up. Others need only a little. Water needs a lot. Iron needs very little.</p>
+</div>
+
+<h2 id="explain">Specific Heat</h2>
+
+<p><strong>Specific heat:</strong> the amount of energy needed to raise the temperature of 1 gram of a substance by 1&deg;C.</p>
+
+<div class="tscroll"><table>
+  <thead><tr><th>Substance</th><th>Specific heat (J per g per &deg;C)</th><th>What that means</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Water</strong></td><td>4.18</td><td>Very high. Slow to heat up, slow to cool down.</td></tr>
+    <tr><td><strong>Cooking oil</strong></td><td>about 2.0</td><td>About half of water.</td></tr>
+    <tr><td><strong>Sand</strong></td><td>about 0.8</td><td>About one fifth of water. Heats up fast in the sun.</td></tr>
+    <tr><td><strong>Iron</strong></td><td>0.45</td><td>Very low. A pan gets hot in seconds.</td></tr>
+  </tbody>
+</table></div>
+
+<p>A joule (J) is a unit of energy. You do not need to calculate anything here. Just notice the pattern: <strong>the higher the specific heat, the smaller the temperature rise</strong> for the same energy.</p>
+
+<div class="box">
+  <span class="label">Back to the beach</span>
+  <p>The sun gives the sand and the sea about the same energy. Sand has a low specific heat, so its temperature shoots up. Water has a high specific heat, so the sea warms only a little. After sunset it flips: the sand loses its heat quickly and cools down, while the sea stays mild all night.</p>
+</div>
+
+<h2 id="lab2">Lab 2: Same Stuff, Different Mass</h2>
+
+<div class="predict" id="p2">
+  <span class="label">Predict first</span>
+  <h3>Two pots of water sit on identical burners. Pot B holds twice as much water as Pot A. After 2 minutes, how does Pot B's temperature rise compare with Pot A's?</h3>
+  <div class="opts">
+    <button class="opt" type="button">A. Pot B rises twice as much.</button>
+    <button class="opt" type="button">B. Both rise by the same amount.</button>
+    <button class="opt" type="button">C. Pot B does not warm up at all until Pot A boils.</button>
+    <button class="opt" type="button">D. Pot B rises about half as much.</button>
+  </div>
+  <div class="outcome"></div>
+</div>
+
+<div class="widget" id="w2">
+  <h3>Heat three masses of water <span class="tryit">Interactive</span></h3>
+  <p style="margin-top:0">This time the substance stays the same: all three beakers hold water at 20&deg;C on identical burners. Only the <strong>mass</strong> is different.</p>
+
+  <div class="beakers three" id="b2"></div>
+
+  <div class="btnrow" style="align-items:center">
+    <button type="button" class="primary" id="go2">Heat for 2 minutes</button>
+    <button type="button" id="reset2">Reset</button>
+    <span style="margin-left:auto">Time: <span class="clock" id="clock2">0 s</span></span>
+  </div>
+
+  <div class="graphbox">
+    <div class="legend" id="leg2"></div>
+    <svg id="g2" viewBox="0 0 560 300" role="img" aria-label="Graph of temperature against time for three masses of water"></svg>
+  </div>
+
+  <div class="tscroll"><table class="data" id="t2"></table></div>
+
+  <p class="commentary" id="note2" aria-live="polite">Press Heat for 2 minutes and compare the three lines.</p>
+</div>
+
+<div class="box key">
+  <span class="label">The big idea</span>
+  <p>How much an object's temperature goes up depends on three things:</p>
+  <ul>
+    <li><strong>How much energy</strong> is added</li>
+    <li><strong>How much mass</strong> there is: more mass means more particles to share the energy</li>
+    <li><strong>What the substance is</strong>: its specific heat</li>
+  </ul>
+  <p>That is why a full kettle takes longer to boil than a half-full one, and why the sea stays cool while the sand burns.</p>
+</div>
+
+<div class="box tip">
+  <span class="label">Misconception alert: "Hotter means it got more energy"</span>
+  <p>In Lab 1 the sand got much hotter than the water, but both got <strong>exactly the same energy</strong> from identical burners. A bigger temperature rise does not mean more energy went in. It means that substance needs less energy per degree.</p>
+</div>
+
+<h2 id="practice">Practice Round</h2>
+
+<p>Five quick questions. Pick an answer and you will find out right away. If you miss one, read the hint and try again.</p>
+
+<div id="pqs"></div>
+<p class="pscore" id="pscore" aria-live="polite"></p>
+
+<h2 id="check">Check Yourself</h2>
+
+<p>Answer in full sentences. Use your data from the labs as evidence.</p>
+
+<div class="widget">
+  <h3>Three questions</h3>
+  <div id="qs"></div>
+</div>
+
+<div class="pagenav">
+  <a href="index.html"><span class="dir">&larr; Back</span><span class="t">Unit 3: Energy Transfer</span></a>
+  <a href="../unit-1/hot-and-iced-tea.html"><span class="dir">Review &rarr;</span><span class="t">Hot Tea, Iced Tea</span></a>
+</div>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 3: Energy Transfer. Aligned to MS-PS3-4.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+function predictGate(rootId, targetId, outcomes){
+  var root=document.getElementById(rootId);
+  var opts=root.querySelectorAll('.opt');
+  var out=root.querySelector('.outcome');
+  var target=targetId?document.getElementById(targetId):null;
+  if(target) target.classList.add('locked');
+  opts.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      opts.forEach(function(o){o.classList.remove('picked')});
+      b.classList.add('picked');
+      out.innerHTML = outcomes[i];
+      out.classList.add('open');
+      if(target) target.classList.remove('locked');
+    });
+  });
+}
+predictGate('p1','w1',[
+ "Not quite. On an open beach the sand and the sea get about the same sunlight. The difference is in how the two substances respond to that energy. Test it in the lab below.",
+ "Not quite, and the sea actually has far more mass than the beach you stand on. If anything, more mass would make something warm up more slowly. Test it in the lab below.",
+ "Correct. Sand needs much less energy than water to warm up by each degree, so the same sunshine raises its temperature far more. Test it in the lab below, and find out which substance is the slowest to heat.",
+ "Not quite. Water particles do speed up when water absorbs energy, just more slowly than sand particles. That is why the sea gets a little warmer by the end of summer. Test it in the lab below."
+]);
+predictGate('p2','w2',[
+ "It is the other way around. Pot B has twice as many particles sharing the same energy, so each particle speeds up less. Test it below.",
+ "Not quite. Both pots get the same energy, but Pot B has twice as much water to share it with. Test it below.",
+ "Not quite. Both pots start warming as soon as the burners go on. Pot B just warms more slowly. Test it below.",
+ "Correct. Same burner, same time, so both get the same energy. Pot B has twice as much water sharing it, so its temperature rises about half as much. Test it below."
+]);
+
+// ============ model ============
+var SUBS={
+  water:{name:'Water',      c:4.18, rho:1.0,  solid:false, fill:'#dbeafe', dot:'#2563eb'},
+  oil:  {name:'Cooking oil',c:2.0,  rho:0.92, solid:false, fill:'#fef3c7', dot:'#b45309'},
+  sand: {name:'Sand',       c:0.83, rho:1.6,  solid:true,  fill:'#f3e3c3', dot:'#a16207'},
+  iron: {name:'Iron',       c:0.45, rho:7.87, solid:true,  fill:'#d1d5db', dot:'#374151'}
+};
+var K=20*4.18/120;          // the burner: 100 g of water warms 20 degrees in 120 s
+var W=300, H=300, BX=50, BW=160, BOT=240;
+function rate(sub,mass){ return K*100/(mass*SUBS[sub].c); }   // degrees per second
+
+function Beaker(el, o){
+  this.el=el; this.sub=o.sub; this.mass=o.mass; this.tmax=o.tmax; this.scale=o.scale;
+  this.color=o.color; this.label=o.label; this.T=20; this.heating=false; this.ph=0;
+  var html='<h4><span><span class="sw" style="background:'+o.color+'"></span>'+o.label+'</span><span class="temp">20&deg;C</span></h4>'+
+           '<canvas width="300" height="300" aria-label="Beaker '+o.label+'"></canvas><p class="mass"></p>';
+  if(o.choose){
+    html+='<div class="subs">';
+    Object.keys(SUBS).forEach(function(k){ html+='<button type="button" data-sub="'+k+'">'+SUBS[k].name+'</button>'; });
+    html+='</div>';
+  }
+  el.innerHTML=html;
+  this.cv=el.querySelector('canvas'); this.ctx=this.cv.getContext('2d');
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  this.cv.width=W*dpr; this.cv.height=H*dpr; this.ctx.setTransform(dpr,0,0,dpr,0,0);
+  this.layout();
+}
+Beaker.prototype.layout=function(){
+  var s=SUBS[this.sub];
+  var vol=this.mass/s.rho;
+  this.h=Math.max(14,Math.min(176,vol*this.scale));
+  var top=BOT-this.h, ps=[];
+  if(s.solid){
+    var cols=Math.floor((BW-6)/12), rows=Math.max(1,Math.floor((this.h-2)/12));
+    var ox=BX+(BW-(cols-1)*12)/2, oy=BOT-6-(rows-1)*12;
+    for(var r=0;r<rows;r++) for(var c=0;c<cols;c++) ps.push({hx:ox+c*12,hy:oy+r*12,x:0,y:0});
+  } else {
+    var n=Math.max(8,Math.round(BW*this.h/650));
+    for(var i=0;i<n;i++) ps.push({x:BX+6+Math.random()*(BW-12), y:top+6+Math.random()*Math.max(1,this.h-12), a:Math.random()*Math.PI*2});
+  }
+  this.ps=ps;
+  this.el.querySelector('.mass').textContent=s.name+', '+this.mass+' g';
+  var me=this;
+  this.el.querySelectorAll('[data-sub]').forEach(function(b){ b.classList.toggle('primary',b.getAttribute('data-sub')===me.sub); });
+};
+Beaker.prototype.setT=function(T){ this.T=T; this.el.querySelector('h4 .temp').textContent=Math.round(T)+'°C'; };
+Beaker.prototype.draw=function(dt){
+  var c=this.ctx, s=SUBS[this.sub], top=BOT-this.h, me=this;
+  this.ph+=dt;
+  c.clearRect(0,0,W,H);
+  // contents
+  c.fillStyle=s.fill; c.fillRect(BX,top,BW,this.h);
+  // particles
+  var heat=(this.T-20)/190;
+  c.fillStyle=s.dot;
+  if(s.solid){
+    var amp=0.4+heat*2.8;
+    this.ps.forEach(function(p){
+      var x=p.hx+(Math.random()*2-1)*amp, y=p.hy+(Math.random()*2-1)*amp;
+      c.beginPath(); c.arc(x,y,4.5,0,Math.PI*2); c.fill();
+    });
+  } else {
+    var sp=(0.4+(this.T-20)*0.03)*dt;
+    this.ps.forEach(function(p){
+      p.x+=Math.cos(p.a)*sp; p.y+=Math.sin(p.a)*sp;
+      if(Math.random()<0.01*dt) p.a=Math.random()*Math.PI*2;
+      if(p.x<BX+5){p.x=BX+5;p.a=Math.PI-p.a;} if(p.x>BX+BW-5){p.x=BX+BW-5;p.a=Math.PI-p.a;}
+      if(p.y<top+5){p.y=top+5;p.a=-p.a;} if(p.y>BOT-5){p.y=BOT-5;p.a=-p.a;}
+      if(me.h<12) p.y=top+me.h/2;
+      c.beginPath(); c.arc(p.x,p.y,4.5,0,Math.PI*2); c.fill();
+    });
+  }
+  // glass
+  c.strokeStyle='#94a3b8'; c.lineWidth=3; c.lineJoin='round';
+  c.beginPath(); c.moveTo(BX-5,58); c.lineTo(BX-5,BOT+5); c.lineTo(BX+BW+5,BOT+5); c.lineTo(BX+BW+5,58); c.stroke();
+  c.beginPath(); c.moveTo(BX-11,58); c.lineTo(BX-5,58); c.stroke();
+  // burner
+  c.fillStyle='#64748b'; c.fillRect(BX-14,BOT+9,BW+28,4);
+  c.fillRect(BX+BW/2-22,H-22,44,14);
+  if(this.heating){
+    for(var k=0;k<5;k++){
+      var fx=BX+BW/2-24+k*12, fh=14+Math.sin(this.ph*0.35+k*1.3)*4;
+      c.fillStyle=k%2?'#f59e0b':'#ea580c';
+      c.beginPath(); c.moveTo(fx-5,H-23); c.quadraticCurveTo(fx,H-23-fh*1.4,fx+5,H-23); c.fill();
+    }
+  }
+  // thermometer
+  var tx=248, t0=26, t1=222, bulbY=238;
+  c.fillStyle='#fff'; c.strokeStyle='#94a3b8'; c.lineWidth=2;
+  c.beginPath(); c.arc(tx+6,bulbY,11,0,Math.PI*2); c.fill(); c.stroke();
+  c.beginPath(); c.rect(tx,t0,12,t1-t0+6); c.fill(); c.stroke();
+  var fy=t1-this.T/this.tmax*(t1-t0);
+  c.fillStyle='#dc2626';
+  c.beginPath(); c.arc(tx+6,bulbY,8,0,Math.PI*2); c.fill();
+  c.fillRect(tx+3,fy,6,bulbY-fy);
+  c.font='600 11px InterG7, Segoe UI, sans-serif'; c.fillStyle='#5b6a7e'; c.textAlign='left';
+  var step=this.tmax>100?50:10;
+  for(var v=0;v<=this.tmax;v+=step){ var y=t1-v/this.tmax*(t1-t0); c.fillText(v,tx+18,y+4); c.fillRect(tx+12,y,4,1.5); }
+  c.fillText('°C',tx+16,16);
+};
+
+function Lab(cfg){
+  this.cfg=cfg; this.t=0; this.running=false; this.bks=cfg.beakers;
+  var me=this;
+  cfg.go.addEventListener('click',function(){ if(me.t>=120) me.reset(); me.running=true; me.bks.forEach(function(b){b.heating=true;}); me.lock(true); });
+  cfg.reset.addEventListener('click',function(){ me.reset(); });
+  this.bks.forEach(function(b){
+    b.el.querySelectorAll('[data-sub]').forEach(function(btn){
+      btn.addEventListener('click',function(){ if(me.running) return; b.sub=btn.getAttribute('data-sub'); b.layout(); me.reset(); });
+    });
+  });
+  this.reset();
+}
+Lab.prototype.lock=function(on){
+  this.cfg.go.disabled=on;
+  this.bks.forEach(function(b){ b.el.querySelectorAll('[data-sub]').forEach(function(x){x.disabled=on;}); });
+};
+Lab.prototype.reset=function(){
+  this.t=0; this.running=false; this.last=-1;
+  this.data=this.bks.map(function(){return [[0,20]];});
+  this.bks.forEach(function(b){ b.setT(20); b.heating=false; b.layout(); });
+  this.lock(false); this.cfg.go.textContent='Heat for 2 minutes';
+  this.cfg.clock.textContent='0 s';
+  if(this.cfg.idle) this.cfg.note.innerHTML=this.cfg.idle(this);
+  this.legend(); this.table(); this.graph();
+};
+Lab.prototype.temp=function(b,t){ return 20+rate(b.sub,b.mass)*t; };
+Lab.prototype.step=function(dts){
+  if(!this.running) return;
+  var me=this;
+  this.t=Math.min(120,this.t+dts*10);              // 10 lab seconds per real second
+  this.bks.forEach(function(b,i){
+    b.setT(me.temp(b,me.t));
+  });
+  var whole=Math.floor(this.t);
+  if(whole>this.last){
+    for(var s=this.last+1;s<=whole;s++) this.bks.forEach(function(b,i){ me.data[i].push([s,me.temp(b,s)]); });
+    this.last=whole; this.graph();
+    if(whole%30===0) this.table();
+  }
+  this.cfg.clock.textContent=whole+' s';
+  if(this.t>=120){
+    this.running=false; this.bks.forEach(function(b){b.heating=false;});
+    this.lock(false); this.cfg.go.textContent='Run it again';
+    this.table(); this.graph(); this.cfg.note.innerHTML=this.cfg.done(this);
+  }
+};
+Lab.prototype.legend=function(){
+  this.cfg.legend.innerHTML=this.bks.map(function(b){ return '<span><i style="background:'+b.color+'"></i>'+b.label+': '+SUBS[b.sub].name+', '+b.mass+' g</span>'; }).join('');
+};
+Lab.prototype.table=function(){
+  var me=this, h='<thead><tr><th>Time (s)</th>';
+  this.bks.forEach(function(b){ h+='<th>'+b.label+': '+SUBS[b.sub].name+', '+b.mass+' g</th>'; });
+  h+='</tr></thead><tbody>';
+  [0,30,60,90,120].forEach(function(t){
+    h+='<tr><td><strong>'+t+'</strong></td>';
+    me.bks.forEach(function(b){ h+='<td>'+(t<=me.t?Math.round(me.temp(b,t))+'°C':'')+'</td>'; });
+    h+='</tr>';
+  });
+  this.cfg.table.innerHTML=h+'</tbody>';
+};
+Lab.prototype.graph=function(){
+  var svg=this.cfg.svg, ym=this.cfg.ymax, L=56,R=540,T=14,B=250, me=this;
+  var px=function(t){return L+t/120*(R-L);}, py=function(v){return B-v/ym*(B-T);};
+  var g='';
+  var stp=ym>100?50:10;
+  for(var v=0;v<=ym;v+=stp){ g+='<line x1="'+L+'" x2="'+R+'" y1="'+py(v)+'" y2="'+py(v)+'" stroke="#e2e8f0"/><text x="'+(L-8)+'" y="'+(py(v)+4)+'" text-anchor="end" font-size="12" fill="#5b6a7e">'+v+'</text>'; }
+  [0,30,60,90,120].forEach(function(t){ g+='<line x1="'+px(t)+'" x2="'+px(t)+'" y1="'+T+'" y2="'+B+'" stroke="#e2e8f0"/><text x="'+px(t)+'" y="'+(B+18)+'" text-anchor="middle" font-size="12" fill="#5b6a7e">'+t+'</text>'; });
+  g+='<line x1="'+L+'" x2="'+R+'" y1="'+B+'" y2="'+B+'" stroke="#94a3b8" stroke-width="1.5"/><line x1="'+L+'" x2="'+L+'" y1="'+T+'" y2="'+B+'" stroke="#94a3b8" stroke-width="1.5"/>';
+  g+='<text x="'+((L+R)/2)+'" y="'+(B+40)+'" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Time (s)</text>';
+  g+='<text transform="translate(16 '+((T+B)/2)+') rotate(-90)" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Temperature (°C)</text>';
+  this.data.forEach(function(d,i){
+    var pts=d.map(function(p){return px(p[0]).toFixed(1)+','+py(Math.min(p[1],ym)).toFixed(1);}).join(' ');
+    g+='<polyline points="'+pts+'" fill="none" stroke="'+me.bks[i].color+'" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    var lp=d[d.length-1]; g+='<circle cx="'+px(lp[0])+'" cy="'+py(Math.min(lp[1],ym))+'" r="5" fill="'+me.bks[i].color+'"/>';
+  });
+  svg.innerHTML=g;
+};
+
+// ============ lab 1 ============
+var b1=document.getElementById('b1');
+var A1=document.createElement('div'), B1=document.createElement('div'); A1.className=B1.className='bk'; b1.appendChild(A1); b1.appendChild(B1);
+var lab1=new Lab({
+  beakers:[new Beaker(A1,{sub:'water',mass:100,tmax:220,scale:1.4,color:'#0d9488',label:'Beaker A',choose:true}),
+           new Beaker(B1,{sub:'sand', mass:100,tmax:220,scale:1.4,color:'#ea580c',label:'Beaker B',choose:true})],
+  svg:document.getElementById('g1'), table:document.getElementById('t1'), clock:document.getElementById('clock1'),
+  go:document.getElementById('go1'), reset:document.getElementById('reset1'), note:document.getElementById('note1'),
+  legend:document.getElementById('leg1'), ymax:220,
+  idle:function(L){ return L.bks[0].sub===L.bks[1].sub?'Both beakers hold the same substance. Pick a different substance for one of them to make a comparison.':'Press <strong>Heat for 2 minutes</strong>. Which line do you think will climb faster?'; },
+  done:function(L){
+    var a=L.bks[0], b=L.bks[1], ra=Math.round(L.temp(a,120)-20), rb=Math.round(L.temp(b,120)-20);
+    if(a.sub===b.sub) return 'Both beakers hold '+SUBS[a.sub].name.toLowerCase()+', so they warmed by the same amount ('+ra+'°C). Pick two different substances to compare.';
+    var hi=ra>rb?a:b, lo=ra>rb?b:a, rh=Math.max(ra,rb), rl=Math.min(ra,rb);
+    return 'Both beakers got the same energy. The <strong>'+SUBS[hi.sub].name.toLowerCase()+'</strong> warmed by '+rh+'°C, but the <strong>'+SUBS[lo.sub].name.toLowerCase()+'</strong> warmed by only '+rl+'°C. The '+SUBS[lo.sub].name.toLowerCase()+' has the higher specific heat: it needs more energy to warm each gram by 1°C. Try another pair.';
+  }
+});
+
+// ============ lab 2 ============
+var b2=document.getElementById('b2'), els2=[0,1,2].map(function(){var d=document.createElement('div');d.className='bk';b2.appendChild(d);return d;});
+var lab2=new Lab({
+  beakers:[new Beaker(els2[0],{sub:'water',mass:100,tmax:50,scale:0.55,color:'#0d9488',label:'Beaker A'}),
+           new Beaker(els2[1],{sub:'water',mass:200,tmax:50,scale:0.55,color:'#2563eb',label:'Beaker B'}),
+           new Beaker(els2[2],{sub:'water',mass:300,tmax:50,scale:0.55,color:'#7c3aed',label:'Beaker C'})],
+  svg:document.getElementById('g2'), table:document.getElementById('t2'), clock:document.getElementById('clock2'),
+  go:document.getElementById('go2'), reset:document.getElementById('reset2'), note:document.getElementById('note2'),
+  legend:document.getElementById('leg2'), ymax:50,
+  idle:function(){ return 'Press <strong>Heat for 2 minutes</strong> and compare the three lines.'; },
+  done:function(){ return 'All three beakers got the same energy. The 100 g beaker warmed by 20°C, the 200 g beaker by 10°C, and the 300 g beaker by about 7°C. <strong>Twice the mass, half the temperature rise.</strong> More particles share the same energy, so each one speeds up less.'; }
+});
+
+// ============ animation ============
+var all=lab1.bks.concat(lab2.bks), last=performance.now();
+function frame(now){
+  var dts=Math.min((now-last)/1000,0.05); last=now;
+  lab1.step(dts); lab2.step(dts);
+  all.forEach(function(b){ b.draw(dts*60); });
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// ============ practice round ============
+(function(){
+  var PQ=[
+    {q:'Emma fills one kettle all the way and another kettle halfway. The water starts at the same temperature, and both go on identical stoves. Which one boils first?',
+     o:['The full kettle.','The half-full kettle.','They boil at the same time.','Whichever kettle is made of metal.'], c:1,
+     h:['The full kettle has twice as much water sharing the same energy, so it warms more slowly.','',
+        'They get the same energy each second, but one has much more water to heat.',
+        'Both kettles are on the same kind of stove. Think about the amount of water instead.'],
+     y:'Same energy each second, but the half-full kettle has less mass to heat, so its temperature rises faster.'},
+    {q:'Liam heats 100 g of water and 100 g of iron on identical burners and graphs the results. Line X climbs steeply. Line Y climbs slowly. Which line is the water?',
+     o:['Line X, because water heats up easily.','Neither, because the temperature of water does not change.','You cannot tell without knowing the time.','Line Y, because water needs more energy for each degree.'], c:3,
+     h:['Water has a very high specific heat, so it does not heat up easily.','Water warms up when it absorbs energy. It just warms slowly.',
+        'Both lines are on the same graph, over the same time. Compare how steep they are.',''],
+     y:'Water has a much higher specific heat than iron, so with the same energy its temperature climbs slowly.'},
+    {q:'An empty iron pan and a pot of water have the same mass. They go on identical burners for 1 minute. Which is hotter?',
+     o:['The iron pan.','The water.','They are the same temperature.','Neither warms up in 1 minute.'], c:0,
+     h:['','Water has a high specific heat, so it is slow to warm up.',
+        'They get the same energy, but iron and water need very different amounts per degree.',
+        'Both warm up as soon as the burners go on.'],
+     y:'Iron has a low specific heat, so the same energy raises its temperature much more. That is why you never touch an empty pan on the stove.'},
+    {q:'200 g of cooking oil warms by 20°C in 2 minutes on a burner. Sophia heats 400 g of the same oil on the same burner for 2 minutes. About how much will it warm?',
+     o:['About 40°C.','About 20°C.','About 10°C.','It will not warm at all.'], c:2,
+     h:['More mass means a smaller temperature rise, not a bigger one.','The energy is the same, but now there is twice as much oil to share it.','',
+        'It will warm, because it is still getting energy from the burner.'],
+     y:'Twice the mass shares the same energy, so the temperature rises about half as much.'},
+    {q:'After sunset at the beach, the sun stops heating everything. Which cools down faster?',
+     o:['The sea, because water loses heat easily.','The sand, because it has a low specific heat.','Both cool at exactly the same rate.','Neither. They stay hot until morning.'], c:1,
+     h:['Water has a high specific heat, so it changes temperature slowly in both directions.','',
+        'Sand and water have very different specific heats, so they change temperature at different rates.',
+        'Both lose energy to the cooler night air, so both cool down.'],
+     y:'A low specific heat means a small energy change makes a big temperature change, so the sand cools quickly while the sea stays mild.'}
+  ];
+  var box=document.getElementById('pqs'), score=document.getElementById('pscore');
+  var first=0, done=0;
+  PQ.forEach(function(item,n){
+    var d=document.createElement('div'); d.className='predict pq';
+    var html='<span class="label">Practice '+(n+1)+' of '+PQ.length+'</span><h3>'+item.q+'</h3><div class="opts">';
+    item.o.forEach(function(t,i){ html+='<button class="opt" type="button">'+'ABCD'[i]+'. '+t+'</button>'; });
+    d.innerHTML=html+'</div><div class="outcome"></div>';
+    var opts=d.querySelectorAll('.opt'), out=d.querySelector('.outcome'), tries=0, solved=false;
+    opts.forEach(function(b,i){
+      b.addEventListener('click',function(){
+        if(solved) return;
+        tries++;
+        if(i===item.c){
+          solved=true; done++; if(tries===1) first++;
+          b.classList.add('right');
+          out.innerHTML='<strong>Correct.</strong> '+item.y; out.classList.add('open','ok');
+          if(done===PQ.length) score.textContent='All five done. You got '+first+' of '+PQ.length+' right on the first try.';
+        } else {
+          b.classList.add('wrong');
+          out.innerHTML='<strong>Not quite.</strong> '+item.h[i]+' Try again.'; out.classList.add('open');
+        }
+      });
+    });
+    box.appendChild(d);
+  });
+})();
+
+// ============ check yourself ============
+(function(){
+  var QS=[
+    {q:'Run Lab 1 with water and sand. Which has the higher specific heat? Use numbers from your data table as evidence.',
+     a:'Water has the higher specific heat. Both beakers got the same energy, but in 2 minutes the water warmed from 20°C to about 40°C, a rise of 20°C, while the sand warmed to about 121°C, a rise of about 100°C. The water needed more energy for each degree, so its temperature rose much less.'},
+    {q:'Why did both beakers in Lab 1 hold the same mass and sit on identical burners?',
+     a:'To make it a fair test. If only the substance changes, then any difference in temperature rise must be caused by the substance. If the mass or the burner were different too, we could not tell which one caused the difference.'},
+    {q:'Ethan says the sand in Lab 1 must have received more energy because it got hotter. Explain why he is wrong.',
+     a:'Both beakers sat on identical burners for the same time, so they received the same energy. The sand got hotter because it has a lower specific heat: it needs less energy to raise each gram by 1°C. A bigger temperature rise does not mean more energy went in.'}
+  ];
+  var box=document.getElementById('qs');
+  QS.forEach(function(item,i){
+    var d=document.createElement('div');
+    d.style.cssText='border-radius:16px;padding:16px 20px;margin:12px 0;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.07)';
+    d.innerHTML='<p style="font-weight:600;margin:0 0 10px">'+(i+1)+'. '+item.q+'</p>'+
+      '<button type="button">Show answer</button>'+
+      '<div style="display:none;border-top:1px dashed var(--line-d);margin-top:11px;padding-top:11px"><p style="margin:0">'+item.a+'</p></div>';
+    var btn=d.querySelector('button'), ans=d.querySelector('div');
+    btn.addEventListener('click',function(){
+      var open=ans.style.display==='none';
+      ans.style.display=open?'block':'none';
+      btn.textContent=open?'Hide answer':'Show answer';
+    });
+    box.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
