@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Hot Tea, Iced Tea | G7 Integrated Science</title>
+<style>@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+
+/* ---------------------------------------------------------------- base */
+:root{
+  --teal:#0d9488; --teal-d:#0f766e; --teal-l:#14b8a6; --teal-s:#ccfbf1; --teal-s2:#f0fdfa;
+  --amber:#f59e0b; --amber-s:#fffbeb; --amber-b:#fde68a; --amber-t:#b45309;
+  --green:#15803d; --green-s:#f0fdf4; --red:#b91c1c; --red-s:#fef2f2;
+  --ink:#0f172a; --muted:#5b6a7e; --line:#e2e8f0; --line-d:#cbd5e1;
+  --bg:#f1f5f9; --surface:#ffffff;
+  --solid:#2563eb; --liquid:#0d9488; --gas:#d97706;
+  --solid-t:#1d4ed8; --liquid-t:#0f766e; --gas-t:#b45309;
+  --shadow-s:0 1px 3px rgba(15,23,42,.07);
+  --shadow-m:0 2px 8px rgba(15,23,42,.07);
+  --shadow-l:0 4px 16px rgba(15,23,42,.08);
+  /* Aliases kept so older inline styles on any page still resolve. */
+  --border:#e2e8f0; --grey:#f8fafc; --teal-dark:#0f766e; --teal-soft:#f0fdfa;
+  --orange:#d97706; --orange-soft:#fffbeb; --orange-text:#b45309; --text:#0f172a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:16.5px;line-height:1.65;
+     color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--teal-d)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 70px}
+
+/* ---------------------------------------------------------------- chrome */
+.crumbs{background:var(--surface);font-size:13.5px;box-shadow:0 1px 2px rgba(15,23,42,.05);
+        position:relative;z-index:31}
+.crumbs .inner,.crumbs .wrap{max-width:860px;margin:0 auto;padding:12px 20px}
+.crumbs a{color:var(--teal-d);text-decoration:none;font-weight:600}
+.crumbs a:hover{text-decoration:underline}
+.crumbs .sep{color:var(--line-d);margin:0 8px}
+.crumbs .here{color:var(--muted)}
+
+/* Gradient stops are all dark enough that white text clears 4.5:1 anywhere along it. */
+header.top,.masthead{background:linear-gradient(135deg,#0a5f58 0%,#0f766e 55%,#12807a 100%);
+        color:#fff;padding:46px 20px 42px}
+header.top .inner,.masthead .wrap{max-width:860px;margin:0 auto;padding-bottom:0}
+/* The pill darkens the gradient rather than lightening it, so its white label
+   keeps enough contrast at the light end of the gradient too. */
+header.top .kicker,.masthead .course{display:inline-block;font-size:12px;font-weight:700;
+        letter-spacing:.09em;text-transform:uppercase;background:rgba(0,0,0,.20);
+        padding:5px 13px;border-radius:99px;margin:0 0 16px}
+header.top h1,.masthead h1{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:42px;line-height:1.1;
+        margin:0;letter-spacing:-.01em}
+header.top p.tag,.masthead p.tag{margin:12px 0 0;font-size:17.5px;opacity:.93}
+.masthead a{color:#fff}
+
+nav.jump{background:var(--surface);box-shadow:0 2px 8px rgba(15,23,42,.06);position:sticky;top:0;z-index:30}
+/* One row that scrolls sideways rather than wrapping: a wrapped bar would be
+   four rows tall on a phone, and this one is sticky. */
+nav.jump ul{max-width:860px;margin:0 auto;padding:10px 20px;list-style:none;
+        display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.jump li{flex:0 0 auto}
+nav.jump a{display:block;padding:8px 15px;font-size:14px;font-weight:600;color:var(--muted);
+        text-decoration:none;border-radius:99px;white-space:nowrap}
+nav.jump a:hover{background:var(--teal-s);color:var(--teal-d)}
+
+main{padding:8px 0 0}
+
+/* ---------------------------------------------------------------- type */
+h2{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:29px;font-weight:600;color:var(--ink);
+   margin:46px 0 12px;line-height:1.22;scroll-margin-top:96px}
+h3{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:21px;font-weight:600;color:var(--ink);margin:30px 0 10px}
+h4{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:17.5px;font-weight:600;margin:20px 0 6px}
+p{margin:13px 0}
+ul,ol{margin:13px 0;padding-left:26px}
+li{margin:5px 0}
+.lede{font-size:18.5px;color:var(--muted);margin:20px 0 4px}
+code{background:#f8fafc;border:1px solid var(--line);padding:1px 6px;border-radius:5px;
+     font-family:Consolas,Monaco,monospace;font-size:.92em}
+strong{font-weight:700}
+
+/* ---------------------------------------------------------------- boxes */
+.box,.note{border-radius:16px;padding:20px 24px;margin:24px 0;border:1px solid var(--amber-b);
+     background:var(--amber-s)}
+.box p:first-child,.note p:first-child{margin-top:0}
+.box p:last-child,.note p:last-child{margin-bottom:0}
+.box .label,.note .label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+     text-transform:uppercase;color:var(--amber-t);margin-bottom:8px}
+.box.key{background:var(--teal-s2);border-color:#99f6e4}
+.box.key .label{color:var(--teal-d)}
+.box.good{background:var(--green-s);border-color:#bbf7d0}
+.box.good .label{color:var(--green)}
+.pending{background:var(--surface);border:2px dashed var(--line-d);border-radius:16px;
+     padding:28px 20px;text-align:center;color:var(--muted);margin:22px 0}
+.pending strong{display:block;color:var(--ink);margin-bottom:4px;font-size:17px}
+
+/* ---------------------------------------------------------------- table */
+table{border-collapse:separate;border-spacing:0;width:100%;margin:26px 0;font-size:16px;
+      background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-s)}
+th,td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+thead th{background:#f8fafc;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+         color:var(--muted);font-weight:700}
+.term{font-weight:700;color:var(--teal-d)}
+
+/* ---------------------------------------------------------------- cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0}
+.card{display:block;background:var(--surface);border-radius:18px;padding:20px 22px;
+      text-decoration:none;color:inherit;box-shadow:var(--shadow-m);
+      border-top:4px solid var(--teal);transition:box-shadow .15s,transform .15s}
+a.card:hover{box-shadow:0 8px 22px rgba(15,23,42,.12);transform:translateY(-2px)}
+.card .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--teal-d);margin:0 0 5px}
+.card .title{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;margin:0 0 7px;line-height:1.25}
+.card .desc{font-size:15px;color:var(--muted);margin:0}
+.card.empty{border-top-color:var(--line-d);opacity:.75}
+.card.empty .kicker{color:var(--muted)}
+
+.resource{display:flex;justify-content:space-between;align-items:center;gap:18px;
+      background:var(--surface);border-radius:16px;padding:18px 22px;margin:12px 0;
+      text-decoration:none;color:inherit;box-shadow:var(--shadow-m)}
+a.resource:hover{box-shadow:0 6px 18px rgba(15,23,42,.11);transform:translateY(-1px)}
+.resource .title{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:19px;color:var(--ink);margin:0 0 3px}
+.resource .desc{font-size:15px;color:var(--muted);margin:0}
+.resource .go{color:var(--teal-d);font-weight:700;font-size:15px;white-space:nowrap}
+
+/* ---------------------------------------------------------------- widget */
+.widget{background:var(--surface);border-radius:20px;padding:26px 28px;margin:28px 0;
+        box-shadow:var(--shadow-l)}
+.widget > h3{margin-top:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.widget .tryit{font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+        text-transform:uppercase;color:var(--amber-t);background:#fef3c7;padding:5px 11px;border-radius:99px}
+svg,canvas{display:block;max-width:100%}
+canvas{border-radius:14px}
+/* Two-pane lab layout: particles beside the graph, stacked on a phone. */
+.labgrid{display:grid;grid-template-columns:minmax(220px,1fr) minmax(260px,1.25fr);
+         gap:18px;align-items:start}
+@media (max-width:680px){.labgrid{grid-template-columns:1fr}}
+/* Any table too wide for the screen scrolls sideways instead of pushing the page. */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll > table{margin-top:0;margin-bottom:0;min-width:520px}
+.tscroll{margin:26px 0}
+
+.ctrls{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0 4px;align-items:flex-end}
+.ctrl{flex:1 1 240px}
+.ctrl label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+        text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ctrl .val{color:var(--teal-d);font-size:15px;letter-spacing:0}
+input[type=range]{width:100%;accent-color:var(--teal);height:28px;cursor:pointer}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 0}
+button{font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;border-radius:99px;
+       padding:10px 20px;border:0;background:#f1f5f9;color:var(--ink);transition:background .12s}
+button:hover{background:var(--teal-s);color:var(--teal-d)}
+button.primary{background:var(--teal-d);color:#fff;box-shadow:0 3px 10px rgba(15,118,110,.35)}
+button.primary:hover{background:#0a5f58;color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible,
+select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+.readouts{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+.ro{flex:1 1 140px;background:#f8fafc;border-radius:14px;padding:14px 16px;text-align:center}
+.ro .k{display:block;font-size:11.5px;font-weight:700;letter-spacing:.07em;
+       text-transform:uppercase;color:var(--muted)}
+.ro .v{display:block;font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:26px;font-weight:600;color:var(--teal-d);line-height:1.3}
+.commentary{margin:16px 0 0;padding:14px 18px;background:var(--teal-s2);border-radius:14px;
+       border:1px solid #99f6e4;font-size:16px}
+
+/* ---------------------------------------------------------------- predict gate */
+.predict{background:var(--amber-s);border:1px solid var(--amber-b);border-radius:20px;
+       padding:22px 26px;margin:28px 0}
+.predict .label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+       text-transform:uppercase;color:var(--amber-t);margin-bottom:6px}
+.predict h3{margin:0 0 10px;color:var(--ink)}
+.predict .opts{display:flex;flex-direction:column;gap:9px;margin:14px 0 0}
+.predict .opt{display:block;width:100%;text-align:left;border:2px solid transparent;
+       background:var(--surface);border-radius:14px;padding:13px 16px;font-size:16.5px;
+       font-weight:500;color:var(--ink);cursor:pointer;box-shadow:var(--shadow-s)}
+.predict .opt:hover{border-color:var(--amber);background:var(--surface);color:var(--ink)}
+.predict .opt.picked{border-color:var(--teal);background:var(--teal-s2);font-weight:700;color:var(--ink)}
+.predict .outcome{display:none;margin:16px 0 0;padding:14px 18px;background:var(--surface);
+       border-radius:14px;box-shadow:var(--shadow-s);font-size:16.5px}
+.predict .outcome.open{display:block}
+.locked{filter:blur(5px);pointer-events:none;user-select:none;opacity:.55}
+
+/* ---------------------------------------------------------------- games */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+.chip{border:2px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 17px;
+      font-size:16px;cursor:pointer;font-family:inherit;color:var(--ink);font-weight:500;
+      box-shadow:var(--shadow-s)}
+.chip:hover{border-color:var(--teal);background:var(--surface);color:var(--ink)}
+.chip.sel{border-color:var(--teal);background:var(--teal-s);font-weight:700;color:var(--teal-d)}
+.chip.done{opacity:.35;cursor:default;text-decoration:line-through;box-shadow:none}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.bin{border:3px dashed var(--line-d);border-radius:18px;padding:14px;min-height:130px;
+     background:var(--surface);cursor:pointer}
+.bin:hover{border-color:var(--teal)}
+.bin h4{margin:0 0 10px;text-align:center;font-size:15px;letter-spacing:.07em;text-transform:uppercase}
+.bin.s h4{color:var(--solid-t)} .bin.l h4{color:var(--liquid-t)} .bin.g h4{color:var(--gas-t)}
+.bin.s{border-color:var(--solid)} .bin.l{border-color:var(--liquid)} .bin.g{border-color:var(--gas)}
+.bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.bin .it{font-size:14.5px;padding:5px 12px;border-radius:99px;background:#f1f5f9}
+.bin .it.ok{background:#dcfce7;color:var(--green);font-weight:700}
+.bin .it.no{background:#fee2e2;color:var(--red);font-weight:700}
+
+/* ---------------------------------------------------------------- CER */
+textarea{font-family:inherit;font-size:16.5px;line-height:1.6;width:100%;min-height:120px;
+       padding:13px 15px;border:2px solid var(--line);border-radius:14px;resize:vertical;
+       background:var(--surface);color:var(--ink)}
+textarea:focus{border-color:var(--teal)}
+.field-row{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 16px}
+.field-row label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+       text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.field-row input{font-family:inherit;font-size:16.5px;padding:10px 13px;border:2px solid var(--line);
+       border-radius:12px;width:100%;background:var(--surface);color:var(--ink)}
+.field-row input:focus{border-color:var(--teal)}
+.levels{display:flex;gap:7px;margin:12px 0 0;flex-wrap:wrap}
+.lvbtn{font-size:14px;padding:7px 14px;border-radius:99px;border:2px solid var(--line);
+       background:var(--surface);color:var(--muted);cursor:pointer;font-weight:600}
+.lvbtn.on{border-color:var(--teal);background:var(--teal-s);color:var(--teal-d)}
+.frames{margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+/* Scoped to .frames on purpose: the study guide uses td.frame for a table cell. */
+.frames button.frame{text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:12px;
+       padding:10px 14px;font-size:15.5px;cursor:pointer;font-family:inherit;color:var(--ink);
+       font-weight:400;box-shadow:none}
+.frames button.frame:hover{border-color:var(--teal);background:var(--surface);color:var(--ink)}
+.checks{margin:14px 0 0;display:flex;flex-direction:column;gap:6px;font-size:15.5px}
+.checks .c{display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+.checks .c .m{font-weight:700;width:18px;flex:0 0 18px;text-align:center}
+.checks .c.pass{color:var(--green)}
+.checks .c.warn{color:var(--amber-t)}
+.selfcheck{margin:14px 0 0}
+.selfcheck label{display:flex;gap:10px;align-items:flex-start;font-size:16px;margin:8px 0;cursor:pointer}
+.selfcheck input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;flex:0 0 19px;cursor:pointer}
+
+/* ---------------------------------------------------------------- misc */
+details{border:1px solid var(--line);border-radius:16px;padding:14px 20px;margin:20px 0;
+        background:var(--surface);box-shadow:var(--shadow-s)}
+details summary{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--teal-d);cursor:pointer;font-size:17px}
+details[open] summary{margin-bottom:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+figure{margin:26px 0}
+figure img{max-width:100%;height:auto;display:block;border-radius:16px;background:#fff;
+       box-shadow:var(--shadow-m)}
+figure.plain img{box-shadow:none}
+figcaption{font-size:15px;color:var(--muted);margin-top:10px;line-height:1.5}
+figure.half{max-width:460px}
+figure.center{margin-left:auto;margin-right:auto}
+.hero{margin:0 0 26px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-m)}
+.hero img{display:block;width:100%;height:auto}
+.img-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:24px 0}
+.img-row figure{margin:0}
+
+footer{margin-top:54px;padding:24px 0 30px;border-top:1px solid var(--line);
+       font-size:15px;color:var(--muted)}
+footer p{margin:4px 0}
+body > footer{background:var(--surface);margin-top:54px;padding:24px 0 30px}
+body > footer .wrap{padding-bottom:0}
+
+.pagenav{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 0}
+.pagenav a{flex:1 1 220px;background:var(--surface);border-radius:16px;padding:16px 20px;
+       text-decoration:none;color:inherit;box-shadow:var(--shadow-m)}
+.pagenav a:hover{box-shadow:0 6px 18px rgba(15,23,42,.11)}
+.pagenav .dir{display:block;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+       text-transform:uppercase;color:var(--muted)}
+.pagenav .t{display:block;font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--teal-d);margin-top:3px}
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width:700px){
+  body{font-size:16px}
+  header.top,.masthead{padding:34px 20px 30px}
+  header.top h1,.masthead h1{font-size:30px}
+  h2{font-size:24px}
+  nav.jump a{padding:7px 12px;font-size:13.5px}
+  .widget{padding:20px 18px;border-radius:16px}
+  .ro .v{font-size:22px}
+  .resource{flex-direction:column;align-items:flex-start;gap:8px}
+  th,td{padding:11px 13px}
+}
+
+/* ---------------------------------------------------------------- print */
+@media print{
+  body{background:#fff;font-size:11pt;color:#000}
+  nav.jump,.crumbs,button,.btnrow,input[type=range],.pagenav,.levels,.frames{display:none!important}
+  .tscroll{overflow:visible!important}
+  .tscroll > table{min-width:0!important}
+  .labgrid{grid-template-columns:1fr}
+  header.top,.masthead{background:#fff!important;color:var(--teal-d)!important;padding:0 0 10px}
+  header.top .kicker,.masthead .course{background:none;color:var(--amber-t);padding:0}
+  .widget,.box,.note,table,details,.resource,.card,figure,.hero,.img-row{
+    break-inside:avoid;page-break-inside:avoid;box-shadow:none!important}
+  .locked{filter:none;opacity:1}
+  .predict .outcome{display:block!important}
+  h2,h3{break-after:avoid}
+  @page{size:A4;margin:15mm}
+}
+
+/* ---------------------------------------------------------------- tea lab */
+.cups{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
+.cup{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px}
+.cup h4{margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cup h4 .temp{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:24px;font-weight:600}
+.cup.hot h4 .temp{color:var(--red)} .cup.cold h4 .temp{color:var(--solid-t)}
+.cup canvas{width:100%;height:auto;display:block;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.meter{margin:12px 0 0}
+.meter .k{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meter .k b{color:var(--ink);letter-spacing:0;font-size:13.5px}
+.bar{height:14px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal);border-radius:99px;transition:width .25s}
+.bar.tot i{background:var(--amber)}
+.sizes{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap}
+.sizes button{flex:1 1 auto;padding:7px 12px;font-size:13.5px}
+.speedkey{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:13.5px;color:var(--muted);margin:14px 0 0}
+.speedkey span{display:inline-flex;align-items:center;gap:6px}
+.speedkey i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.goals{display:flex;flex-direction:column;gap:10px;margin:18px 0 0}
+.goal{display:flex;gap:12px;align-items:flex-start;background:#f8fafc;border-radius:14px;padding:12px 16px;border:2px solid transparent}
+.goal .tick{flex:0 0 26px;height:26px;border-radius:50%;background:var(--line);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.goal.done{border-color:#bbf7d0;background:var(--green-s)}
+.goal.done .tick{background:var(--green)}
+.goal p{margin:0}
+.pq .opt.right{border-color:var(--green);background:var(--green-s);font-weight:700;color:var(--ink)}
+.pq .opt.wrong{border-color:var(--red);background:var(--red-s);color:var(--ink)}
+.pq .outcome.ok{border-left:0;background:var(--green-s)}
+.pscore{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;color:var(--teal-d);margin:6px 0 0}
+@media (max-width:680px){.cups{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 2</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">Hot Tea, Iced Tea</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 2 &bull; Energy</p>
+    <h1>Hot Tea, Iced Tea</h1>
+    <p class="tag">What is a thermometer really measuring?</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#start">Predict First</a></li>
+    <li><a href="#lab">Two Cups</a></li>
+    <li><a href="#words">Three Words</a></li>
+    <li><a href="#size">The Bigger Cup</a></li>
+    <li><a href="#practice">Practice Round</a></li>
+    <li><a href="#check">Check Yourself</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<h2 id="start">Predict First</h2>
+
+<p>Answer this first. The lab below stays blurry until you pick an answer, so commit to one before you look.</p>
+
+<div class="predict" id="p1">
+  <span class="label">Predict first</span>
+  <h3>Lily puts a thermometer in a bowl of warm soup. It reads 65&deg;C. Then she puts it in a glass of cold milk, and it reads 4&deg;C. What is different about the particles in the soup?</h3>
+  <div class="opts">
+    <button class="opt" type="button">A. Each soup particle is larger than each milk particle.</button>
+    <button class="opt" type="button">B. The soup particles are moving faster, on average.</button>
+    <button class="opt" type="button">C. The soup particles have stopped moving, and the milk particles have not.</button>
+    <button class="opt" type="button">D. The bowl holds more soup than the glass holds milk.</button>
+  </div>
+  <div class="outcome"></div>
+</div>
+
+<h2 id="lab">Two Cups</h2>
+
+<div class="widget" id="lab1">
+  <h3>Watch the particles <span class="tryit">Interactive</span></h3>
+  <p style="margin-top:0">Each dot is a particle of tea. Drag a slider to change that drink's temperature, then compare how the particles move. The color of a dot shows how fast it is going right now.</p>
+
+  <div class="cups">
+    <div class="cup hot" id="c1h">
+      <h4>Hot tea <span class="temp">80&deg;C</span></h4>
+      <canvas width="400" height="340" aria-label="Particles in the hot tea"></canvas>
+      <div class="ctrl" style="margin-top:12px">
+        <label>Temperature <span class="val">80&deg;C</span></label>
+        <input type="range" min="0" max="95" value="80" step="1" aria-label="Hot tea temperature">
+      </div>
+      <div class="meter"><div class="k">Average kinetic energy <b class="avgv"></b></div><div class="bar avg"><i></i></div></div>
+    </div>
+    <div class="cup cold" id="c1c">
+      <h4>Iced tea <span class="temp">5&deg;C</span></h4>
+      <canvas width="400" height="340" aria-label="Particles in the iced tea"></canvas>
+      <div class="ctrl" style="margin-top:12px">
+        <label>Temperature <span class="val">5&deg;C</span></label>
+        <input type="range" min="0" max="95" value="5" step="1" aria-label="Iced tea temperature">
+      </div>
+      <div class="meter"><div class="k">Average kinetic energy <b class="avgv"></b></div><div class="bar avg"><i></i></div></div>
+    </div>
+  </div>
+
+  <div class="speedkey">
+    <span><i style="background:#2563eb"></i>slow right now</span>
+    <span><i style="background:#0d9488"></i>medium</span>
+    <span><i style="background:#ea580c"></i>fast right now</span>
+  </div>
+
+  <p class="commentary" id="note1" aria-live="polite"></p>
+
+  <div class="btnrow">
+    <button type="button" id="spotBtn" class="primary">Spot the surprise</button>
+    <button type="button" id="sameBtn">Make them the same temperature</button>
+    <button type="button" id="resetBtn">Reset</button>
+    <button type="button" class="pauseBtn">Pause</button>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);margin:14px 0 0">In this model the speed differences are exaggerated so you can see them. Real particles are far too small and fast to watch.</p>
+</div>
+
+<div class="box key">
+  <span class="label">Why the word "average" matters</span>
+  <p>Not every particle in a drink moves at the same speed. They are always bumping into each other, so some speed up and some slow down. Press <strong>Spot the surprise</strong> and you will find a particle in the iced tea that is moving faster than a particle in the hot tea.</p>
+  <p>So a thermometer cannot be measuring one particle. It measures the <strong>average</strong>. The particles of the tea hit the thermometer until its own particles move at the same average speed, and the reading tells you that average.</p>
+</div>
+
+<h2 id="words">Three Words That Sound Alike</h2>
+
+<div class="tscroll"><table>
+  <thead><tr><th style="width:26%">Word</th><th>What it means</th><th style="width:30%">Hot tea vs iced tea</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Kinetic energy</strong></td><td>The energy of motion. One particle moving faster has more kinetic energy.</td><td>Each particle has its own, and it keeps changing.</td></tr>
+    <tr><td><strong>Temperature</strong></td><td>A measure of the <strong>average</strong> kinetic energy of the particles. This is what a thermometer reads.</td><td>Hot tea is higher: its particles move faster on average.</td></tr>
+    <tr><td><strong>Thermal energy</strong></td><td>The <strong>total</strong> kinetic energy of all the particles added together. More particles means more to add up.</td><td>Depends on the temperature <strong>and</strong> on how much tea there is.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="box tip">
+  <span class="label">Misconception alert: "Cold things have no thermal energy"</span>
+  <p>Look at the iced tea. Its particles are slower, but they never stop. Even ice is full of vibrating particles. Particles would only stop moving at <strong>absolute zero</strong>, about &minus;273&deg;C, which is why the iced tea's energy bar is lower than the hot tea's but still far from empty.</p>
+</div>
+
+<h2 id="size">The Bigger Cup</h2>
+
+<p>Temperature is an average. Thermal energy is a total. Here is where that difference shows up.</p>
+
+<div class="predict" id="p2">
+  <span class="label">Predict first</span>
+  <h3>A small cup of hot tea at 80&deg;C sits next to a big pitcher holding three times as much iced tea at 5&deg;C. Which has more thermal energy?</h3>
+  <div class="opts">
+    <button class="opt" type="button">A. The cup of hot tea, because it has the higher temperature.</button>
+    <button class="opt" type="button">B. The pitcher of iced tea, because it has many more particles.</button>
+    <button class="opt" type="button">C. They have the same thermal energy.</button>
+    <button class="opt" type="button">D. Only the hot tea has thermal energy. Cold drinks have none.</button>
+  </div>
+  <div class="outcome"></div>
+</div>
+
+<div class="widget" id="lab2">
+  <h3>Change the amount of tea <span class="tryit">Interactive</span></h3>
+  <p style="margin-top:0">Now you can change how much tea is in each container. Watch both bars. The top bar is the average, which the thermometer shows. The bottom bar is the total thermal energy.</p>
+
+  <div class="cups">
+    <div class="cup hot" id="c2h">
+      <h4>Hot tea <span class="temp">80&deg;C</span></h4>
+      <canvas width="400" height="340" aria-label="Particles in the hot tea container"></canvas>
+      <div class="sizes"><button type="button" data-size="0" class="primary">Small cup</button><button type="button" data-size="1">Big pitcher</button></div>
+      <div class="ctrl" style="margin-top:12px">
+        <label>Temperature <span class="val">80&deg;C</span></label>
+        <input type="range" min="0" max="95" value="80" step="1" aria-label="Hot tea temperature">
+      </div>
+      <div class="meter"><div class="k">Average kinetic energy <b class="avgv"></b></div><div class="bar avg"><i></i></div></div>
+      <div class="meter"><div class="k">Total thermal energy <b class="totv"></b></div><div class="bar tot"><i></i></div></div>
+    </div>
+    <div class="cup cold" id="c2c">
+      <h4>Iced tea <span class="temp">5&deg;C</span></h4>
+      <canvas width="400" height="340" aria-label="Particles in the iced tea container"></canvas>
+      <div class="sizes"><button type="button" data-size="0" class="primary">Small cup</button><button type="button" data-size="1">Big pitcher</button></div>
+      <div class="ctrl" style="margin-top:12px">
+        <label>Temperature <span class="val">5&deg;C</span></label>
+        <input type="range" min="0" max="95" value="5" step="1" aria-label="Iced tea temperature">
+      </div>
+      <div class="meter"><div class="k">Average kinetic energy <b class="avgv"></b></div><div class="bar avg"><i></i></div></div>
+      <div class="meter"><div class="k">Total thermal energy <b class="totv"></b></div><div class="bar tot"><i></i></div></div>
+    </div>
+  </div>
+
+  <p class="commentary" id="note2" aria-live="polite"></p>
+
+  <div class="goals">
+    <div class="goal" id="g1"><span class="tick">1</span><p><strong>Challenge 1.</strong> Give the iced tea <strong>more</strong> thermal energy than the hot tea, while keeping the iced tea <strong>colder</strong>.</p></div>
+    <div class="goal" id="g2"><span class="tick">2</span><p><strong>Challenge 2.</strong> Make both drinks the <strong>same temperature</strong> but with <strong>different</strong> thermal energy.</p></div>
+  </div>
+
+  <div class="btnrow">
+    <button type="button" class="pauseBtn">Pause</button>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);margin:14px 0 0">In this model, total thermal energy = number of particles &times; average kinetic energy. Energy is shown in made-up "energy units" so the numbers are easy to compare.</p>
+</div>
+
+<div class="box key">
+  <span class="label">The big idea</span>
+  <p>A thermometer tells you how fast the particles are moving <strong>on average</strong>. It does not tell you how much tea there is.</p>
+  <p>Two drinks can have the same temperature and very different thermal energy. A swimming pool at 25&deg;C has far more thermal energy than a cup of tea at 80&deg;C, because it has so many more particles to add up.</p>
+</div>
+
+<h2 id="practice">Practice Round</h2>
+
+<p>Five quick questions. Pick an answer and you will find out right away. If you miss one, read the hint and try again.</p>
+
+<div id="pqs"></div>
+<p class="pscore" id="pscore" aria-live="polite"></p>
+
+<h2 id="check">Check Yourself</h2>
+
+<p>Answer in full sentences. Use the two labs to test your answer before you reveal it.</p>
+
+<div class="widget">
+  <h3>Three questions</h3>
+  <div id="qs"></div>
+</div>
+
+<div class="pagenav">
+  <a href="index.html"><span class="dir">&larr; Back</span><span class="t">Unit 2: Energy</span></a>
+  <a href="../index.html"><span class="dir">Home &rarr;</span><span class="t">G7 Integrated Science</span></a>
+</div>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 2: Energy. Supports MS-PS1-4 and MS-PS3-4.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+function predictGate(rootId, targetId, outcomes){
+  var root=document.getElementById(rootId);
+  var opts=root.querySelectorAll('.opt');
+  var out=root.querySelector('.outcome');
+  var target=targetId?document.getElementById(targetId):null;
+  if(target) target.classList.add('locked');
+  opts.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      opts.forEach(function(o){o.classList.remove('picked')});
+      b.classList.add('picked');
+      out.innerHTML = outcomes[i];
+      out.classList.add('open');
+      if(target) target.classList.remove('locked');
+    });
+  });
+}
+
+predictGate('p1','lab1',[
+ "Not quite. Warming something up does not make its particles grow. The size of a particle does not change the thermometer reading. Open the lab below and watch what actually changes when a drink gets warmer.",
+ "Correct. A higher temperature means the particles are moving faster <strong>on average</strong>, so they have more <strong>average kinetic energy</strong>. Use the lab below to see it, and to find out why the word <strong>average</strong> matters.",
+ "It is the other way around, and even then, not quite. Particles in a liquid never stop moving, hot or cold. The cold milk particles are moving too, just more slowly. Watch the two cups in the lab below.",
+ "Tempting, but the amount does not change the thermometer reading. A spoonful of that soup would still read 65&deg;C. The amount matters for something else, which you will see in The Bigger Cup section. Watch the particles in the lab below first."
+]);
+predictGate('p2','lab2',[
+ "That is the most common answer, and it mixes up temperature and thermal energy. The hot tea has the higher temperature, so its particles move faster on average. But thermal energy is a <strong>total</strong>, and the pitcher has three times as many particles to add up. Test it below.",
+ "Correct. Each iced tea particle has less kinetic energy on average, but the pitcher has three times as many particles. Add them all up and the pitcher wins. Test it below, then try the two challenges.",
+ "Not quite. They would only match if the numbers balanced out exactly. Set up the containers in the lab below and compare the total thermal energy bars.",
+ "Not quite. Cold drinks still have moving particles, so they still have thermal energy. Look at the iced tea in the lab: the particles are slower, but they never stop."
+]);
+
+// ============ particle model ============
+var W=400, H=340, TMAX=95;
+var paused=false;
+var RECT=[ {x:85,y:160,w:170,h:158,n:20},   // small cup
+           {x:20,y:50,w:300,h:268,n:60} ];  // big pitcher (3x the area, 3x the particles)
+function rayleigh(){ var u=Math.random(); var f=Math.sqrt(-2*Math.log(1-u))/1.2533; return Math.max(0.15,Math.min(2.6,f)); }
+function baseSpeed(T){ return 0.3 + (T/TMAX)*2.9; }           // exaggerated on purpose
+function avgKE(T){ return (T+273)/100; }                       // energy units per particle, from absolute zero
+function speedColor(s){ return s<1.0?'#2563eb':(s<2.0?'#0d9488':'#ea580c'); }
+function fmtT(T){ return T+'°C'; }
+
+function Cup(el, T, hot, withSize){
+  this.el=el; this.T=T; this.hot=hot; this.size=0; this.withSize=withSize;
+  this.cv=el.querySelector('canvas'); this.ctx=this.cv.getContext('2d');
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  this.cv.width=W*dpr; this.cv.height=H*dpr; this.ctx.setTransform(dpr,0,0,dpr,0,0);
+  this.slider=el.querySelector('input[type=range]');
+  this.mark=[]; this.t=0;
+  this.fill();
+  var me=this;
+  this.slider.addEventListener('input',function(){ me.T=+me.slider.value; me.sync(); if(me.onchange) me.onchange(); });
+  el.querySelectorAll('[data-size]').forEach(function(b){
+    b.addEventListener('click',function(){
+      me.size=+b.getAttribute('data-size');
+      el.querySelectorAll('[data-size]').forEach(function(o){o.classList.toggle('primary',o===b)});
+      me.fill(); me.sync(); if(me.onchange) me.onchange();
+    });
+  });
+  this.sync();
+}
+Cup.prototype.n=function(){ return RECT[this.size].n; };
+Cup.prototype.total=function(){ return this.n()*avgKE(this.T); };
+Cup.prototype.fill=function(){
+  var r=RECT[this.size], R=5.5; this.ps=[]; this.mark=[];
+  for(var i=0;i<r.n;i++){
+    this.ps.push({x:r.x+R+Math.random()*(r.w-2*R), y:r.y+R+Math.random()*(r.h-2*R), a:Math.random()*Math.PI*2, f:rayleigh(), hold:0});
+  }
+};
+Cup.prototype.speed=function(p){ return baseSpeed(this.T)*p.f; };
+Cup.prototype.sync=function(){
+  var el=this.el;
+  el.querySelector('h4 .temp').textContent=fmtT(this.T);
+  el.querySelector('.ctrl .val').textContent=fmtT(this.T);
+  if(+this.slider.value!==this.T) this.slider.value=this.T;
+  var a=avgKE(this.T);
+  el.querySelector('.avgv').textContent=a.toFixed(1)+' units';
+  el.querySelector('.bar.avg i').style.width=(a/avgKE(TMAX)*100)+'%';
+  var tv=el.querySelector('.totv');
+  if(tv){ tv.textContent=Math.round(this.total())+' units';
+          el.querySelector('.bar.tot i').style.width=(this.total()/(RECT[1].n*avgKE(TMAX))*100)+'%'; }
+};
+Cup.prototype.step=function(dt){
+  var r=RECT[this.size], R=5.5, me=this;
+  this.t+=dt;
+  this.ps.forEach(function(p){
+    if(p.hold>0) p.hold-=dt;
+    else if(Math.random()<0.006*dt){ p.f=rayleigh(); p.a=Math.random()*Math.PI*2; }   // a bump from a neighbor
+    var s=me.speed(p);
+    p.x+=Math.cos(p.a)*s*dt; p.y+=Math.sin(p.a)*s*dt;
+    if(p.x<r.x+R){p.x=r.x+R; p.a=Math.PI-p.a;}
+    if(p.x>r.x+r.w-R){p.x=r.x+r.w-R; p.a=Math.PI-p.a;}
+    if(p.y<r.y+R){p.y=r.y+R; p.a=-p.a;}
+    if(p.y>r.y+r.h-R){p.y=r.y+r.h-R; p.a=-p.a;}
+  });
+};
+Cup.prototype.draw=function(){
+  var c=this.ctx, r=RECT[this.size], me=this;
+  c.clearRect(0,0,W,H);
+  // liquid
+  c.fillStyle=this.hot?'#f7e6cf':'#e8eef3';
+  c.beginPath(); c.moveTo(r.x,r.y); c.lineTo(r.x,r.y+r.h-14); c.quadraticCurveTo(r.x,r.y+r.h,r.x+14,r.y+r.h);
+  c.lineTo(r.x+r.w-14,r.y+r.h); c.quadraticCurveTo(r.x+r.w,r.y+r.h,r.x+r.w,r.y+r.h-14); c.lineTo(r.x+r.w,r.y); c.closePath(); c.fill();
+  // glass
+  c.strokeStyle='#94a3b8'; c.lineWidth=3; c.lineJoin='round';
+  var g=6, top=r.y-22;
+  c.beginPath(); c.moveTo(r.x-g,top); c.lineTo(r.x-g,r.y+r.h-14+g); c.quadraticCurveTo(r.x-g,r.y+r.h+g,r.x+14-g,r.y+r.h+g);
+  c.lineTo(r.x+r.w-14+g,r.y+r.h+g); c.quadraticCurveTo(r.x+r.w+g,r.y+r.h+g,r.x+r.w+g,r.y+r.h-14+g); c.lineTo(r.x+r.w+g,top); c.stroke();
+  // surface line
+  c.strokeStyle='rgba(148,163,184,.6)'; c.lineWidth=1.5; c.beginPath(); c.moveTo(r.x,r.y); c.lineTo(r.x+r.w,r.y); c.stroke();
+  // steam when hot
+  if(this.T>=55){
+    var alpha=Math.min(1,(this.T-55)/30)*0.55;
+    c.strokeStyle='rgba(100,116,139,'+alpha+')'; c.lineWidth=2.5; c.lineCap='round';
+    for(var k=0;k<3;k++){
+      var sx=r.x+r.w*(0.3+0.2*k), ph=this.t*0.05+k*1.7;
+      c.beginPath();
+      for(var j=0;j<=10;j++){ var yy=r.y-30-j*3.4, xx=sx+Math.sin(ph+j*0.6)*5; if(yy<4) break; if(j===0)c.moveTo(xx,yy); else c.lineTo(xx,yy); }
+      c.stroke();
+    }
+  }
+  // particles
+  this.ps.forEach(function(p){
+    c.fillStyle=speedColor(me.speed(p));
+    c.beginPath(); c.arc(p.x,p.y,5.5,0,Math.PI*2); c.fill();
+  });
+  // highlight rings
+  this.mark.forEach(function(m){
+    if(m.time<=0) return;
+    var p=m.p; c.strokeStyle='#0f172a'; c.lineWidth=2.5;
+    c.beginPath(); c.arc(p.x,p.y,12,0,Math.PI*2); c.stroke();
+    c.font='700 13px InterG7, Segoe UI, sans-serif'; c.fillStyle='#0f172a'; c.textAlign='center';
+    var ly=p.y-18<14?p.y+28:p.y-18; c.fillText(m.label,p.x,ly);
+  });
+  // thermometer
+  var tx=364, t0=34, t1=292, bulbY=310;
+  c.fillStyle='#fff'; c.strokeStyle='#94a3b8'; c.lineWidth=2;
+  c.beginPath(); c.arc(tx+7,bulbY,13,0,Math.PI*2); c.fill(); c.stroke();
+  c.beginPath(); c.rect(tx,t0,14,t1-t0+6); c.fill(); c.stroke();
+  var fy=t1-(this.T+10)/110*(t1-t0);
+  c.fillStyle='#dc2626';
+  c.beginPath(); c.arc(tx+7,bulbY,10,0,Math.PI*2); c.fill();
+  c.fillRect(tx+3,fy,8,bulbY-fy);
+  c.font='600 11px InterG7, Segoe UI, sans-serif'; c.fillStyle='#5b6a7e'; c.textAlign='right';
+  [0,50,100].forEach(function(v){ var y=t1-(v+10)/110*(t1-t0); c.fillText(v,tx-5,y+4); c.fillRect(tx,y,4,1.5); });
+  c.textAlign='center'; c.fillText('°C',tx+7,22);
+};
+
+// ============ lab 1 ============
+var h1=new Cup(document.getElementById('c1h'),80,true,false);
+var i1=new Cup(document.getElementById('c1c'),5,false,false);
+var note1=document.getElementById('note1');
+function say1(){
+  var a=h1.T, b=i1.T;
+  if(Math.abs(a-b)<=1) note1.innerHTML='Same temperature means the same <strong>average</strong> particle speed. Look closely: individual particles in both cups still speed up and slow down as they bump into each other.';
+  else {
+    var warm=a>b?'hot tea':'iced tea', cool=a>b?'iced tea':'hot tea';
+    note1.innerHTML='The '+warm+' particles are moving faster <strong>on average</strong>, so the '+warm+' has more average kinetic energy and its thermometer reads higher. The '+cool+' particles are slower, but they never stop.';
+  }
+}
+h1.onchange=say1; i1.onchange=say1; say1();
+
+document.getElementById('spotBtn').addEventListener('click',function(){
+  if(Math.abs(h1.T-i1.T)<10){ note1.innerHTML='Set the two drinks at least 10 degrees apart first, then press <strong>Spot the surprise</strong> again.'; return; }
+  var warm=h1.T>i1.T?h1:i1, cool=warm===h1?i1:h1;
+  var fast=cool.ps.reduce(function(m,p){return p.f>m.f?p:m;});
+  var slow=warm.ps.reduce(function(m,p){return p.f<m.f?p:m;});
+  if(cool.speed(fast)<=warm.speed(slow)*1.25){        // make sure the surprise is visible
+    slow.f=0.18; fast.f=Math.min(2.6,warm.speed(slow)*1.5/baseSpeed(cool.T));
+  }
+  fast.hold=slow.hold=360;
+  cool.mark=[{p:fast,label:'fast!',time:360}]; warm.mark=[{p:slow,label:'slow!',time:360}];
+  var cn=cool===i1?'iced tea':'hot tea', wn=warm===h1?'hot tea':'iced tea';
+  note1.innerHTML='Look at the circled particles. This particle in the <strong>'+cn+'</strong> is moving faster than that particle in the <strong>'+wn+'</strong>. One particle does not decide the temperature. The thermometer measures the <strong>average</strong> of all of them.';
+});
+document.getElementById('sameBtn').addEventListener('click',function(){ h1.T=40; i1.T=40; h1.sync(); i1.sync(); say1(); });
+document.getElementById('resetBtn').addEventListener('click',function(){ h1.T=80; i1.T=5; h1.fill(); i1.fill(); h1.sync(); i1.sync(); say1(); });
+
+// ============ lab 2 ============
+var h2=new Cup(document.getElementById('c2h'),80,true,true);
+var i2=new Cup(document.getElementById('c2c'),5,false,true);
+var note2=document.getElementById('note2');
+var g1=document.getElementById('g1'), g2=document.getElementById('g2');
+function say2(){
+  var hotWarmer=h2.T>i2.T, same=Math.abs(h2.T-i2.T)<=1;
+  var ht=Math.round(h2.total()), it=Math.round(i2.total());
+  var tWin=same?'Both drinks have the same temperature':('The '+(hotWarmer?'hot tea':'iced tea')+' has the higher temperature');
+  var eWin=Math.abs(ht-it)<=1?'they have about the same total thermal energy':('the '+(ht>it?'hot tea':'iced tea')+' has more total thermal energy ('+Math.max(ht,it)+' vs '+Math.min(ht,it)+' units)');
+  note2.innerHTML=tWin+', and '+eWin+'.';
+  if(i2.T<h2.T && it>ht && !g1.classList.contains('done')){
+    g1.classList.add('done'); g1.querySelector('.tick').textContent='✓';
+    note2.innerHTML+=' <strong>Challenge 1 done.</strong> The iced tea is colder, but it has more particles, so its total is bigger.';
+  }
+  if(same && h2.size!==i2.size && !g2.classList.contains('done')){
+    g2.classList.add('done'); g2.querySelector('.tick').textContent='✓';
+    note2.innerHTML+=' <strong>Challenge 2 done.</strong> Same average, different amount of tea, different total.';
+  }
+}
+h2.onchange=say2; i2.onchange=say2; say2();
+
+// ============ animation ============
+var cups=[h1,i1,h2,i2], last=performance.now();
+function frame(now){
+  var dt=Math.min((now-last)/16.67,3); last=now;
+  cups.forEach(function(c){
+    if(!paused){ c.step(dt); c.mark.forEach(function(m){m.time-=dt;}); }
+    c.draw();
+  });
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+document.querySelectorAll('.pauseBtn').forEach(function(b){
+  b.addEventListener('click',function(){
+    paused=!paused;
+    document.querySelectorAll('.pauseBtn').forEach(function(o){o.textContent=paused?'Play':'Pause';});
+  });
+});
+if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  paused=true; document.querySelectorAll('.pauseBtn').forEach(function(o){o.textContent='Play';});
+}
+
+// ============ practice round ============
+(function(){
+  var PQ=[
+    {q:'Noah puts a thermometer in the school pool in the morning, and it reads 24°C. By the afternoon it reads 29°C. What changed about the water particles?',
+     o:['They became heavier.','They moved faster, on average.','More particles were added to the pool.','They changed into a new substance.'], c:1,
+     h:['Particles do not gain mass when they warm up. Think about what a thermometer reading tells you.','',
+        'Even if a little water were added, that would not raise the temperature. Temperature is about how the particles move.',
+        'It is still water. Warming is a physical change, not a chemical one.'],
+     y:'A higher temperature means more average kinetic energy. The sun added energy, so the particles sped up.'},
+    {q:'Two thermometers both read 60°C. One is in a mug of coffee, and one is in a bathtub of water. What must be the same in both?',
+     o:['The total thermal energy.','The number of particles.','The average kinetic energy of the particles.','The mass of the liquid.'], c:2,
+     h:['The bathtub has far more particles, so its total is much bigger. Total is not the same as average.',
+        'A bathtub holds much more water than a mug, so it has many more particles.','',
+        'The bathtub holds far more water, so it has much more mass.'],
+     y:'Same temperature means the same average kinetic energy. The bathtub still has much more thermal energy, because it has so many more particles.'},
+    {q:'Ava takes an ice pop out of the freezer at −18°C. Which statement about its particles is true?',
+     o:['They are moving, but slowly on average.','They are not moving at all.','They are moving faster than particles in warm water.','They have no energy because they are frozen.'], c:0,
+     h:['',
+        'Particles in a solid still vibrate in place. They only stop at absolute zero, about −273°C.',
+        'A lower temperature means a lower average speed, so these particles are slower than those in warm water.',
+        'Frozen particles still vibrate, so they still have kinetic energy.'],
+     y:'Particles in a solid still vibrate. Cold means slow on average, not stopped.'},
+    {q:'A bowl of noodles cools from 80°C to 40°C while it sits on the table. What happened to its particles?',
+     o:['They got smaller.','Half of them disappeared.','Their average kinetic energy increased.','Their average kinetic energy decreased.'], c:3,
+     h:['Particles do not shrink when they cool. Look at what the thermometer is telling you.',
+        'The noodles did not lose half their particles. The same particles are just moving differently.',
+        'The temperature went down, so the average kinetic energy must have gone down too.',
+        ''],
+     y:'Energy moved from the noodles into the cooler air, so the particles slowed down on average.'},
+    {q:'A cup of tea is at 90°C. A lake is at 15°C. Which statement is correct?',
+     o:['The tea has more thermal energy and a higher temperature.','They have the same thermal energy.','The lake has more thermal energy, but the tea has a higher temperature.','The lake has a higher temperature because it is bigger.'], c:2,
+     h:['The tea does have the higher temperature, but thermal energy is a total. Think about how many particles a lake has.',
+        'A lake has far more particles than a cup, so the totals are nowhere near the same.',
+        '',
+        'Size does not change temperature. The thermometer measures the average, not the total.'],
+     y:'Temperature is the average and thermal energy is the total. The lake has so many particles that its total is huge, even though each one moves more slowly.'}
+  ];
+  var box=document.getElementById('pqs'), score=document.getElementById('pscore');
+  var first=0, done=0;
+  PQ.forEach(function(item,n){
+    var d=document.createElement('div'); d.className='predict pq';
+    var html='<span class="label">Practice '+(n+1)+' of '+PQ.length+'</span><h3>'+item.q+'</h3><div class="opts">';
+    item.o.forEach(function(t,i){ html+='<button class="opt" type="button">'+'ABCD'[i]+'. '+t+'</button>'; });
+    d.innerHTML=html+'</div><div class="outcome"></div>';
+    var opts=d.querySelectorAll('.opt'), out=d.querySelector('.outcome'), tries=0, solved=false;
+    opts.forEach(function(b,i){
+      b.addEventListener('click',function(){
+        if(solved) return;
+        tries++;
+        if(i===item.c){
+          solved=true; done++; if(tries===1) first++;
+          b.classList.add('right');
+          out.innerHTML='<strong>Correct.</strong> '+item.y; out.classList.add('open','ok');
+          if(done===PQ.length) score.textContent='All five done. You got '+first+' of '+PQ.length+' right on the first try.';
+        } else {
+          b.classList.add('wrong');
+          out.innerHTML='<strong>Not quite.</strong> '+item.h[i]+' Try again.'; out.classList.add('open');
+        }
+      });
+    });
+    box.appendChild(d);
+  });
+})();
+
+// ============ check yourself ============
+(function(){
+  var QS=[
+    {q:'In the first lab, some iced tea particles were moving faster than some hot tea particles. So how can the hot tea still have the higher temperature?',
+     a:'Temperature measures the average kinetic energy of all the particles, not the speed of one particle. A few iced tea particles may be fast for a moment, but on average the hot tea particles move faster, so the hot tea has the higher temperature.'},
+    {q:'A bathtub of water is at 30°C. A mug of hot cocoa is at 70°C. Which has the higher temperature? Which has more thermal energy? Explain using particles.',
+     a:'The cocoa has the higher temperature, because its particles move faster on average. The bathtub has more thermal energy, because it has many more particles. Each one moves slower, but adding up the kinetic energy of all those particles gives a much bigger total.'},
+    {q:'Ethan says his iced tea has no thermal energy because it is cold. Use the labs to explain why he is wrong.',
+     a:'The particles in iced tea are still moving, just more slowly than in hot tea. Moving particles have kinetic energy, so the iced tea still has thermal energy. It has less per particle than hot tea, but it is not zero. Particles would only stop at absolute zero, about −273°C.'}
+  ];
+  var box=document.getElementById('qs');
+  QS.forEach(function(item,i){
+    var d=document.createElement('div');
+    d.style.cssText='border-radius:16px;padding:16px 20px;margin:12px 0;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.07)';
+    d.innerHTML='<p style="font-weight:600;margin:0 0 10px">'+(i+1)+'. '+item.q+'</p>'+
+      '<button type="button">Show answer</button>'+
+      '<div style="display:none;border-top:1px dashed var(--line-d);margin-top:11px;padding-top:11px"><p style="margin:0">'+item.a+'</p></div>';
+    var btn=d.querySelector('button'), ans=d.querySelector('div');
+    btn.addEventListener('click',function(){
+      var open=ans.style.display==='none';
+      ans.style.display=open?'block':'none';
+      btn.textContent=open?'Hide answer':'Show answer';
+    });
+    box.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
