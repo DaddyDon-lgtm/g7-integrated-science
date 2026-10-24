@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ready or Moving? | G7 Integrated Science</title>
+<style>@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Fredoka';src:url('../assets/fonts/fredoka-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'InterG7';src:url('../assets/fonts/inter-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+
+/* ---------------------------------------------------------------- base */
+:root{
+  --teal:#0d9488; --teal-d:#0f766e; --teal-l:#14b8a6; --teal-s:#ccfbf1; --teal-s2:#f0fdfa;
+  --amber:#f59e0b; --amber-s:#fffbeb; --amber-b:#fde68a; --amber-t:#b45309;
+  --green:#15803d; --green-s:#f0fdf4; --red:#b91c1c; --red-s:#fef2f2;
+  --ink:#0f172a; --muted:#5b6a7e; --line:#e2e8f0; --line-d:#cbd5e1;
+  --bg:#f1f5f9; --surface:#ffffff;
+  --solid:#2563eb; --liquid:#0d9488; --gas:#d97706;
+  --solid-t:#1d4ed8; --liquid-t:#0f766e; --gas-t:#b45309;
+  --shadow-s:0 1px 3px rgba(15,23,42,.07);
+  --shadow-m:0 2px 8px rgba(15,23,42,.07);
+  --shadow-l:0 4px 16px rgba(15,23,42,.08);
+  /* Aliases kept so older inline styles on any page still resolve. */
+  --border:#e2e8f0; --grey:#f8fafc; --teal-dark:#0f766e; --teal-soft:#f0fdfa;
+  --orange:#d97706; --orange-soft:#fffbeb; --orange-text:#b45309; --text:#0f172a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:16.5px;line-height:1.65;
+     color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--teal-d)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 70px}
+
+/* ---------------------------------------------------------------- chrome */
+.crumbs{background:var(--surface);font-size:13.5px;box-shadow:0 1px 2px rgba(15,23,42,.05);
+        position:relative;z-index:31}
+.crumbs .inner,.crumbs .wrap{max-width:860px;margin:0 auto;padding:12px 20px}
+.crumbs a{color:var(--teal-d);text-decoration:none;font-weight:600}
+.crumbs a:hover{text-decoration:underline}
+.crumbs .sep{color:var(--line-d);margin:0 8px}
+.crumbs .here{color:var(--muted)}
+
+/* Gradient stops are all dark enough that white text clears 4.5:1 anywhere along it. */
+header.top,.masthead{background:linear-gradient(135deg,#0a5f58 0%,#0f766e 55%,#12807a 100%);
+        color:#fff;padding:46px 20px 42px}
+header.top .inner,.masthead .wrap{max-width:860px;margin:0 auto;padding-bottom:0}
+/* The pill darkens the gradient rather than lightening it, so its white label
+   keeps enough contrast at the light end of the gradient too. */
+header.top .kicker,.masthead .course{display:inline-block;font-size:12px;font-weight:700;
+        letter-spacing:.09em;text-transform:uppercase;background:rgba(0,0,0,.20);
+        padding:5px 13px;border-radius:99px;margin:0 0 16px}
+header.top h1,.masthead h1{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:42px;line-height:1.1;
+        margin:0;letter-spacing:-.01em}
+header.top p.tag,.masthead p.tag{margin:12px 0 0;font-size:17.5px;opacity:.93}
+.masthead a{color:#fff}
+
+nav.jump{background:var(--surface);box-shadow:0 2px 8px rgba(15,23,42,.06);position:sticky;top:0;z-index:30}
+/* One row that scrolls sideways rather than wrapping: a wrapped bar would be
+   four rows tall on a phone, and this one is sticky. */
+nav.jump ul{max-width:860px;margin:0 auto;padding:10px 20px;list-style:none;
+        display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.jump li{flex:0 0 auto}
+nav.jump a{display:block;padding:8px 15px;font-size:14px;font-weight:600;color:var(--muted);
+        text-decoration:none;border-radius:99px;white-space:nowrap}
+nav.jump a:hover{background:var(--teal-s);color:var(--teal-d)}
+
+main{padding:8px 0 0}
+
+/* ---------------------------------------------------------------- type */
+h2{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:29px;font-weight:600;color:var(--ink);
+   margin:46px 0 12px;line-height:1.22;scroll-margin-top:96px}
+h3{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:21px;font-weight:600;color:var(--ink);margin:30px 0 10px}
+h4{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:17.5px;font-weight:600;margin:20px 0 6px}
+p{margin:13px 0}
+ul,ol{margin:13px 0;padding-left:26px}
+li{margin:5px 0}
+.lede{font-size:18.5px;color:var(--muted);margin:20px 0 4px}
+code{background:#f8fafc;border:1px solid var(--line);padding:1px 6px;border-radius:5px;
+     font-family:Consolas,Monaco,monospace;font-size:.92em}
+strong{font-weight:700}
+
+/* ---------------------------------------------------------------- boxes */
+.box,.note{border-radius:16px;padding:20px 24px;margin:24px 0;border:1px solid var(--amber-b);
+     background:var(--amber-s)}
+.box p:first-child,.note p:first-child{margin-top:0}
+.box p:last-child,.note p:last-child{margin-bottom:0}
+.box .label,.note .label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+     text-transform:uppercase;color:var(--amber-t);margin-bottom:8px}
+.box.key{background:var(--teal-s2);border-color:#99f6e4}
+.box.key .label{color:var(--teal-d)}
+.box.good{background:var(--green-s);border-color:#bbf7d0}
+.box.good .label{color:var(--green)}
+.pending{background:var(--surface);border:2px dashed var(--line-d);border-radius:16px;
+     padding:28px 20px;text-align:center;color:var(--muted);margin:22px 0}
+.pending strong{display:block;color:var(--ink);margin-bottom:4px;font-size:17px}
+
+/* ---------------------------------------------------------------- table */
+table{border-collapse:separate;border-spacing:0;width:100%;margin:26px 0;font-size:16px;
+      background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-s)}
+th,td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+thead th{background:#f8fafc;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+         color:var(--muted);font-weight:700}
+.term{font-weight:700;color:var(--teal-d)}
+
+/* ---------------------------------------------------------------- cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0}
+.card{display:block;background:var(--surface);border-radius:18px;padding:20px 22px;
+      text-decoration:none;color:inherit;box-shadow:var(--shadow-m);
+      border-top:4px solid var(--teal);transition:box-shadow .15s,transform .15s}
+a.card:hover{box-shadow:0 8px 22px rgba(15,23,42,.12);transform:translateY(-2px)}
+.card .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--teal-d);margin:0 0 5px}
+.card .title{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;margin:0 0 7px;line-height:1.25}
+.card .desc{font-size:15px;color:var(--muted);margin:0}
+.card.empty{border-top-color:var(--line-d);opacity:.75}
+.card.empty .kicker{color:var(--muted)}
+
+.resource{display:flex;justify-content:space-between;align-items:center;gap:18px;
+      background:var(--surface);border-radius:16px;padding:18px 22px;margin:12px 0;
+      text-decoration:none;color:inherit;box-shadow:var(--shadow-m)}
+a.resource:hover{box-shadow:0 6px 18px rgba(15,23,42,.11);transform:translateY(-1px)}
+.resource .title{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:19px;color:var(--ink);margin:0 0 3px}
+.resource .desc{font-size:15px;color:var(--muted);margin:0}
+.resource .go{color:var(--teal-d);font-weight:700;font-size:15px;white-space:nowrap}
+
+/* ---------------------------------------------------------------- widget */
+.widget{background:var(--surface);border-radius:20px;padding:26px 28px;margin:28px 0;
+        box-shadow:var(--shadow-l)}
+.widget > h3{margin-top:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.widget .tryit{font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+        text-transform:uppercase;color:var(--amber-t);background:#fef3c7;padding:5px 11px;border-radius:99px}
+svg,canvas{display:block;max-width:100%}
+canvas{border-radius:14px}
+/* Two-pane lab layout: particles beside the graph, stacked on a phone. */
+.labgrid{display:grid;grid-template-columns:minmax(220px,1fr) minmax(260px,1.25fr);
+         gap:18px;align-items:start}
+@media (max-width:680px){.labgrid{grid-template-columns:1fr}}
+/* Any table too wide for the screen scrolls sideways instead of pushing the page. */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll > table{margin-top:0;margin-bottom:0;min-width:520px}
+.tscroll{margin:26px 0}
+
+.ctrls{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0 4px;align-items:flex-end}
+.ctrl{flex:1 1 240px}
+.ctrl label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+        text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ctrl .val{color:var(--teal-d);font-size:15px;letter-spacing:0}
+input[type=range]{width:100%;accent-color:var(--teal);height:28px;cursor:pointer}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 0}
+button{font-family:InterG7,'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;border-radius:99px;
+       padding:10px 20px;border:0;background:#f1f5f9;color:var(--ink);transition:background .12s}
+button:hover{background:var(--teal-s);color:var(--teal-d)}
+button.primary{background:var(--teal-d);color:#fff;box-shadow:0 3px 10px rgba(15,118,110,.35)}
+button.primary:hover{background:#0a5f58;color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,a:focus-visible,textarea:focus-visible,
+select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+.readouts{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+.ro{flex:1 1 140px;background:#f8fafc;border-radius:14px;padding:14px 16px;text-align:center}
+.ro .k{display:block;font-size:11.5px;font-weight:700;letter-spacing:.07em;
+       text-transform:uppercase;color:var(--muted)}
+.ro .v{display:block;font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:26px;font-weight:600;color:var(--teal-d);line-height:1.3}
+.commentary{margin:16px 0 0;padding:14px 18px;background:var(--teal-s2);border-radius:14px;
+       border:1px solid #99f6e4;font-size:16px}
+
+/* ---------------------------------------------------------------- predict gate */
+.predict{background:var(--amber-s);border:1px solid var(--amber-b);border-radius:20px;
+       padding:22px 26px;margin:28px 0}
+.predict .label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+       text-transform:uppercase;color:var(--amber-t);margin-bottom:6px}
+.predict h3{margin:0 0 10px;color:var(--ink)}
+.predict .opts{display:flex;flex-direction:column;gap:9px;margin:14px 0 0}
+.predict .opt{display:block;width:100%;text-align:left;border:2px solid transparent;
+       background:var(--surface);border-radius:14px;padding:13px 16px;font-size:16.5px;
+       font-weight:500;color:var(--ink);cursor:pointer;box-shadow:var(--shadow-s)}
+.predict .opt:hover{border-color:var(--amber);background:var(--surface);color:var(--ink)}
+.predict .opt.picked{border-color:var(--teal);background:var(--teal-s2);font-weight:700;color:var(--ink)}
+.predict .outcome{display:none;margin:16px 0 0;padding:14px 18px;background:var(--surface);
+       border-radius:14px;box-shadow:var(--shadow-s);font-size:16.5px}
+.predict .outcome.open{display:block}
+.locked{filter:blur(5px);pointer-events:none;user-select:none;opacity:.55}
+
+/* ---------------------------------------------------------------- games */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+.chip{border:2px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 17px;
+      font-size:16px;cursor:pointer;font-family:inherit;color:var(--ink);font-weight:500;
+      box-shadow:var(--shadow-s)}
+.chip:hover{border-color:var(--teal);background:var(--surface);color:var(--ink)}
+.chip.sel{border-color:var(--teal);background:var(--teal-s);font-weight:700;color:var(--teal-d)}
+.chip.done{opacity:.35;cursor:default;text-decoration:line-through;box-shadow:none}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.bin{border:3px dashed var(--line-d);border-radius:18px;padding:14px;min-height:130px;
+     background:var(--surface);cursor:pointer}
+.bin:hover{border-color:var(--teal)}
+.bin h4{margin:0 0 10px;text-align:center;font-size:15px;letter-spacing:.07em;text-transform:uppercase}
+.bin.s h4{color:var(--solid-t)} .bin.l h4{color:var(--liquid-t)} .bin.g h4{color:var(--gas-t)}
+.bin.s{border-color:var(--solid)} .bin.l{border-color:var(--liquid)} .bin.g{border-color:var(--gas)}
+.bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.bin .it{font-size:14.5px;padding:5px 12px;border-radius:99px;background:#f1f5f9}
+.bin .it.ok{background:#dcfce7;color:var(--green);font-weight:700}
+.bin .it.no{background:#fee2e2;color:var(--red);font-weight:700}
+
+/* ---------------------------------------------------------------- CER */
+textarea{font-family:inherit;font-size:16.5px;line-height:1.6;width:100%;min-height:120px;
+       padding:13px 15px;border:2px solid var(--line);border-radius:14px;resize:vertical;
+       background:var(--surface);color:var(--ink)}
+textarea:focus{border-color:var(--teal)}
+.field-row{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 16px}
+.field-row label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+       text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.field-row input{font-family:inherit;font-size:16.5px;padding:10px 13px;border:2px solid var(--line);
+       border-radius:12px;width:100%;background:var(--surface);color:var(--ink)}
+.field-row input:focus{border-color:var(--teal)}
+.levels{display:flex;gap:7px;margin:12px 0 0;flex-wrap:wrap}
+.lvbtn{font-size:14px;padding:7px 14px;border-radius:99px;border:2px solid var(--line);
+       background:var(--surface);color:var(--muted);cursor:pointer;font-weight:600}
+.lvbtn.on{border-color:var(--teal);background:var(--teal-s);color:var(--teal-d)}
+.frames{margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+/* Scoped to .frames on purpose: the study guide uses td.frame for a table cell. */
+.frames button.frame{text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:12px;
+       padding:10px 14px;font-size:15.5px;cursor:pointer;font-family:inherit;color:var(--ink);
+       font-weight:400;box-shadow:none}
+.frames button.frame:hover{border-color:var(--teal);background:var(--surface);color:var(--ink)}
+.checks{margin:14px 0 0;display:flex;flex-direction:column;gap:6px;font-size:15.5px}
+.checks .c{display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+.checks .c .m{font-weight:700;width:18px;flex:0 0 18px;text-align:center}
+.checks .c.pass{color:var(--green)}
+.checks .c.warn{color:var(--amber-t)}
+.selfcheck{margin:14px 0 0}
+.selfcheck label{display:flex;gap:10px;align-items:flex-start;font-size:16px;margin:8px 0;cursor:pointer}
+.selfcheck input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;flex:0 0 19px;cursor:pointer}
+
+/* ---------------------------------------------------------------- misc */
+details{border:1px solid var(--line);border-radius:16px;padding:14px 20px;margin:20px 0;
+        background:var(--surface);box-shadow:var(--shadow-s)}
+details summary{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--teal-d);cursor:pointer;font-size:17px}
+details[open] summary{margin-bottom:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+figure{margin:26px 0}
+figure img{max-width:100%;height:auto;display:block;border-radius:16px;background:#fff;
+       box-shadow:var(--shadow-m)}
+figure.plain img{box-shadow:none}
+figcaption{font-size:15px;color:var(--muted);margin-top:10px;line-height:1.5}
+figure.half{max-width:460px}
+figure.center{margin-left:auto;margin-right:auto}
+.hero{margin:0 0 26px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-m)}
+.hero img{display:block;width:100%;height:auto}
+.img-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:24px 0}
+.img-row figure{margin:0}
+
+footer{margin-top:54px;padding:24px 0 30px;border-top:1px solid var(--line);
+       font-size:15px;color:var(--muted)}
+footer p{margin:4px 0}
+body > footer{background:var(--surface);margin-top:54px;padding:24px 0 30px}
+body > footer .wrap{padding-bottom:0}
+
+.pagenav{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 0}
+.pagenav a{flex:1 1 220px;background:var(--surface);border-radius:16px;padding:16px 20px;
+       text-decoration:none;color:inherit;box-shadow:var(--shadow-m)}
+.pagenav a:hover{box-shadow:0 6px 18px rgba(15,23,42,.11)}
+.pagenav .dir{display:block;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+       text-transform:uppercase;color:var(--muted)}
+.pagenav .t{display:block;font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--teal-d);margin-top:3px}
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width:700px){
+  body{font-size:16px}
+  header.top,.masthead{padding:34px 20px 30px}
+  header.top h1,.masthead h1{font-size:30px}
+  h2{font-size:24px}
+  nav.jump a{padding:7px 12px;font-size:13.5px}
+  .widget{padding:20px 18px;border-radius:16px}
+  .ro .v{font-size:22px}
+  .resource{flex-direction:column;align-items:flex-start;gap:8px}
+  th,td{padding:11px 13px}
+}
+
+/* ---------------------------------------------------------------- print */
+@media print{
+  body{background:#fff;font-size:11pt;color:#000}
+  nav.jump,.crumbs,button,.btnrow,input[type=range],.pagenav,.levels,.frames{display:none!important}
+  .tscroll{overflow:visible!important}
+  .tscroll > table{min-width:0!important}
+  .labgrid{grid-template-columns:1fr}
+  header.top,.masthead{background:#fff!important;color:var(--teal-d)!important;padding:0 0 10px}
+  header.top .kicker,.masthead .course{background:none;color:var(--amber-t);padding:0}
+  .widget,.box,.note,table,details,.resource,.card,figure,.hero,.img-row{
+    break-inside:avoid;page-break-inside:avoid;box-shadow:none!important}
+  .locked{filter:none;opacity:1}
+  .predict .outcome{display:block!important}
+  h2,h3{break-after:avoid}
+  @page{size:A4;margin:15mm}
+}
+
+/* ---------------------------------------------------------------- tea lab */
+.cups{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
+.cup{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px}
+.cup h4{margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cup h4 .temp{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:24px;font-weight:600}
+.cup.hot h4 .temp{color:var(--red)} .cup.cold h4 .temp{color:var(--solid-t)}
+.cup canvas{width:100%;height:auto;display:block;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.meter{margin:12px 0 0}
+.meter .k{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meter .k b{color:var(--ink);letter-spacing:0;font-size:13.5px}
+.bar{height:14px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal);border-radius:99px;transition:width .25s}
+.bar.tot i{background:var(--amber)}
+.sizes{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap}
+.sizes button{flex:1 1 auto;padding:7px 12px;font-size:13.5px}
+.speedkey{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:13.5px;color:var(--muted);margin:14px 0 0}
+.speedkey span{display:inline-flex;align-items:center;gap:6px}
+.speedkey i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.goals{display:flex;flex-direction:column;gap:10px;margin:18px 0 0}
+.goal{display:flex;gap:12px;align-items:flex-start;background:#f8fafc;border-radius:14px;padding:12px 16px;border:2px solid transparent}
+.goal .tick{flex:0 0 26px;height:26px;border-radius:50%;background:var(--line);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.goal.done{border-color:#bbf7d0;background:var(--green-s)}
+.goal.done .tick{background:var(--green)}
+.goal p{margin:0}
+.pq .opt.right{border-color:var(--green);background:var(--green-s);font-weight:700;color:var(--ink)}
+.pq .opt.wrong{border-color:var(--red);background:var(--red-s);color:var(--ink)}
+.pq .outcome.ok{border-left:0;background:var(--green-s)}
+.pscore{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;color:var(--teal-d);margin:6px 0 0}
+@media (max-width:680px){.cups{grid-template-columns:1fr}}
+
+/* ---------------------------------------------------------------- lesson 1 */
+:root{--ke:#2563eb;--ke-t:#1d4ed8;--pe:#ea580c;--pe-t:#c2410c}
+.scenebox svg,.mini svg{width:100%;height:auto;border-radius:14px;background:#e0f2fe}
+.chips.ans-row{margin:18px 0 8px}
+button.ans{border:2px solid var(--line);background:#fff;border-radius:99px;padding:11px 20px;font-size:15.5px}
+button.ans.k{border-color:#93c5fd;color:var(--ke-t)}
+button.ans.p{border-color:#fdba74;color:var(--pe-t)}
+button.ans:hover{background:#f8fafc}
+button.ans.bad{background:var(--red-s);border-color:#fca5a5;color:var(--red);opacity:.7}
+button.ans.good{background:var(--green-s);border-color:#86efac;color:var(--green)}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;border-radius:14px;border:2px solid var(--line);background:#fff;padding:12px 16px;font-size:16px;border-radius:14px}
+.opt.bad{background:var(--red-s);border-color:#fca5a5;color:var(--red);opacity:.75}
+.opt.good{background:var(--green-s);border-color:#86efac;color:var(--green)}
+.qbox{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+.qbox .qt{font-weight:700;margin:0 0 6px}
+.fb{min-height:1.5em;margin:8px 0 0;font-size:15.5px}
+.fb.ok{color:var(--green)} .fb.no{color:var(--red)}
+.barrow{display:flex;align-items:center;gap:12px;margin:10px 0}
+.barrow .lab{flex:0 0 150px;font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.barrow.pe .lab{color:var(--pe-t)} .barrow.ke .lab{color:var(--ke-t)}
+.bar{flex:1;height:20px;border-radius:99px;background:#f1f5f9;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px}
+.barrow.pe .bar i{background:var(--pe)} .barrow.ke .bar i{background:var(--ke)}
+#hill{touch-action:none;cursor:grab}
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:18px 0}
+.mini{background:#f8fafc;border-radius:16px;padding:12px}
+.mini h4{margin:10px 0 4px;font-size:16.5px}
+.mini .btnrow{margin:10px 0 8px}
+.mini .cap{font-size:14.5px;color:var(--muted);margin:6px 0 0;min-height:2.6em}
+.hint{font-size:14.5px;color:var(--muted)}
+.finish{text-align:center}
+.finish .big{font-family:Fredoka,'Trebuchet MS','Segoe UI',system-ui,sans-serif;font-size:34px;font-weight:700;color:var(--teal-d);margin:6px 0}
+.dots{display:flex;gap:6px;margin:6px 0 2px}
+.dots span{width:10px;height:10px;border-radius:50%;background:var(--line-d)}
+.dots span.on{background:var(--teal)}
+button.ans.good:disabled,.opt.good:disabled{opacity:1}
+button.ans:disabled:not(.bad):not(.good),.opt:disabled:not(.bad):not(.good){opacity:.55}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation-duration:.01s!important}}
+</style>
+</head>
+<body>
+
+<div class="crumbs">
+  <div class="inner">
+    <a href="../index.html">G7 Integrated Science</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="index.html">Unit 2</a>
+    <span class="sep">&rsaquo;</span>
+    <span class="here">Ready or Moving?</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="inner">
+    <p class="kicker">Unit 2 &bull; Energy &bull; Lesson 1</p>
+    <h1>Ready or Moving?</h1>
+    <p class="tag">Some things move. Some things are ready to move. Can you tell which is which?</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <ul>
+    <li><a href="#p1">Freeze Frame</a></li>
+    <li><a href="#p2">Let Go!</a></li>
+    <li><a href="#p3">Needs a Partner</a></li>
+    <li><a href="#p4">Energy Check</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<p class="lede">Energy is the ability to cause change. Kinetic energy is the energy of motion. Potential energy is stored energy. Four short parts, about 10 minutes.</p>
+<div class="btnrow"><button class="primary" id="startbtn">Start</button></div>
+
+<h2 id="p1">Freeze Frame</h2>
+<p>Look at the picture. Pick one.</p>
+<div class="widget" id="ff"></div>
+
+<h2 id="p2">Let Go!</h2>
+<p>Drag the coaster car up the hill, or use the slider. Then let go.</p>
+<div class="widget">
+  <h3>Coaster Hill <span class="tryit">Try it</span></h3>
+  <div class="scenebox">
+    <svg id="hill" viewBox="0 0 340 200" role="img" aria-label="A coaster car on a curved hill. Drag it up or down.">
+      <rect width="340" height="200" fill="#e0f2fe"/>
+      <path d="M30 40 Q30 170 140 170 L322 170 L322 200 L30 200 Z" fill="#cbd5e1"/>
+      <path d="M30 40 Q30 170 140 170 L322 170" fill="none" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+      <rect x="318" y="140" width="8" height="32" rx="2" fill="#64748b"/>
+      <g id="car"><rect x="-15" y="-19" width="30" height="13" rx="4" fill="#ef4444"/><rect x="-9" y="-26" width="18" height="9" rx="3" fill="#fca5a5"/><circle cx="-8" cy="-6" r="5" fill="#1e293b"/><circle cx="8" cy="-6" r="5" fill="#1e293b"/></g>
+    </svg>
+  </div>
+  <div class="ctrls">
+    <div class="ctrl"><label for="hgt">Starting height</label>
+      <input type="range" id="hgt" min="10" max="100" value="70"></div>
+  </div>
+  <div class="barrow pe"><span class="lab">Potential (stored)</span><span class="bar"><i id="peBar"></i></span></div>
+  <div class="barrow ke"><span class="lab">Kinetic (moving)</span><span class="bar"><i id="keBar"></i></span></div>
+  <div class="commentary" id="hillMsg" aria-live="polite">Stored, not moving.</div>
+  <div class="btnrow"><button class="primary" id="relBtn">Let go!</button><button id="rstBtn">Reset</button></div>
+  <p class="hint">This model has no friction, to keep it simple.</p>
+  <div id="p2q"></div>
+</div>
+
+<h2 id="p3">Stored Energy Needs a Partner</h2>
+<p>Try the switch. What happens?</p>
+<div class="widget">
+  <div class="cols3" id="partners"></div>
+  <div class="box key"><span class="label">Remember</span><p><strong>Stored energy needs a partner.</strong> It lives between objects.</p></div>
+  <div id="p3q"></div>
+</div>
+
+<h2 id="p4">Energy Check</h2>
+<div class="widget" id="p4w"><div id="p4q"></div></div>
+
+<div class="widget finish" id="finish" hidden>
+  <p class="kicker" style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-d);margin:0">Energy Detective</p>
+  <p class="big" id="scoreBig"></p>
+  <p id="scoreTxt"></p>
+  <div class="btnrow" style="justify-content:center"><button id="againBtn" class="primary">Try again</button><button onclick="location.href='index.html'">Back to Unit 2</button></div>
+</div>
+
+<div class="pagenav">
+  <a href="index.html"><span class="dir">&larr; Back</span><span class="t">Unit 2: Energy</span></a>
+  <a href="../index.html"><span class="dir">Home &rarr;</span><span class="t">G7 Integrated Science</span></a>
+</div>
+
+<footer>
+  <p>Grade 7 Integrated Science, Unit 2: Energy. Introduces MS-PS3-1 and MS-PS3-2.</p>
+  <p>Don West, Science Teacher. Questions? Ask in class or message me on Canvas.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var NS='http://www.w3.org/2000/svg';
+
+/* ---------- shared helpers ---------- */
+function scrollTo(id){var el=$(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+
+/* Moves every [data-go] element in an svg to its "go" state, or back. */
+function setState(svg,on){
+  var els=svg.querySelectorAll('[data-go]');
+  for(var i=0;i<els.length;i++){
+    var el=els[i], p=el.getAttribute('data-go').split(',');
+    var dx=+p[0]||0, dy=+p[1]||0, rot=+p[2]||0, op=(p[3]===undefined?1:+p[3]);
+    var dur=el.getAttribute('data-dur')||'1.4', ease=el.getAttribute('data-ease')||'ease-in-out';
+    el.style.transformBox='fill-box'; el.style.transformOrigin='center';
+    el.style.transition='transform '+dur+'s '+ease+', opacity '+dur+'s';
+    el.style.transform=on?'translate('+dx+'px,'+dy+'px) rotate('+rot+'deg)':'none';
+    el.style.opacity=on?op:1;
+  }
+  var h=svg.querySelectorAll('[data-hide-on-go]');
+  for(i=0;i<h.length;i++)h[i].style.display=on?'none':'';
+  var s=svg.querySelectorAll('[data-show-on-go]');
+  for(i=0;i<s.length;i++)s[i].style.display=on?'':'none';
+}
+function hideShowInit(svg){
+  var s=svg.querySelectorAll('[data-show-on-go]');
+  for(var i=0;i<s.length;i++)s[i].style.display='none';
+}
+
+/* Multiple-choice question. Fixed option order. onDone(firstTry). */
+function mcq(host,q,onDone){
+  var box=document.createElement('div');box.className='qbox';
+  var p=document.createElement('p');p.className='qt';p.textContent=q.q;box.appendChild(p);
+  var fb=document.createElement('div');fb.className='fb';fb.setAttribute('aria-live','polite');
+  var wrong=false,btns=[];
+  q.o.forEach(function(t,i){
+    var b=document.createElement('button');b.className='opt';b.type='button';
+    b.textContent='ABCD'.charAt(i)+'. '+t;
+    b.addEventListener('click',function(){
+      if(i===q.c){
+        b.classList.add('good');
+        btns.forEach(function(x){x.disabled=true});
+        fb.className='fb ok';fb.textContent='Correct! '+q.e;
+        if(onDone)onDone(!wrong);
+      }else{
+        wrong=true;b.classList.add('bad');b.disabled=true;
+        fb.className='fb no';fb.textContent='Not quite. Read it again and try another answer.';
+      }
+    });
+    btns.push(b);box.appendChild(b);
+  });
+  box.appendChild(fb);host.appendChild(box);
+}
+
+/* ---------- scene art (viewBox 0 0 320 190) ---------- */
+function sky(extra){return '<rect width="320" height="190" fill="#e0f2fe"/>'+(extra||'')}
+var grass='<rect y="150" width="320" height="40" fill="#86efac"/>';
+var SCENES=[
+ {name:'A stretched rubber band on a slingshot, with a ball ready to fly',ans:'p',btn:'Let go!',
+  fb:'It is not moving, but it stores energy. Let go and it flies.',
+  svg:sky()+grass+
+   '<path d="M200 160 L200 112 L178 68 M200 112 L224 68" fill="none" stroke="#92400e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>'+
+   '<polyline data-hide-on-go points="178,68 124,96 224,68" fill="none" stroke="#dc2626" stroke-width="4"/>'+
+   '<path data-show-on-go d="M178 68 Q201 82 224 68" fill="none" stroke="#dc2626" stroke-width="4"/>'+
+   '<circle data-go="170,-34,0,0" data-dur="1.2" data-ease="ease-in" cx="121" cy="97" r="10" fill="#475569"/>'},
+ {name:'A soccer ball rolling across the grass',ans:'k',btn:'Watch it go!',
+  fb:'It is moving, so it has kinetic energy.',
+  svg:sky()+grass+
+   '<line x1="40" y1="128" x2="70" y2="128" stroke="#64748b" stroke-width="3" stroke-linecap="round"/><line x1="30" y1="140" x2="66" y2="140" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>'+
+   '<g data-go="160,0,360" data-dur="1.6"><circle cx="110" cy="128" r="22" fill="#fff" stroke="#1e293b" stroke-width="3"/><polygon points="110,116 121,124 117,137 103,137 99,124" fill="#1e293b"/></g>'},
+ {name:'A boba tea cup at the edge of a table',ans:'p',btn:'Nudge it!',
+  fb:'It is high up and ready to fall. Careful!',
+  svg:sky()+'<rect y="170" width="320" height="20" fill="#e2e8f0"/>'+
+   '<rect x="40" y="118" width="172" height="12" rx="3" fill="#a16207"/><rect x="58" y="130" width="10" height="42" fill="#854d0e"/><rect x="184" y="130" width="10" height="42" fill="#854d0e"/>'+
+   '<g data-go="52,50,85" data-dur="1.1" data-ease="ease-in"><polygon points="170,66 206,66 201,118 175,118" fill="#fde68a" stroke="#a16207" stroke-width="2"/><line x1="192" y1="40" x2="186" y2="66" stroke="#dc2626" stroke-width="4"/><circle cx="182" cy="108" r="4" fill="#422006"/><circle cx="192" cy="110" r="4" fill="#422006"/><circle cx="187" cy="100" r="4" fill="#422006"/><circle cx="196" cy="100" r="4" fill="#422006"/></g>'},
+ {name:'A person on a scooter speeding down the street',ans:'k',btn:'Watch it go!',
+  fb:'Fast motion means lots of kinetic energy.',
+  svg:sky()+'<rect y="150" width="320" height="40" fill="#94a3b8"/>'+
+   '<line x1="30" y1="95" x2="70" y2="95" stroke="#64748b" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="110" x2="62" y2="110" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>'+
+   '<g data-go="130,0,0" data-dur="1.4" data-ease="ease-in"><circle cx="112" cy="146" r="11" fill="#1e293b"/><circle cx="176" cy="146" r="11" fill="#1e293b"/><rect x="110" y="134" width="68" height="7" rx="3" fill="#0d9488"/><line x1="176" y1="136" x2="184" y2="78" stroke="#475569" stroke-width="5" stroke-linecap="round"/><line x1="176" y1="78" x2="196" y2="78" stroke="#475569" stroke-width="5" stroke-linecap="round"/><circle cx="150" cy="50" r="10" fill="#fcd34d"/><line x1="150" y1="60" x2="146" y2="104" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/><line x1="146" y1="104" x2="136" y2="134" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/><line x1="149" y1="72" x2="182" y2="78" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/></g>'},
+ {name:'Two magnets held apart, pulling toward each other',ans:'p',btn:'Let go!',
+  fb:'Energy is stored in how the magnets are arranged.',
+  svg:sky()+'<rect y="150" width="320" height="40" fill="#e2e8f0"/>'+
+   '<g data-go="28,0,0"><rect x="52" y="88" width="40" height="36" fill="#dc2626"/><rect x="92" y="88" width="40" height="36" fill="#2563eb"/><text x="72" y="113" font-size="18" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">N</text><text x="112" y="113" font-size="18" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">S</text></g>'+
+   '<g data-go="-28,0,0"><rect x="188" y="88" width="40" height="36" fill="#dc2626"/><rect x="228" y="88" width="40" height="36" fill="#2563eb"/><text x="208" y="113" font-size="18" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">N</text><text x="248" y="113" font-size="18" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">S</text></g>'+
+   '<g data-hide-on-go stroke="#ea580c" stroke-width="3" stroke-dasharray="6 5"><line x1="138" y1="106" x2="162" y2="106"/><line x1="182" y1="106" x2="158" y2="106"/></g>'},
+ {name:'A gondola cabin parked at the top station of a mountain',ans:'p',btn:'Ride down!',
+  fb:'It is high up, so it has stored energy.',
+  svg:sky()+'<path d="M0 190 L0 82 L58 78 L300 168 L320 168 L320 190 Z" fill="#86efac"/>'+
+   '<rect x="38" y="46" width="42" height="32" rx="3" fill="#92400e"/><rect x="264" y="136" width="44" height="32" rx="3" fill="#92400e"/>'+
+   '<line x1="78" y1="58" x2="268" y2="140" stroke="#334155" stroke-width="3"/>'+
+   '<g data-go="150,64,0" data-dur="1.8" data-ease="ease-in"><line x1="96" y1="66" x2="96" y2="76" stroke="#334155" stroke-width="3"/><rect x="82" y="76" width="28" height="20" rx="4" fill="#ef4444"/><rect x="87" y="81" width="8" height="8" fill="#fff"/><rect x="98" y="81" width="8" height="8" fill="#fff"/></g>'},
+ {name:'A skateboarder at the top of a ramp, about to roll down',ans:'b',btn:'Watch it go!',
+  fb:'Moving: kinetic. Still up high: potential. Both at once.',
+  svg:sky()+'<path d="M30 40 Q30 160 150 160 L320 160 L320 190 L30 190 Z" fill="#cbd5e1" stroke="#64748b" stroke-width="3"/>'+
+   '<g data-go="190,0,0" data-dur="1.6" data-ease="ease-in"><g data-go="0,112,0" data-dur="1.6" data-ease="ease-out"><circle cx="52" cy="2" r="9" fill="#fcd34d"/><line x1="52" y1="11" x2="52" y2="32" stroke="#ea580c" stroke-width="8" stroke-linecap="round"/><line x1="52" y1="32" x2="50" y2="44" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/><rect x="38" y="44" width="30" height="5" rx="2" fill="#0d9488"/><circle cx="44" cy="52" r="3.5" fill="#1e293b"/><circle cx="62" cy="52" r="3.5" fill="#1e293b"/></g></g>'},
+ {name:'A paper airplane gliding across a room',ans:'b',btn:'Watch it go!',
+  fb:'It moves and it is high up. Both kinds at once.',
+  svg:sky()+'<rect y="150" width="320" height="40" fill="#e2e8f0"/><rect x="226" y="20" width="62" height="58" rx="4" fill="#bae6fd" stroke="#94a3b8" stroke-width="3"/>'+
+   '<g data-go="170,56,8" data-dur="2" data-ease="ease-in-out"><polygon points="50,52 128,38 74,66" fill="#fff" stroke="#64748b" stroke-width="2"/><polygon points="74,66 128,38 80,74" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/></g>'}
+];
+var LABEL={k:'Moving (kinetic)',p:'Ready to move (potential)',b:'Both'};
+
+/* ---------- Part 1: Freeze Frame ---------- */
+var ffHost=$('ff'), ffI=0, ffFirst=[], ffDone=false, ffOn=false;
+function ffRender(){
+  var s=SCENES[ffI]; ffOn=false;
+  var dots='';for(var d=0;d<SCENES.length;d++)dots+='<span'+(d<=ffI?' class="on"':'')+'></span>';
+  ffHost.innerHTML='<h3>Scene '+(ffI+1)+' of '+SCENES.length+'</h3><div class="dots" aria-hidden="true">'+dots+'</div>'+
+   '<div class="scenebox"><svg viewBox="0 0 320 190" role="img" aria-label="'+s.name+'" id="ffsvg">'+s.svg+'</svg></div>'+
+   '<div class="chips ans-row" id="ffChoices"></div>'+
+   '<div class="commentary" id="ffFb" aria-live="polite">What kind of energy does it have?</div>'+
+   '<div class="btnrow"><button id="ffGo" type="button" hidden>'+s.btn+'</button><button id="ffNext" class="primary" type="button" hidden>'+(ffI===SCENES.length-1?'Go to Part 2':'Next')+'</button></div>';
+  var svg=$('ffsvg');hideShowInit(svg);setState(svg,false);
+  var row=$('ffChoices'),wrong=false;
+  ['k','p','b'].forEach(function(key){
+    var b=document.createElement('button');b.type='button';b.className='ans '+key;b.textContent=LABEL[key];
+    b.addEventListener('click',function(){
+      if(key===s.ans){
+        b.classList.add('good');
+        Array.prototype.forEach.call(row.children,function(x){x.disabled=true});
+        $('ffFb').innerHTML='<strong>Correct!</strong> '+s.fb;
+        if(ffFirst.length===ffI)ffFirst.push(!wrong);
+        $('ffGo').hidden=false;$('ffNext').hidden=false;
+      }else{
+        wrong=true;b.classList.add('bad');b.disabled=true;
+        $('ffFb').textContent='Not quite. Is it moving right now? Could it fall, snap, or pull?';
+      }
+    });
+    row.appendChild(b);
+  });
+  $('ffGo').addEventListener('click',function(){
+    ffOn=!ffOn;setState(svg,ffOn);this.textContent=ffOn?'Reset':s.btn;
+  });
+  $('ffNext').addEventListener('click',function(){
+    if(ffI<SCENES.length-1){ffI++;ffRender()}
+    else{ffDone=true;scrollTo('p2')}
+  });
+}
+ffRender();
+
+/* ---------- Part 2: Let Go! (coaster hill) ---------- */
+var car=$('car'), hill=$('hill'), hgt=$('hgt'), peBar=$('peBar'), keBar=$('keBar'), msg=$('hillMsg');
+var relBtn=$('relBtn'), rstBtn=$('rstBtn'), p2q=$('p2q');
+var t0=1-Math.sqrt(0.7), running=false, p2asked=false, raf=0;
+function posT(t){return {x:30+110*t*t, y:170-130*(1-t)*(1-t)}}
+function placeCar(x,y,ang){car.setAttribute('transform','translate('+x+','+y+') rotate('+ang+')')}
+function carAtT(t){
+  var p=posT(t), a=Math.min(Math.atan2(260*(1-t),220*t)*180/Math.PI,72);
+  placeCar(p.x,p.y,a);
+}
+function bars(pe,ke){peBar.style.width=Math.round(pe*100)+'%';keBar.style.width=Math.round(ke*100)+'%'}
+function holdState(){
+  var pe=(1-t0)*(1-t0);carAtT(t0);bars(pe,0);
+  msg.textContent='Stored, not moving.';
+  hgt.value=Math.round(pe*100);
+}
+function setHeight(h){ // h in 0..1
+  if(running)return;
+  t0=1-Math.sqrt(Math.max(h,0.02));holdState();
+}
+hgt.addEventListener('input',function(){setHeight(hgt.value/100)});
+var dragging=false;
+function svgX(e){
+  var pt=hill.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+  return pt.matrixTransform(hill.getScreenCTM().inverse()).x;
+}
+hill.addEventListener('pointerdown',function(e){
+  if(running)return;dragging=true;hill.setPointerCapture(e.pointerId);dragTo(e);
+});
+hill.addEventListener('pointermove',function(e){if(dragging)dragTo(e)});
+hill.addEventListener('pointerup',function(){dragging=false});
+hill.addEventListener('pointercancel',function(){dragging=false});
+function dragTo(e){
+  var s=Math.min(Math.max((svgX(e)-30)/110,0),1), t=Math.sqrt(s);
+  setHeight((1-t)*(1-t));
+}
+function release(){
+  if(running)return;
+  var pe0=(1-t0)*(1-t0);
+  if(pe0<0.06){msg.textContent='Drag the car higher first.';return}
+  running=true;hgt.disabled=true;relBtn.disabled=true;
+  msg.textContent='Stored energy is turning into moving energy.';
+  var t=t0,x=140,last=null,flat=false;
+  function step(ts){
+    if(last===null)last=ts;
+    var dt=Math.min((ts-last)/1000,0.05);last=ts;
+    var v=Math.sqrt(pe0)*420+25;
+    if(!flat){
+      var pe=(1-t)*(1-t);
+      v=Math.sqrt(Math.max(pe0-pe,0))*420+25;
+      t+=v*dt/Math.hypot(220*t,260*(1-t)+0.0001);
+      if(t>=1){t=1;flat=true}
+      carAtT(t);bars((1-t)*(1-t),Math.max(pe0-(1-t)*(1-t),0));
+      raf=requestAnimationFrame(step);
+    }else{
+      x+=v*dt;
+      if(x>=296){x=296;placeCar(x,170,0);bars(0,pe0);finish();return}
+      placeCar(x,170,0);bars(0,pe0);
+      raf=requestAnimationFrame(step);
+    }
+  }
+  raf=requestAnimationFrame(step);
+}
+function finish(){
+  running=false;relBtn.disabled=false;hgt.disabled=false;
+  msg.textContent='At the bottom, all the stored energy became moving energy.';
+  if(!p2asked){p2asked=true;askP2()}
+}
+function resetHill(){cancelAnimationFrame(raf);running=false;relBtn.disabled=false;hgt.disabled=false;holdState()}
+relBtn.addEventListener('click',release);
+rstBtn.addEventListener('click',resetHill);
+holdState();
+function askP2(){
+  mcq(p2q,{q:'Where was potential energy biggest?',o:['Top of the hill','Bottom of the hill','Both the same'],c:0,e:'Stored energy is biggest at the top, where the car is highest.'},function(){
+    mcq(p2q,{q:'Where was kinetic energy biggest?',o:['Top of the hill','Bottom of the hill','Both the same'],c:1,e:'The car moves fastest at the bottom. Energy did not disappear. It changed form.'},null);
+  });
+}
+
+/* ---------- Part 3: Stored Energy Needs a Partner ---------- */
+var PARTNERS=[
+ {t:'Book and Earth',btn:'Remove Earth',back:'Put Earth back',on:'No Earth, no fall.',off:'Earth pulls the book. That pull stores energy.',
+  svg:'<rect width="220" height="150" fill="#e0f2fe"/>'+
+   '<g data-go="0,0,0,0" data-dur="1"><circle cx="110" cy="210" r="95" fill="#38bdf8"/><path d="M60 140 Q85 122 110 128 Q135 120 160 140 Q130 134 110 138 Q85 132 60 140Z" fill="#4ade80"/></g>'+
+   '<rect x="40" y="62" width="140" height="8" rx="2" fill="#a16207"/>'+
+   '<g data-go="0,-26,-8" data-dur="1"><rect x="82" y="34" width="52" height="28" rx="3" fill="#ef4444"/><rect x="88" y="40" width="40" height="3" fill="#fff"/><rect x="88" y="47" width="30" height="3" fill="#fff"/></g>'+
+   '<g data-hide-on-go stroke="#ea580c" stroke-width="3" stroke-linecap="round"><line x1="108" y1="76" x2="108" y2="116"/><polyline points="102,108 108,118 114,108" fill="none"/></g>'},
+ {t:'Two magnets',btn:'Remove magnet 2',back:'Put magnet 2 back',on:'One magnet alone has nothing to pull on.',off:'The magnets pull on each other. That stores energy.',
+  svg:'<rect width="220" height="150" fill="#e0f2fe"/>'+
+   '<g><rect x="22" y="58" width="30" height="30" fill="#dc2626"/><rect x="52" y="58" width="30" height="30" fill="#2563eb"/><text x="37" y="79" font-size="15" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">N</text><text x="67" y="79" font-size="15" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">S</text></g>'+
+   '<g data-go="0,0,0,0" data-dur="1"><rect x="138" y="58" width="30" height="30" fill="#dc2626"/><rect x="168" y="58" width="30" height="30" fill="#2563eb"/><text x="153" y="79" font-size="15" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">N</text><text x="183" y="79" font-size="15" font-weight="700" fill="#fff" text-anchor="middle" font-family="sans-serif">S</text></g>'+
+   '<g data-hide-on-go stroke="#ea580c" stroke-width="3" stroke-dasharray="6 5"><line x1="88" y1="73" x2="110" y2="73"/><line x1="132" y1="73" x2="110" y2="73"/></g>'},
+ {t:'Rubber band',btn:'Cut it',back:'Tape it back',on:'Cut: no stretch, no stored energy.',off:'The stretch stores energy in the band.',
+  svg:'<rect width="220" height="150" fill="#e0f2fe"/>'+
+   '<circle cx="46" cy="50" r="8" fill="#475569"/><circle cx="174" cy="50" r="8" fill="#475569"/>'+
+   '<polyline data-hide-on-go points="46,50 110,112 174,50" fill="none" stroke="#dc2626" stroke-width="5" stroke-linejoin="round"/>'+
+   '<g data-show-on-go stroke="#dc2626" stroke-width="5" stroke-linecap="round" fill="none"><path d="M46 50 Q50 70 56 78"/><path d="M174 50 Q170 70 164 78"/></g>'+
+   '<circle cx="110" cy="116" r="9" fill="#fcd34d" stroke="#a16207" stroke-width="2"/>'}
+];
+var partHost=$('partners'), p3done=false;
+PARTNERS.forEach(function(p){
+  var d=document.createElement('div');d.className='mini';
+  d.innerHTML='<svg viewBox="0 0 220 150" role="img" aria-label="'+p.t+'">'+p.svg+'</svg><h4>'+p.t+'</h4>'+
+   '<div class="barrow pe"><span class="lab" style="flex-basis:90px">Stored</span><span class="bar"><i style="width:100%"></i></span></div>'+
+   '<div class="btnrow"><button type="button">'+p.btn+'</button></div><p class="cap" aria-live="polite">'+p.off+'</p>';
+  partHost.appendChild(d);
+  var svg=d.querySelector('svg'),on=false,bar=d.querySelector('.bar i'),btn=d.querySelector('button'),cap=d.querySelector('.cap');
+  hideShowInit(svg);setState(svg,false);bar.style.transition='width .8s';
+  btn.addEventListener('click',function(){
+    on=!on;setState(svg,on);bar.style.width=on?'0%':'100%';
+    btn.textContent=on?p.back:p.btn;cap.textContent=on?p.on:p.off;
+    if(on&&!p3done&&++removed===3){p3done=true}
+    if(on&&!p3asked){p3asked=true;mcq($('p3q'),{q:'Why does the book on the shelf have stored energy?',o:['It is a heavy book','It is made of paper','It is not moving','Earth pulls on it, and it is high up'],c:3,e:'Stored energy needs a partner. The book and Earth are the system.'},null)}
+  });
+});
+var removed=0,p3asked=false;
+
+/* ---------- Part 4: Energy Check ---------- */
+var CHECK=[
+ {q:'1. What is energy?',o:['How fast something moves','A kind of food','The ability to cause change','A kind of light'],c:2,e:'Energy is the ability to cause change.'},
+ {q:'2. A stretched rubber band is not moving. Does it have energy?',o:['No','Yes, potential','Yes, kinetic','Only after you let go'],c:1,e:'A stretched band stores energy in its shape. Let go and it moves.'},
+ {q:'3. Which has kinetic energy?',o:['A parked bike','A bike on a shelf','A rolling bike','A bike in a box'],c:2,e:'Rolling means moving, so it has kinetic energy.'},
+ {q:'4. How can something have energy when it is not moving?',o:['It cannot','It is hiding energy','It borrows energy from the floor','It stores energy from its position or shape'],c:3,e:'A still object can store energy because of its position or shape.'}
+];
+var chkFirst=[],p4Host=$('p4q');
+(function ask(i){
+  if(i>=CHECK.length){showFinish();return}
+  mcq(p4Host,CHECK[i],function(first){chkFirst[i]=first;ask(i+1)});
+})(0);
+
+/* ---------- Finish ---------- */
+function showFinish(){
+  var score=0,k;
+  for(k=0;k<ffFirst.length;k++)if(ffFirst[k])score++;
+  for(k=0;k<chkFirst.length;k++)if(chkFirst[k])score++;
+  $('finish').hidden=false;
+  $('scoreBig').textContent=score+' of 12';
+  var t='You sorted '+score+' of 12 correctly on the first try.';
+  if(ffFirst.length<SCENES.length)t+=' Go back to Freeze Frame to finish all 8 scenes and raise your score.';
+  else if(score<12)t+=' Try again to beat it!';
+  else t+=' Perfect. Detective work!';
+  $('scoreTxt').textContent=t;
+  $('finish').scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('againBtn').addEventListener('click',function(){location.href=location.pathname+'#p1';location.reload()});
+$('startbtn').addEventListener('click',function(){scrollTo('p1')});
+})();
+
+</script>
+</body>
+</html>
